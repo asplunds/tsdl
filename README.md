@@ -36,6 +36,7 @@ TSDL is developed as a monorepo using [nx](https://nx.dev/) for cloud runs and c
 ## Publishing (access only)
 
 1. Run lints, build packages, bump package versions and publish
-  ```sh
-  npm run release
-  ```
+
+```sh
+npm run release
+```

@@ -32,7 +32,9 @@ import { promises as fs } from "node:fs";
           "***",
           `${readme}`,
           "***",
-          `This README file was generated automatically at ${new Date().toLocaleString("en-US")}`,
+          `This README file was generated automatically at ${new Date().toLocaleString(
+            "en-US"
+          )}`,
         ].join("\n")
       );
 

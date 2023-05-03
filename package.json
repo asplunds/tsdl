@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint && prettier . -w",
-    "release": "npm run build && npx lerna publish --no-private",
+    "release": "npx lerna publish --no-private",
     "prepare": "husky install && npx lerna link",
     "build": "npx lerna run build",
     "readme": "ts-node scripts/compileReadme.ts"

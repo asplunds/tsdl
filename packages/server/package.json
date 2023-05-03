@@ -13,7 +13,7 @@
       "require": "./dist/server/index.js"
     },
     "./*": {
-      "import": "./*",
+      "import": "./*.ts",
       "require": "./dist/server/*.js"
     },
     "./package.json": "./package.json"

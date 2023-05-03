@@ -1,6 +1,9 @@
 ## @tsdl/react-query
+
 TSDL React Query integration
-***
+
+---
+
 # [TSDL](https://tsdl.asplund.dev)
 
 ## Introduction
@@ -39,9 +42,11 @@ TSDL is developed as a monorepo using [nx](https://nx.dev/) for cloud runs and c
 ## Publishing (access only)
 
 1. Run lints, build packages, bump package versions and publish
-  ```sh
-  npm run release
-  ```
 
-***
+```sh
+npm run release
+```
+
+---
+
 This README file was generated automatically at 5/3/2023, 6:30:11 PM
