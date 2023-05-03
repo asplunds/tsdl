@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/server",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "TSDL server package",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
