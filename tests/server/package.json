@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tsdl/test-server",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
   "scripts": {
