@@ -14,10 +14,10 @@ module.exports = {
   ignorePatterns: [
     ".eslintrc.*",
     "next.config.*",
-    "node_modules/*",
-    "dist/*",
-    ".next/*",
-    "docs/out/*",
+    "node_modules/**/*",
+    "dist/**/*",
+    ".next/**/*",
+    "out/**/*",
   ],
   rules: {
     indent: "off",
