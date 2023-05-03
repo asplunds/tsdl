@@ -11,7 +11,14 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["@typescript-eslint"],
-  ignorePatterns: [".eslintrc.*", "next.config.*", "node_modules/*", "dist/*", ".next/*", "docs/out/*"],
+  ignorePatterns: [
+    ".eslintrc.*",
+    "next.config.*",
+    "node_modules/*",
+    "dist/*",
+    ".next/*",
+    "docs/out/*",
+  ],
   rules: {
     indent: "off",
     "linebreak-style": ["error", "unix"],
