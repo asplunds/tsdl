@@ -1,12 +1,11 @@
 {
   "name": "@tsdl/server",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "tsDL server package",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
-  },
-  "dependencies": {}
+  }
 }
