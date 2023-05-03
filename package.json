@@ -6,7 +6,7 @@
     "lint": "eslint && prettier . -w",
     "release": "npx lerna publish --no-private",
     "prepare": "husky install && npx lerna link",
-    "build": "npx lerna run build",
+    "build": "npx lerna run --parallel build",
     "readme": "ts-node scripts/compileReadme.ts"
   },
   "private": true,
