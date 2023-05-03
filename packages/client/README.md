@@ -1,10 +1,9 @@
 ## @tsdl/client
-
 TSDL vanilla client
-
----
-
+***
 # [TSDL](https://tsdl.asplund.dev)
+
+Turn your backend into a library
 
 ## Introduction
 
@@ -27,7 +26,7 @@ Move fast; don't break things ⤵️
 
 ## Contributing
 
-TSDL is developed as a monorepo using [nx](https://nx.dev/) for cloud runs and caching as well as [lerna](https://lerna.js.org/) for package linking and publishing.
+TSDL is developed as a monorepo using [Nx](https://nx.dev/) for cloud runs and caching as well as [Lerna](https://lerna.js.org/) for package linking and publishing.
 
 1. Clone the repository
    ```sh
@@ -42,11 +41,13 @@ TSDL is developed as a monorepo using [nx](https://nx.dev/) for cloud runs and c
 ## Publishing (access only)
 
 1. Run lints, build packages, bump package versions and publish
+   ```sh
+   npm run release
+   ```
 
-```sh
-npm run release
-```
+### Detecting circular dependencies
 
----
+If you suspect you have caused a circular dependency (easily done in monorepos), you can run `npx madge -c` in the project root.
 
-This README file was generated automatically at 5/3/2023, 6:35:57 PM
+***
+This README file was generated automatically at 5/3/2023, 11:15:13 PM

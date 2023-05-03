@@ -1,5 +1,7 @@
 # [TSDL](https://tsdl.asplund.dev)
 
+Turn your backend into a library
+
 ## Introduction
 
 TSDL, short for TypeScript as Data Layer, is a transport layer designed to blur the line between client and server side.
