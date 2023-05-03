@@ -7,5 +7,6 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
-  }
+  },
+  "gitHead": "039bef9b96f6bc1bda1afaa4dbf520a2a29fac60"
 }

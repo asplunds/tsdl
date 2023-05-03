@@ -9,10 +9,11 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@tsdl/client": "file:../client",
-    "@tsdl/types": "file:../types"
+    "@tsdl/client": "^0.0.2",
+    "@tsdl/types": "^0.0.2"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^4 || ^5"
-  }
+  },
+  "gitHead": "039bef9b96f6bc1bda1afaa4dbf520a2a29fac60"
 }

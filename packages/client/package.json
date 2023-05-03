@@ -8,6 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@tsdl/types": "file:../types"
-  }
+    "@tsdl/types": "^0.0.2"
+  },
+  "gitHead": "039bef9b96f6bc1bda1afaa4dbf520a2a29fac60"
 }

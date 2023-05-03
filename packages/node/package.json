@@ -9,10 +9,11 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "@tsdl/types": "file:../types",
+    "@tsdl/types": "^0.0.2",
     "@types/node": "^18.16.3"
   },
   "dependencies": {
-    "@tsdl/server": "file:../server"
-  }
+    "@tsdl/server": "^0.0.2"
+  },
+  "gitHead": "039bef9b96f6bc1bda1afaa4dbf520a2a29fac60"
 }
