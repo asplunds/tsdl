@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "TSDL vanilla client",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@tsdl/types": "^0.0.2"
+    "@tsdl/types": "^0.0.3"
   },
   "gitHead": "039bef9b96f6bc1bda1afaa4dbf520a2a29fac60"
 }
