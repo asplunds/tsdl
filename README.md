@@ -21,7 +21,7 @@ Move fast; don't break things ⤵️
 
 ## Contributing
 
-TSDL is developed as a monorepo using [nx](https://nx.dev/) for cloud runs and caching as well as [lerna](https://lerna.js.org/) for package linking and publishing.
+TSDL is developed as a monorepo using [Nx](https://nx.dev/) for cloud runs and caching as well as [Lerna](https://lerna.js.org/) for package linking and publishing.
 
 1. Clone the repository
    ```sh
@@ -39,3 +39,7 @@ TSDL is developed as a monorepo using [nx](https://nx.dev/) for cloud runs and c
    ```sh
    npm run release
    ```
+
+### Detecting circular dependencies
+
+If you suspect you have caused a circular dependency (easily done in monorepos), you can run `npx madge -c` in the project root.
