@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "TSDL vanilla client",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@tsdl/types": "^0.0.4"
+    "@tsdl/types": "^0.0.5"
   },
   "files": [
     "index.ts",
