@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint && prettier . -w",
-    "release": "lerna publish --no-private"
+    "release": "npx lerna publish --no-private"
   },
   "private": true,
   "devDependencies": {
