@@ -1,0 +1,14 @@
+{
+  "introduction": {
+    "title": "Introduction"
+  },
+  "installation": {
+    "title": "Installation"
+  },
+  "server-code-setup": {
+    "title": "Server code setup"
+  },
+  "client-code-setup": {
+    "title": "Client code setup"
+  }
+}

@@ -1,0 +1,130 @@
+# Code setup
+
+## Server
+
+After [installing](installation) and [setting up your router](server-code-setup) you can link your backend-env router yo your front-end client. TSDL will by design blur the line between the two ends using TypeScript magic.
+
+import { Steps, Tabs, Tab, Callout } from "nextra-theme-docs";
+
+<Steps>
+
+### Import router from server
+
+<Tabs items={["Standard", "Monorepo"]}>
+  <Tab>
+
+    ```ts filename="main.tsx"
+    import type { Router } from "../server/src/server";
+    ```
+
+  </Tab>
+  <Tab>
+
+    ```shell filename="packages/client"
+    npm i ../server
+    ```
+
+    It should add your local sevrer package to the `package.json`:
+    ```json filename="packages/client/package.json" /my-server/
+    ...
+    "dependencies": {
+      "my-server": "file:../server"
+    }
+    ...
+    ```
+    Then you can import your router from the server package:
+
+    ```ts filename="main.tsx" /my-server/
+    import type { Router } from "my-server";
+    ```
+    Make sure `Router` is exported from `index.ts` otherwise you need to update the import path to `my-server/path/to/server.ts`
+
+  </Tab>
+</Tabs>
+
+### Create client
+
+<Tabs items={["Default", "React query", "SWR"]}>
+
+  <Tab>
+
+    ```ts filename="main.tsx" {3-5}
+    import type { Router } from "my-server";
+
+    export const tsdl = createClient<Router>((url) =>
+      fetch(url("http://localhost:8000/tsdl")).then((d) => d.json())
+    );
+    ```
+
+    ### Start using TSDL
+
+    ```tsx filename="App.tsx" {2,5}
+    /* ... */
+    import { tsdl } from "./main";
+
+    const fruit = await tsdl.food.fetchFruit();
+    ```
+
+  </Tab>
+
+  <Tab>
+
+    ```tsx filename="main.tsx" {4-8,12,14} copy
+    /* ... */
+    import type { Router } from "my-server";
+
+    const queryClient = new QueryClient();
+    export const tsdl = createReactQueryClient<Router>(
+      (url) => fetch(url("http://localhost:8000/tsdl")).then((d) => d.json()),
+      queryClient
+    );
+
+    ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+      <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </React.StrictMode>
+    );
+    ```
+
+
+    ### Start using TSDL+ReactQuery
+
+    ```tsx filename="App.tsx" {2,5}
+    /* ... */
+    import { tsdl } from "./main";
+
+    function App() {
+      const fruit = atsdl.food.fetchFruit.useQuery();
+
+      return (
+        <ul>
+          {fruit.data?.map(fruit => <li key={fruit}>{fruit}</li>)}
+        </ul>
+      );
+    }
+    ```
+
+    The TSDL+ReactQuery integration exposes the following properties to the client:
+
+    - `.useQuery(input? | options?, options?)`
+    - `.useMutation(options?)`
+    - `.invalidate()`
+
+    In addition, you can still call each query normally by invoking the function.
+
+  </Tab>
+
+</Tabs>
+
+### Next Steps
+
+You're up and running but you're probably missing a few things:
+
+- [Make your queries have inputs](../api/input) (recommended)
+- [Add middleware (& auth) to your queries](../api/middleware)
+- [What is a router?](../api/router)
+- [Handle output of queries](../api/output)
+
+</Steps>

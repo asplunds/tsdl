@@ -2,14 +2,23 @@
   "name": "tsdl",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint && prettier . -w"
+  },
   "private": true,
-  "dependencies": {},
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.0.1",
+    "eslint": "^8.7.0",
+    "lerna": "^5.5.4",
     "nx": "16.0.1",
-    "nx-cloud": "latest"
+    "nx-cloud": "latest",
+    "prettier": "^2.5.1",
+    "typescript": "^5.0.4"
   },
   "workspaces": [
-    "packages/*"
-  ]
+    "packages/*",
+    "tests/*"
+  ],
+  "author": "Jonathan Asplund <jonathan@asplund.net>"
 }

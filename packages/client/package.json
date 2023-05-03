@@ -1,0 +1,13 @@
+{
+  "name": "@tsdl/client",
+  "version": "0.0.0",
+  "description": "TSDL vanilla client",
+  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@tsdl/types": "file:../types"
+  }
+}

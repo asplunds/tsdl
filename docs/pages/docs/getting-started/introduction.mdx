@@ -1,0 +1,38 @@
+import { Callout, FileTree } from "nextra-theme-docs";
+
+<Callout type="warning" emoji="🚧">
+  Documentation is currently under construction
+</Callout>
+
+## Introduction
+
+TSDL, short for TypeScript as Data Layer, is a transport layer designed to blur the line between client and server side.
+In effect, TSDL aims to make your backend a library with full implicit type safety.
+TSDL is an improvement of existing RPC technologies and is designed to make migrating from tRPC painless.
+
+Another aspect of this transport layer is its framework agnostic approach, TSDL is designed to work seamlessly with any client-side framework or application because it does not introduce any framework specific dependencies. To clarify,
+TSDL does come with some helpers to integrate better with frameworks. However,
+the core library will always be standalone.
+
+Move fast; don't break things ⤵️
+
+## Project folder structure
+
+Make sure your client and server are in close reach of each other.
+
+Example:
+
+<FileTree>
+  <FileTree.Folder name="example-app" defaultOpen>
+    <FileTree.Folder name="client">
+      <FileTree.File name="App.tsx" />
+      <FileTree.File name="main.tsx" />
+    </FileTree.Folder>
+    <FileTree.Folder name="server">
+      <FileTree.File name="index.ts" />
+      <FileTree.File name="server.ts" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+Once you're all set, move onto [installation](installation)

@@ -1,0 +1,18 @@
+{
+  "name": "@tsdl/node",
+  "version": "0.0.0",
+  "description": "TSDL node integration",
+  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@tsdl/types": "file:../types",
+    "@types/node": "^18.16.3"
+  },
+  "dependencies": {
+    "@tsdl/server": "file:../server"
+  }
+}

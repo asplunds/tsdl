@@ -1,0 +1,90 @@
+import Split from "../../../components/misc/Split";
+import Divider from "../../../components/misc/Divider";
+
+## Defining inputs for queries
+
+### [Zod](https://zod.dev/) example
+
+<br />
+<Split>
+
+  <div>
+
+```tsx filename="client.ts"
+const volvos = await tsdl.cars({
+  brand: "volvo", // ✅
+});
+
+const apples = await tsdl.cars({
+  type: "apple", // Error! Property "type" does not exist on type `{ brand: string }`
+});
+```
+
+  </div>
+  <Divider />
+  <div>
+
+```ts filename="server.ts" {5-7}
+import { z } from "zod";
+
+const router = tsdl.router({
+  cars: tsdl
+    .input(z.object({
+      brand: z.string().min(2).max(100).trim(),
+    }))
+    .query(async ({ input }) => {
+      return await db.findOne({
+        brand: input.brand // string
+      });
+    });
+});
+```
+
+  </div>
+
+</Split>
+
+### [Yup](https://github.com/jquense/yup#yup) example
+
+<br />
+
+```ts filename="server.ts" {5-7}
+import * as yup from "yup";
+
+const router = tsdl.router({
+  cars: tsdl
+    .input(yup.object({
+      brand: yup.string().required(),
+    }))
+    .query(async ({ input }) => {
+      return await db.findOne({
+        brand: input.brand // string
+      });
+    });
+});
+```
+
+### Other/custom schema validator
+
+<br />
+
+```ts filename="server.ts" {3-12}
+const router = tsdl.router({
+  cars: tsdl
+    .input({
+      validate(raw: unknown) {
+        if (typeof raw === "object" && "brand" in raw && typeof raw.brand === "string") {
+          return raw as {
+            brand: string;
+          };
+        }
+        throw "invalid input";
+      }
+    })
+    .query(async ({ input }) => {
+      return await db.findOne({
+        brand: input.brand
+      });
+    });
+});
+```

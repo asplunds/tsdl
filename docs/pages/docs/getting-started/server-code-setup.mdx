@@ -1,0 +1,82 @@
+# Code setup
+
+## Server
+
+After [installing](installation) you can start setting upp your app router on your server
+
+import { Steps, Tabs, Tab } from "nextra-theme-docs";
+
+<Steps>
+
+### Initialize TSDL
+
+```ts filename="server.ts" copy
+import { createTsdl } from "@tsdl/server";
+
+export const tsdl = createTsdl(() => undefined);
+
+const fruit = ["banana", "apple", "orange"];
+const router = tsdl.router({
+  food: tsdl.router({
+    fetchFruit: tsdl.query(() => fruit),
+  }),
+});
+
+export type Router = typeof router;
+```
+
+### Add HTTP capabilities
+
+<Tabs items={["Vanilla (Node.JS)", "express.js", "koa"]}>
+
+  <Tab>
+    ```shell
+    npm i @tsdl/node
+    pnpm add @tsdl/node
+    yarn add @tsdl/node
+    ```
+
+    ```ts {2-3,6-9,20-36} filename="server.ts" copy
+    import { createTsdl } from "@tsdl/server";
+    import http from "node:http";
+    import { tsdlNodeIntegration } from "@tsdl/node";
+
+    // A base context is created for each query
+    const tsdl = createTsdl((ctx: {
+      req: http.IncomingMessage;
+      res: http.ServerResponse<http.IncomingMessage>;
+    }) => ctx);
+
+    const fruit = ["banana", "apple", "orange"];
+    const router = tsdl.router({
+      food: tsdl.router({
+        fetchFruit: tsdl.query(() => fruit),
+      }),
+    });
+
+    export type Router = typeof router;
+
+    const requestListener = (
+      req: http.IncomingMessage,
+      res: http.ServerResponse<http.IncomingMessage>
+    ) => {
+      if (req.url?.startsWith("/tsdl")) {
+        return tsdlNodeIntegration(
+          router,
+          { req, res }, // the arg needed to create a context
+          req,
+          res
+        );
+      }
+    };
+
+    const server = http.createServer(requestListener);
+
+    server.listen(8000);
+    ```
+
+  </Tab>
+
+</Tabs>
+
+</Steps>
