@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint && prettier . -w"
+    "lint": "eslint && prettier . -w",
+    "release": "lerna publish --no-private"
   },
   "private": true,
   "devDependencies": {
