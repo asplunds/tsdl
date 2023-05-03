@@ -1,6 +1,9 @@
 ## @tsdl/types
+
 TSDL types - probably only useful for internally
-***
+
+---
+
 # [TSDL](https://tsdl.asplund.dev)
 
 Turn your backend into a library
@@ -49,5 +52,6 @@ TSDL is developed as a monorepo using [Nx](https://nx.dev/) for cloud runs and c
 
 If you suspect you have caused a circular dependency (easily done in monorepos), you can run `npx madge -c` in the project root.
 
-***
+---
+
 This README file was generated automatically at 5/3/2023, 11:15:14 PM
