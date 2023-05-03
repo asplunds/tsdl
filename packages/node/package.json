@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/node",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TSDL node integration",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
@@ -9,11 +9,11 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "@tsdl/types": "^0.0.3",
+    "@tsdl/types": "^0.0.4",
     "@types/node": "^18.16.3"
   },
   "dependencies": {
-    "@tsdl/server": "^0.0.3"
+    "@tsdl/server": "^0.0.4"
   },
   "gitHead": "9da76f52393cfec7a8e096d8ca65ee783c5245f9"
 }
