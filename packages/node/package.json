@@ -4,16 +4,32 @@
   "description": "TSDL node integration",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
   },
-  "devDependencies": {
-    "@tsdl/types": "^0.0.4",
-    "@types/node": "^18.16.3"
-  },
   "dependencies": {
-    "@tsdl/server": "^0.0.4"
+    "@tsdl/server": "file:../server"
   },
-  "gitHead": "9da76f52393cfec7a8e096d8ca65ee783c5245f9"
+  "gitHead": "9da76f52393cfec7a8e096d8ca65ee783c5245f9",
+  "devDependencies": {
+    "@tsdl/types": "file:../types"
+  },
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.ts",
+    "lib",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asplunds/tsdl.git",
+    "directory": "packages/node"
+  }
 }

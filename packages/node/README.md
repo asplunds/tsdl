@@ -1,3 +1,6 @@
+## @tsdl/node
+TSDL node integration
+***
 # [TSDL](https://tsdl.asplund.dev)
 
 ## Introduction
@@ -39,3 +42,6 @@ TSDL is developed as a monorepo using [nx](https://nx.dev/) for cloud runs and c
   ```sh
   npm run release
   ```
+
+***
+This README file was generated automatically at 5/3/2023, 6:30:11 PM

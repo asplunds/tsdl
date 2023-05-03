@@ -7,7 +7,7 @@ import {
   useMutation,
   useQuery,
 } from "@tanstack/react-query";
-import { fetcherUrlCallback } from "@tsdl/client/lib/fetcherUrlCallback";
+import { fetcherUrlCallback } from "@tsdl/client/src/lib/fetcherUrlCallback";
 import { Branch, ClientFetcher, Leaf } from "@tsdl/types";
 
 type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
@@ -55,6 +55,10 @@ export function createReactQueryClient<TRouter extends Branch>(
   function emulator(path: string[]): object {
     const caller = async (input: unknown) => {
       const request = await fetcher(fetcherUrlCallback(path, input));
+
+      if (request.code != null && request.code > 399) {
+        throw new Error(request.message);
+      }
 
       return request?.payload ?? null;
     };

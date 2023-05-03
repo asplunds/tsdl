@@ -1,12 +1,36 @@
 {
   "name": "@tsdl/server",
   "version": "0.0.4",
-  "description": "tsDL server package",
+  "description": "TSDL server package",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./dist/server/index.js"
+    },
+    "./*": {
+      "import": "./*",
+      "require": "./dist/server/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@tsdl/types": "file:../types"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "index.ts",
+    "lib",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asplunds/tsdl.git",
+    "directory": "packages/server"
   },
   "gitHead": "9da76f52393cfec7a8e096d8ca65ee783c5245f9"
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { tsdl } from "./main";
 
 function App() {
-  const apple = tsdl.vegetables.fetchOne.useQuery({ name: "apple" });
+  /* const apple = tsdl.vegetables.fetchOne.useQuery({ name: "apple" }); */
   const fruit = tsdl.vegetables.fetchAll.useQuery();
   const addOne = tsdl.vegetables.addOne.useMutation();
 

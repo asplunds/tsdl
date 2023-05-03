@@ -1,5 +1,5 @@
 import { Branch, ClientFetcher, InferClient } from "@tsdl/types";
-import { fetcherUrlCallback } from "../lib/fetcherUrlCallback";
+import { fetcherUrlCallback } from "./lib/fetcherUrlCallback";
 
 /** @internal */
 export function createClient<TRouter extends Branch>(fetcher: ClientFetcher) {
