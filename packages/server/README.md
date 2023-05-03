@@ -1,6 +1,9 @@
 ## @tsdl/server
+
 TSDL server package
-***
+
+---
+
 # [TSDL](https://tsdl.asplund.dev)
 
 ## Introduction
@@ -44,5 +47,6 @@ TSDL is developed as a monorepo using [nx](https://nx.dev/) for cloud runs and c
 npm run release
 ```
 
-***
+---
+
 This README file was generated automatically at 5/3/2023, 6:35:57 PM
