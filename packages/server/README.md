@@ -1,5 +1,9 @@
-## @tsdl/server
+[//]: <> (AUTO GENERATED - DO NOT EDIT ME. EDIT README IN PROJECT ROOT)
+
 TSDL server package
+
+[@tsdl/client](https://npmjs.com/package/@tsdl/client), [@tsdl/node](https://npmjs.com/package/@tsdl/node), [@tsdl/react-query](https://npmjs.com/package/@tsdl/react-query), @tsdl/server, [@tsdl/types](https://npmjs.com/package/@tsdl/types)
+
 ***
 # [TSDL](https://tsdl.asplund.dev)
 

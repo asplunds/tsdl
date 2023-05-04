@@ -1,4 +1,4 @@
-import { Branch, ClientFetcher, InferClient } from "@tsdl/types";
+import type { Branch, ClientFetcher, InferClient } from "@tsdl/types";
 import { fetcherUrlCallback } from "./lib/fetcherUrlCallback";
 
 /** @internal */

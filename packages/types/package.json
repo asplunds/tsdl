@@ -4,6 +4,28 @@
   "version": "0.0.7",
   "gitHead": "9da76f52393cfec7a8e096d8ca65ee783c5245f9",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "dist",
+    "index.ts",
+    "src",
+    "lib"
+  ],
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./dist/server/index.js"
+    },
+    "./*": {
+      "import": "./*.ts",
+      "require": "./dist/server/*.js"
+    },
+    "./package.json": "./package.json"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/asplunds/tsdl.git",
