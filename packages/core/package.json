@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/core",
   "description": "TSDL core",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "gitHead": "9da76f52393cfec7a8e096d8ca65ee783c5245f9",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "types": "dist/index.d.ts",
