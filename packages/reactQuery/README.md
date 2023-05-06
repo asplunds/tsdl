@@ -2,7 +2,7 @@
 
 TSDL React Query integration
 
-[@tsdl/client](https://npmjs.com/package/@tsdl/client), [@tsdl/node](https://npmjs.com/package/@tsdl/node), @tsdl/react-query, [@tsdl/server](https://npmjs.com/package/@tsdl/server), [@tsdl/types](https://npmjs.com/package/@tsdl/types)
+[@tsdl/client](https://npmjs.com/package/@tsdl/client), [@tsdl/core](https://npmjs.com/package/@tsdl/core), [@tsdl/node](https://npmjs.com/package/@tsdl/node), @tsdl/react-query, [@tsdl/server](https://npmjs.com/package/@tsdl/server)
 
 ***
 # [TSDL](https://tsdl.asplund.dev)
