@@ -1,4 +1,4 @@
-import { TsDLNode } from "../../types";
+import { types } from "@tsdl/core";
 
 /** @internal */
 export default function createQuery<TContext, TInput, TInputValidator>(
@@ -10,13 +10,12 @@ export default function createQuery<TContext, TInput, TInputValidator>(
     input: {} as TInput,
   };
   return {
-    // use typeof to infer a better intellisense type
     query<TReturn>(query: (arg: { ctx: TContext; input: TInput }) => TReturn) {
       return {
         $arg,
         $input: {} as TInput,
         $query: query,
-        $type: TsDLNode.Leaf as const,
+        $type: types.routing.TsDLNode.Leaf as const,
         $inputValidator,
         $mw,
         $return: {} as Awaited<TReturn>,

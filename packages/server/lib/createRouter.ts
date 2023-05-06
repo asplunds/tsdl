@@ -1,4 +1,4 @@
-import { TsDLNode, TsDLTree } from "@tsdl/types";
+import { types } from "@tsdl/core";
 
 /**
  * @internal
@@ -12,10 +12,10 @@ export default function createRouter<TArg, TBaseContext>(
    * The middleware it "uses" is applied for all child routes.
    */
   return {
-    router<T extends { [key in keyof T]: TsDLTree }>(routes: T) {
+    router<T extends { [key in keyof T]: types.routing.TsDLTree }>(routes: T) {
       return {
         $routes: routes,
-        $type: TsDLNode.Node as const,
+        $type: types.routing.TsDLNode.Node as const,
         $invoke,
       };
     },

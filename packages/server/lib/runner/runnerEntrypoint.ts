@@ -1,33 +1,21 @@
-import { Branch, ClientPayload, TsDLResponse, Validator } from "@tsdl/types";
 import validatePayload from "./validatePayload";
 import findLeaf from "./findLeaf";
-import createResponse from "../clientResponses/createResponse";
-import createErrorMessage from "../clientResponses/createErrorMessage";
+import { TSDLError, types } from "@tsdl/core";
 
 /** @internal */
 export default async function runnerEntrypoint<TBaseContext>(
-  router: Branch,
+  router: types.routing.Branch,
   baseContext: TBaseContext,
   payload: string
-): Promise<TsDLResponse<unknown>> {
-  const parsed = validatePayload(payload);
+): Promise<unknown> {
+  const parsed = validatePayload(payload) as types.client.ClientPayload<unknown>;
 
-  if (!parsed.ok) {
-    return parsed;
-  }
-
-  const validatedPayload = parsed.payload as ClientPayload<unknown>;
-
-  const leaf = findLeaf(validatedPayload.path, router);
+  const leaf = findLeaf(parsed.path, router);
 
   if (!leaf) {
-    return createResponse({
-      tsDLInternalError: true,
-      code: 500,
-      message: createErrorMessage(
-        `no leaf found for path ${validatedPayload.path.join("/")}`
-      ),
-    });
+    throw new TSDLError(500, "internal").setMessage(
+      `no leaf found for path ${parsed.path.join("/")}`
+    );
   }
 
   const validatedInput = await (async () => {
@@ -39,7 +27,9 @@ export default async function runnerEntrypoint<TBaseContext>(
       };
     }
     const l = leaf as NonNullable<typeof leaf>;
-    const validators = leaf.$inputValidator as Validator<typeof l.$input>;
+    const validators = leaf.$inputValidator as types.validation.Validator<
+      typeof l.$input
+    >;
     const validator =
       "parse" in validators ? validators.parse : validators.validate;
 
@@ -54,14 +44,14 @@ export default async function runnerEntrypoint<TBaseContext>(
     try {
       const result = await validator.call(
         leaf.$inputValidator,
-        validatedPayload.input
+        parsed.input
       );
 
       if (result === true) {
         return {
           hasInput: true,
           failure: false,
-          input: validatedPayload.input,
+          input: parsed.input,
         };
       } else if (result === false) {
         return {
@@ -77,21 +67,23 @@ export default async function runnerEntrypoint<TBaseContext>(
         input: result,
       };
     } catch (e) {
+      if (e instanceof TSDLError) {
+        throw e;
+      }
       return {
         hasInput: true,
         failure: true,
-        message: e + "",
+        message: extractErrorMessage(e),
         input: null,
+        e,
       };
     }
   })();
 
   if (validatedInput.failure) {
-    return createResponse({
-      tsDLInternalError: false,
-      code: 400,
-      message: validatedInput.message,
-    });
+    throw new TSDLError(400, "input")
+      .setMessage(validatedInput.message)
+      .setValidationError(validatedInput.e);
   }
 
   const middleware = (leaf?.$mw ?? []) as ((arg: unknown) => unknown)[];
@@ -105,11 +97,9 @@ export default async function runnerEntrypoint<TBaseContext>(
       } catch (e) {
         return {
           failure: true,
-          message: createErrorMessage(
-            `failed to invoke middleware [${i}] of query ${validatedPayload.path.join(
-              "/"
-            )}: ${e}`
-          ),
+          message: `failed to invoke middleware [${i}] of query ${parsed.path.join(
+            "/"
+          )}: ${extractErrorMessage(e)}`,
           ctx: null,
         };
       }
@@ -122,11 +112,7 @@ export default async function runnerEntrypoint<TBaseContext>(
   })();
 
   if (ctxReduction.failure) {
-    return createResponse({
-      tsDLInternalError: false,
-      code: 500,
-      message: ctxReduction.message,
-    });
+    throw new TSDLError(500, "middleware").setMessage(ctxReduction.message);
   }
 
   const query = leaf.$query as (arg: {
@@ -144,28 +130,19 @@ export default async function runnerEntrypoint<TBaseContext>(
         }),
       };
     } catch (e) {
-      return {
-        failure: true,
-        message: createErrorMessage(
-          `failed to invoke query on path ${validatedPayload.path.join(
-            "/"
-          )}: ${e}`
-        ),
-      };
+      if (e instanceof TSDLError) {
+        throw e;
+      }
+      throw new TSDLError(500, "application").setMessage(
+        extractErrorMessage(e)
+      );
     }
   })();
 
-  if (resultOperation.failure) {
-    return createResponse({
-      tsDLInternalError: false,
-      code: 500,
-      message: resultOperation.message,
-    });
-  }
+  return resultOperation.result;
+}
 
-  return createResponse({
-    tsDLInternalError: false,
-    code: 200,
-    payload: resultOperation.result,
-  });
+/** @internal */
+function extractErrorMessage(e: unknown): string | undefined {
+  return e instanceof Error ? e.message : undefined;
 }

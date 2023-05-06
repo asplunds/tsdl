@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@tsdl/client": "^0.0.9",
-    "@tsdl/types": "^0.0.9"
+    "@tsdl/core": "file:../core"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^4 || ^5"

@@ -13,7 +13,34 @@ const tsdl = createTsdl(
 
 const db = ["apple", "banana", "orange", "apple", "banana"];
 
+let fruit = [
+  {
+    name: "Apple",
+    id: 1,
+  },
+  {
+    name: "Banana",
+    id: 2,
+  },
+  {
+    name: "Orange",
+    id: 3,
+  },
+];
+
 export const router = tsdl.router({
+  fruit: tsdl.router({
+    addOne: tsdl.input(z.string().regex(/^[\w\s]+$/)).query(({ input }) =>
+      fruit.unshift({
+        id: Date.now(),
+        name: input,
+      })
+    ),
+    removeOne: tsdl.input(z.number()).query(({ input }) => {
+      fruit = fruit.filter((v) => v.id !== input);
+    }),
+    all: tsdl.query(() => fruit),
+  }),
   vegetables: tsdl.router({
     fetchOne: tsdl
       .input(
@@ -61,4 +88,6 @@ const requestListener = (
 
 const server = http.createServer(requestListener);
 
-server.listen(8000);
+server.listen(8000, () => {
+  console.log("Backend started");
+});

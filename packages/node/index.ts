@@ -1,11 +1,10 @@
-import createErrorMessage from "@tsdl/server/lib/clientResponses/createErrorMessage";
-import createResponse from "@tsdl/server/lib/clientResponses/createResponse";
 import runnerEntrypoint from "@tsdl/server/lib/runner/runnerEntrypoint";
-import { Branch } from "@tsdl/types";
+import { createHTTPResponse } from "@tsdl/server/lib/runner/createHTTPResponse";
+import { TSDLError, types } from "@tsdl/core";
 import http from "node:http";
 
 export async function tsdlNodeIntegration<TArg, TBaseContext>(
-  router: Branch & {
+  router: types.routing.Branch & {
     $invoke?: (arg: TArg) => TBaseContext;
   },
   arg: TArg,
@@ -13,19 +12,15 @@ export async function tsdlNodeIntegration<TArg, TBaseContext>(
   res: http.ServerResponse<http.IncomingMessage>
 ) {
   res.setHeader("Content-Type", "application/json");
+  
   if (!router.$invoke) {
-    res.writeHead(500);
+    const error = new TSDLError(500, "internal").setMessage(
+      "internal property '$invoke' not defined in provided TSDL router instance"
+    );
+    res.writeHead(error.numberCode);
 
     return void res.end(
-      JSON.stringify(
-        createResponse({
-          tsDLInternalError: true,
-          code: 500,
-          message: createErrorMessage(
-            "internal property '$invoke' not defined in provided tsDL router instance"
-          ),
-        })
-      )
+      JSON.stringify(createHTTPResponse(error.package(), null))
     );
   }
   const url = (() => {
@@ -37,49 +32,57 @@ export async function tsdlNodeIntegration<TArg, TBaseContext>(
   })();
 
   if (url == null) {
-    res.writeHead(500);
+    const error = new TSDLError(500, "internal").setMessage("invalid url");
+    res.writeHead(error.numberCode);
 
     return void res.end(
-      JSON.stringify(
-        createResponse({
-          tsDLInternalError: true,
-          code: 500,
-          message: createErrorMessage("invalid url"),
-        })
-      )
-    );
-  }
-
-  if (url == null) {
-    res.writeHead(500);
-
-    return void res.end(
-      JSON.stringify(
-        createResponse({
-          code: 500,
-          message: createErrorMessage("no payload found"),
-        })
-      )
+      JSON.stringify(JSON.stringify(createHTTPResponse(error.package(), null)))
     );
   }
 
   const payload = url.get("payload");
 
-  if (!payload || typeof payload !== "string") {
-    res.writeHead(500);
+  if (payload == null) {
+    const error = new TSDLError(500, "internal").setMessage("no payload found");
+
+    res.writeHead(error.numberCode);
 
     return void res.end(
-      JSON.stringify(
-        createResponse({
-          code: 500,
-          message: createErrorMessage("payload parameter not found"),
-        })
-      )
+      JSON.stringify(JSON.stringify(createHTTPResponse(error.package(), null)))
+    );
+  }
+
+  if (!payload || typeof payload !== "string") {
+    const error = new TSDLError(500, "internal").setMessage(
+      "payload parameter not found"
+    );
+
+    res.writeHead(error.numberCode);
+
+    return void res.end(
+      JSON.stringify(JSON.stringify(createHTTPResponse(error.package(), null)))
     );
   }
 
   const ctx: TBaseContext = router.$invoke(arg);
-  const response = await runnerEntrypoint(router, ctx, payload);
-  res.writeHead(response.code ?? 200);
-  res.end(JSON.stringify(response));
+  try {
+    const response = await runnerEntrypoint(router, ctx, payload);
+    res.writeHead(200);
+    res.end(JSON.stringify(createHTTPResponse(null, response)));
+  } catch (e: unknown) {
+    if (e instanceof TSDLError) {
+      res.writeHead(e.numberCode);
+      return void res.end(
+        JSON.stringify(createHTTPResponse(e.package(), null))
+      );
+    } else {
+      res.writeHead(500);
+      res.end("internal error");
+      if (typeof console !== "undefined") {
+        console.error(
+          "TSDL never: error not of instance TSDLError. This is fatal."
+        );
+      }
+    }
+  }
 }
