@@ -8,7 +8,9 @@ export default async function runnerEntrypoint<TBaseContext>(
   baseContext: TBaseContext,
   payload: string
 ): Promise<unknown> {
-  const parsed = validatePayload(payload) as types.client.ClientPayload<unknown>;
+  const parsed = validatePayload(
+    payload
+  ) as types.client.ClientPayload<unknown>;
 
   const leaf = findLeaf(parsed.path, router);
 
@@ -42,10 +44,7 @@ export default async function runnerEntrypoint<TBaseContext>(
     }
 
     try {
-      const result = await validator.call(
-        leaf.$inputValidator,
-        parsed.input
-      );
+      const result = await validator.call(leaf.$inputValidator, parsed.input);
 
       if (result === true) {
         return {

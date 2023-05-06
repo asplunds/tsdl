@@ -12,7 +12,7 @@ export async function tsdlNodeIntegration<TArg, TBaseContext>(
   res: http.ServerResponse<http.IncomingMessage>
 ) {
   res.setHeader("Content-Type", "application/json");
-  
+
   if (!router.$invoke) {
     const error = new TSDLError(500, "internal").setMessage(
       "internal property '$invoke' not defined in provided TSDL router instance"

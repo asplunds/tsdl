@@ -1,7 +1,6 @@
 import Fruit from "./examples/Fruit";
 
 function App() {
-
   return (
     <div>
       <Fruit />
