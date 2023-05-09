@@ -20,7 +20,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@tsdl/core": "file:../core"
+    "@tsdl/core": "^0.1.0"
   },
   "types": "./dist/index.d.ts",
   "files": [
@@ -33,5 +33,5 @@
     "url": "https://github.com/asplunds/tsdl.git",
     "directory": "packages/server"
   },
-  "gitHead": "9da76f52393cfec7a8e096d8ca65ee783c5245f9"
+  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b"
 }
