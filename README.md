@@ -45,6 +45,13 @@ TSDL is developed as a monorepo using [Nx](https://nx.dev/) for cloud runs and c
    ```
 3. Start hacking! Official tests are located in /tests. For playing, use /playground (it's git ignored but included in workspaces)
 
+### Docs (nextra)
+
+1. `cd meta/docs`
+2. `npm run dev` (assuming dependencies are installed)
+3. `npm run build` check that it builds
+4. `npm run start` preview
+
 ## Publishing (access only)
 
 ### Publish npm packages
@@ -58,6 +65,6 @@ TSDL is developed as a monorepo using [Nx](https://nx.dev/) for cloud runs and c
 
 If you suspect you have caused a circular dependency (easily done in monorepos), you can run `npx madge -c` in the project root.
 
-### Updating the documentation site
+### Deploying documentation
 
-Merge into `preview` (for preview) or `docs` for live. The CI/CD workflows will automatically build the nextra documentation site and deploy it to Cloudflare.
+Merge into branch `preview` (for preview) or branch `docs` for live. The CI/CD workflows will automatically build the nextra documentation site and deploy it to Cloudflare.

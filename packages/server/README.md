@@ -11,22 +11,32 @@ Turn your backend into a library
 
 ## Introduction
 
-TSDL, short for TypeScript as Data Layer, is a transport layer designed to blur the line between client and server side.
-In effect, TSDL aims to make your backend a library with full implicit type safety.
-TSDL is an improvement of existing RPC technologies and is designed to make migrating from tRPC painless.
-
-Another aspect of this transport layer is its framework agnostic approach, TSDL is designed to work seamlessly with any client-side framework or application because it does not introduce any framework specific dependencies. To clarify,
-TSDL does come with some helpers to integrate better with frameworks. However,
-the core library will always be standalone.
-
-Move fast; don't break things ⤵️
+TSDL, short for TypeScript as Data Layer, is a transport layer designed to blur the line between client and server side. TSDL is an end-to-end communication framework that makes your back-end a Type-safe library for your front-end.
 
 ## Links
 
+- [Documentation](https://tsdl.asplund.dev)
 - [Getting started](https://tsdl.asplund.dev/docs/getting-started/introduction)
 - [Installation](https://tsdl.asplund.dev/docs/getting-started/installation)
 - [Server setup](https://tsdl.asplund.dev/docs/getting-started/server-code-setup)
 - [Client setup](https://tsdl.asplund.dev/docs/getting-started/client-code-setup)
+
+## Features
+
+### Replaces
+
+- ~~Rest APIs~~
+- ~~Express/Koa/Nest etc.~~
+- ~~GraphQL~~
+
+### Introduces
+
+- Type-safe back-end architecture
+- [Type-safe and implicit input validation](https://tsdl.asplund.dev/docs/api/input)
+- [Type-safe and powerful middleware](https://tsdl.asplund.dev/docs/api/middleware)
+- Modular (install only what you need)
+- [TanStack Query (FKA React Query)](https://tanstack.com/query/latest/docs/react/overview) and [SWR](https://swr.vercel.app/) integration
+- Consistent error handling
 
 ## Contributing
 
@@ -42,7 +52,16 @@ TSDL is developed as a monorepo using [Nx](https://nx.dev/) for cloud runs and c
    ```
 3. Start hacking! Official tests are located in /tests. For playing, use /playground (it's git ignored but included in workspaces)
 
+### Docs (nextra)
+
+1. `cd meta/docs`
+2. `npm run dev` (assuming dependencies are installed)
+3. `npm run build` check that it builds
+4. `npm run start` preview
+
 ## Publishing (access only)
+
+### Publish npm packages
 
 1. Run lints, build packages, bump package versions and publish
    ```sh
@@ -52,6 +71,10 @@ TSDL is developed as a monorepo using [Nx](https://nx.dev/) for cloud runs and c
 ### Detecting circular dependencies
 
 If you suspect you have caused a circular dependency (easily done in monorepos), you can run `npx madge -c` in the project root.
+
+### Deploying documentation
+
+Merge into branch `preview` (for preview) or branch `docs` for live. The CI/CD workflows will automatically build the nextra documentation site and deploy it to Cloudflare.
 
 ***
 This README is auto-generated

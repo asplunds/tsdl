@@ -29,7 +29,7 @@ module.exports = {
   },
   settings: {
     next: {
-      rootDir: "meta/docs"
-    }
-  }
+      rootDir: "meta/docs",
+    },
+  },
 };
