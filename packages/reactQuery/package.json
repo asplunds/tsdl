@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/react-query",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TSDL React Query integration",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
@@ -8,8 +8,8 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@tsdl/client": "^0.1.0",
-    "@tsdl/core": "^0.1.0"
+    "@tsdl/client": "^0.1.1",
+    "@tsdl/core": "^0.1.1"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^4 || ^5"
