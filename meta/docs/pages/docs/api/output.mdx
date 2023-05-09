@@ -1,0 +1,44 @@
+# Output
+
+Outputs are seldom integral to an app but can be useful in specific situations.
+
+An output is invoked after a query is completed. The output of the query along with the
+input and context are then passed to the output callback.
+
+## Example
+
+```ts
+fetchFruit: tsdl
+  .input(z.literal("banana"))
+  .use(() => "orange")
+  .query(() => "apple")
+  .output((res) => {
+    res.input; // "banana"
+    res.ctx; // "orange"
+    res.output; // "potato"
+  })
+  .output(console.log),
+```
+
+## Type
+
+```ts
+type Output = <TCtx, TInput, TOutput, TReturn>(res: {
+  ctx: TCtx;
+  input: TInput;
+  output: TOutput;
+} => TReturn);
+```
+
+import { Callout } from "nextra-theme-docs";
+
+<Callout type="info">The return value of the output is ignored</Callout>
+<Callout type="info">
+  Outputs can throw errors and thereby modify the response. If one output
+  throws, no further outputs will be invoked.
+</Callout>
+<Callout type="warning">
+  All outputs will need to be resolved before a request is fulfilled, the output
+  callbacks are run in parallel.
+</Callout>
+```

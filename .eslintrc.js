@@ -1,6 +1,7 @@
 module.exports = {
+  root: true,
   env: {
-    browser: true,
+    browser: false,
     es2021: true,
   },
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
@@ -20,9 +21,15 @@ module.exports = {
     "out/**/*",
   ],
   rules: {
+    "no-unused-labels": "off",
     indent: "off",
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
     semi: ["error", "always"],
+  },
+  settings: {
+    next: {
+      rootDir: "meta/docs",
+    },
   },
 };

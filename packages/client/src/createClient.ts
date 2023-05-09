@@ -1,8 +1,10 @@
-import { Branch, ClientFetcher, InferClient } from "@tsdl/types";
+import type { types } from "@tsdl/core";
 import { fetcherUrlCallback } from "./lib/fetcherUrlCallback";
 
 /** @internal */
-export function createClient<TRouter extends Branch>(fetcher: ClientFetcher) {
+export function createClient<TRouter extends types.routing.Branch>(
+  fetcher: types.client.ClientFetcher
+) {
   function emulator(path: string[]): object {
     const caller = (input: unknown) => fetcher(fetcherUrlCallback(path, input));
 
@@ -20,5 +22,5 @@ export function createClient<TRouter extends Branch>(fetcher: ClientFetcher) {
     return new Proxy(caller, handler);
   }
 
-  return emulator([]) as InferClient<TRouter>;
+  return emulator([]) as types.client.InferClient<TRouter>;
 }

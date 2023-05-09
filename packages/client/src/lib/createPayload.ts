@@ -1,11 +1,11 @@
-import { ClientPayload } from "@tsdl/types";
+import { types } from "@tsdl/core";
 
 export function createPayload(
   path: string[],
   input: unknown
-): ClientPayload<unknown> {
+): types.client.ClientPayload<unknown> {
   return {
     path,
     input,
-  } satisfies ClientPayload<unknown>;
+  } satisfies types.client.ClientPayload<unknown>;
 }

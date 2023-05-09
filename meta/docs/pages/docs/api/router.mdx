@@ -1,0 +1,57 @@
+# Router
+
+## Defining a router
+
+Each key on the router argument is a part of a path.
+All the router keys chained together make up the path.
+The path always leads a query (or an output) also known as a leaf.
+
+```ts
+const router = tsdl.router({
+  fruits: tsdl.router({
+    fetchOne: tsdl.query(() => "Apple"),
+  }),
+  weatherForecast: tsdl.query(() => "Sunny"),
+});
+```
+
+In the above snippet there are two paths.
+
+1. /fruits/fetchOne
+2. /weatherForecast
+
+Because TSDL uses TypeScript as a data layer, the inferred router on the client
+will be an object where each part of the path is itself a key, mirroring the router
+defined on the server:
+
+```ts
+const client = {
+  fruits: {
+    fetchOne: () => string,
+  },
+  weatherForecast: () => string,
+};
+```
+
+## What is a route?
+
+In TSDL a route is the last chain of the router value for example
+
+```ts
+tsdl
+  .input(z.string())
+  .use(admin)
+  .use(logger)
+  .query(() => "I'm a query");
+```
+
+The entire above snippet is a _route_. The query is only the `.query` part
+
+A route can be declared elsewhere and still be a route:
+
+```ts
+const isAdmin = tsdl.input(z.string()).use(admin).use(logger);
+
+const route = isAdmin.query(() => "I'm a query");
+const route2 = isAdmin.query(() => "I'm another query");
+```

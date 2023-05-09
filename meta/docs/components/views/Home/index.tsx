@@ -18,11 +18,6 @@ const Hero = styled.div`
   flex-direction: column;
 `;
 
-const Underlined = styled.span`
-  text-decoration: underline;
-  text-underline-offset: 13px;
-`;
-
 function Home({ children }: { children: React.ReactNode }) {
   return (
     <Wrapper>
@@ -34,8 +29,7 @@ function Home({ children }: { children: React.ReactNode }) {
               font-weight: 700;
             `}
           >
-            Make your <Underlined>backend</Underlined> a{" "}
-            <Underlined>library</Underlined>
+            Backend as a library
           </h1>
           <div style={{ height: 5 }} />
           <h2
@@ -44,7 +38,7 @@ function Home({ children }: { children: React.ReactNode }) {
               font-weight: 500;
             `}
           >
-            Stop hassling with REST and GraphQL. Level up your app with TSDL
+            Connect your backend with your front-end as a library
           </h2>
           <div style={{ height: 30 }} />
           <Link href="/docs/getting-started/introduction">

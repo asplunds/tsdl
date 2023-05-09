@@ -1,0 +1,29 @@
+.cont {
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 400px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow: auto;
+  padding: 20px;
+}
+
+.listItem {
+  flex: none;
+}
+.list h3 {
+  margin: 0;
+}

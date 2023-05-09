@@ -1,0 +1,92 @@
+# TSDLError
+
+This class is exposed from `@tsdl/core`
+
+```ts
+import { TSDLError } from "@tsdl/core";
+```
+
+## Constructor
+
+```ts filename="server.ts"
+throw new TSDLError(400);
+throw new TSDLError("Unauthorized");
+```
+
+import { Callout } from "nextra-theme-docs";
+
+<Callout type="info">
+  All HTTP error codes are supported as either number code or the literal string
+  name.
+</Callout>
+
+## Methods
+
+### `setMessage(message: string)`
+
+Returns `this`
+
+```ts filename="server.ts"
+throw new TSDLError(400).setMessage("This is a bad request");
+```
+
+### `package()`
+
+```ts
+throw new TSDLError(419).package();
+```
+
+### _static_ `fromPackage(package: unknown)`
+
+Returns populated TSDLError instance
+
+```ts
+const error = TSDLError.fromPackage(package);
+```
+
+## Properties
+
+All properties only expose getters and are read-only
+
+### `message`
+
+```ts filename="client.ts"
+try {
+  /* ... */
+} catch (e) {
+  if (e instanceof TSDLError) {
+    alert(`Something went wrong: ${e.message}`);
+  }
+}
+```
+
+### `code`
+
+```ts filename="client.ts"
+error.code; // "Bad Request"
+```
+
+### `numberCode`
+
+```ts filename="client.ts"
+error.code; // 400
+```
+
+### `validationError`
+
+```ts filename="client.ts"
+const error = new TSDLError<{ issue: string }>().setValidationError({
+  issue: "Name is a required field",
+});
+error.validationError.issue; // "Name is a required field"
+```
+
+### `semanticErrorMessage`
+
+Get an error message with semantic information about the source and message.
+
+Probably appropriate for console logs or debugging, not user facing.
+
+```ts filename="client.ts"
+error.semanticErrorMessage; // "Error: Something went wrong. Source: application"
+```

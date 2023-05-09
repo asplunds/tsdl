@@ -8,17 +8,23 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { fetcherUrlCallback } from "@tsdl/client/src/lib/fetcherUrlCallback";
-import { Branch, ClientFetcher, Leaf } from "@tsdl/types";
+import { TSDLError, types } from "@tsdl/core";
 
 type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
   UseQueryOptions<TQueryFnData, TError, TReturn, string[]>,
   "queryKey" | "queryFn" | "initialData"
 > & { initialData?: () => undefined };
 
-export type InferReactQueryClient<T extends Branch | Leaf> = T extends infer R
-  ? R extends Branch
-    ? { [Key in keyof R["$routes"]]: InferReactQueryClient<R["$routes"][Key]> }
-    : R extends Leaf
+export type InferReactQueryClient<
+  T extends types.routing.Branch | types.routing.Leaf
+> = T extends infer R
+  ? R extends types.routing.Branch
+    ? {
+        [Key in keyof R["$routes"]]: InferReactQueryClient<R["$routes"][Key]>;
+      } & {
+        invalidate: () => void;
+      }
+    : R extends types.routing.Leaf
     ? {
         (input: R["$input"]): Promise<R["$return"]>;
         useQuery: R["$input"] extends undefined
@@ -48,16 +54,16 @@ export type InferReactQueryClient<T extends Branch | Leaf> = T extends infer R
     : never
   : never;
 
-export function createReactQueryClient<TRouter extends Branch>(
-  fetcher: ClientFetcher,
+export function createReactQueryClient<TRouter extends types.routing.Branch>(
+  fetcher: types.client.ClientFetcher,
   client: QueryClient
 ) {
   function emulator(path: string[]): object {
     const caller = async (input: unknown) => {
       const request = await fetcher(fetcherUrlCallback(path, input));
 
-      if (request.code != null && request.code > 399) {
-        throw new Error(request.message);
+      if (request.error != null) {
+        throw TSDLError.fromPackage(request.error);
       }
 
       return request?.payload ?? null;

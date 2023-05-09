@@ -1,0 +1,38 @@
+# Query
+
+The query, also called handler, is a callback function that exists on a
+_route_ and invoked when a _request_ with the query's path is sent from the client.
+
+## API
+
+```ts
+type Arg<TCtx, TInput> = {
+  ctx: TCtx;
+  input: TInput;
+};
+type Query<TCtx, TInput, TReturn> = (arg: Arg) => Promise<TReturn> | TReturn;
+```
+
+## Examples
+
+```ts
+const router = tsdl.router({
+  fruit: tsdl.router({
+    addOne: tsdl
+      .input(z.string().regex(/^[\w\s]+$/))
+      .query(async ({ input }) => {
+        await db.addOne(input);
+      }),
+    removeOne: tsdl.input(z.number()).query(({ input }) => {
+      fruit = fruit.filter((v) => v.id !== input);
+    }),
+    all: tsdl.query(() => fruit),
+  }),
+});
+```
+
+import { Callout } from "nextra-theme-docs";
+
+<Callout type="info">
+  See [middleware page](./middleware) for context examples
+</Callout>
