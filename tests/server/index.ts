@@ -1,11 +1,14 @@
-import { createTsdl } from "@tsdl/server";
+import { createTSDL } from "@tsdl/server";
 import http from "node:http";
-import { tsdlNodeIntegration } from "@tsdl/node";
+import { nodeTSDL } from "@tsdl/node";
 import { z } from "zod";
 import { TSDLError } from "@tsdl/core";
+import express from "express";
+import { expressTSDL } from "@tsdl/express";
+import cors from "cors";
 /* import * as yup from "yup"; */
 
-const tsdl = createTsdl(
+const tsdl = createTSDL(
   (ctx: {
     req: http.IncomingMessage;
     res: http.ServerResponse<http.IncomingMessage>;
@@ -79,17 +82,15 @@ const router = tsdl.router({
   }),
 });
 
-new TSDLError("Bad Request");
-
 export type Router = typeof router;
 
 const requestListener = (
   req: http.IncomingMessage,
   res: http.ServerResponse<http.IncomingMessage>
 ) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "localhost");
   if (req.url?.startsWith("/tsdl")) {
-    return tsdlNodeIntegration(
+    return nodeTSDL(
       router,
       {
         req,
@@ -104,5 +105,15 @@ const requestListener = (
 const server = http.createServer(requestListener);
 
 server.listen(8000, () => {
-  console.log("Backend started");
+  console.log("Node backend started");
 });
+
+const app = express();
+
+app
+  .use(cors())
+  .use(
+    "/tsdl",
+    expressTSDL(router, (req, res) => ({ req, res }))
+  )
+  .listen(9000, () => console.log("Express backend started"));

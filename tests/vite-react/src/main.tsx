@@ -17,7 +17,7 @@ const darkTheme = createTheme({
 
 const queryClient = new QueryClient();
 export const tsdl = createReactQueryClient<Router>(
-  (url) => fetch(url("http://localhost:8000/tsdl")).then((d) => d.json()),
+  (url) => fetch(url("http://localhost:9000/tsdl")).then((d) => d.json()),
   queryClient
 );
 

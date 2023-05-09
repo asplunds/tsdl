@@ -11,9 +11,9 @@ import { Steps, Tabs, Tab } from "nextra-theme-docs";
 ### Initialize TSDL
 
 ```ts filename="server.ts" copy
-import { createTsdl } from "@tsdl/server";
+import { createTSDL } from "@tsdl/server";
 
-export const tsdl = createTsdl(() => undefined);
+export const tsdl = createTSDL(() => undefined);
 
 const fruit = ["banana", "apple", "orange"];
 const router = tsdl.router({
@@ -37,12 +37,12 @@ export type Router = typeof router;
     ```
 
     ```ts {2-3,6-9,20-36} filename="server.ts" copy
-    import { createTsdl } from "@tsdl/server";
+    import { createTSDL } from "@tsdl/server";
     import http from "node:http";
-    import { tsdlNodeIntegration } from "@tsdl/node";
+    import { nodeTSDL } from "@tsdl/node";
 
     // A base context is created for each query
-    const tsdl = createTsdl((ctx: {
+    const tsdl = createTSDL((ctx: {
       req: http.IncomingMessage;
       res: http.ServerResponse<http.IncomingMessage>;
     }) => ctx);
@@ -61,7 +61,7 @@ export type Router = typeof router;
       res: http.ServerResponse<http.IncomingMessage>
     ) => {
       if (req.url?.startsWith("/tsdl")) {
-        return tsdlNodeIntegration(
+        return nodeTSDL(
           router,
           { req, res }, // the arg needed to create a context
           req,

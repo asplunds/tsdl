@@ -7,7 +7,8 @@
     "release": "npx lerna publish --no-private",
     "prepare": "husky install && npx lerna link",
     "build": "npx lerna run --parallel build",
-    "readme": "ts-node scripts/compileReadme.ts"
+    "readme": "ts-node scripts/compileReadme.ts",
+    "prune:dist": "find packages/**/* -name 'dist' -type d -prune -exec rm -rf '{}' +"
   },
   "private": true,
   "devDependencies": {
