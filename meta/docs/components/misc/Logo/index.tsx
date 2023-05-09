@@ -4,6 +4,7 @@ import { jsx } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useTheme } from "nextra-theme-docs";
 import { useMemo } from "react";
+import useMounted from "../../../hooks/useMounted";
 void jsx;
 
 const Root = styled.div`
@@ -17,9 +18,10 @@ const Root = styled.div`
 
 function Logo() {
   const theme = useTheme();
+  const isMounted = useMounted();
   const color = useMemo(
-    () => (theme.resolvedTheme === "dark" ? "#fff" : "#000"),
-    [theme]
+    () => (theme.resolvedTheme === "dark" && isMounted ? "#fff" : "#000"),
+    [theme, isMounted]
   );
 
   return (

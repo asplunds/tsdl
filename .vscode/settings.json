@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["Subrouter", "tsdl"]
+  "cSpell.words": ["Subrouter", "tsdl"],
+  "eslint.workingDirectories": ["."]
 }

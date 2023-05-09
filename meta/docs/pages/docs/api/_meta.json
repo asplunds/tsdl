@@ -2,16 +2,19 @@
   "input": {
     "title": "Input (tsdl.input)"
   },
+  "middleware": {
+    "title": "Middleware (tsdl.use)"
+  },
   "query": {
     "title": "Query (tsdl.query)"
   },
   "router": {
     "title": "Router (tsdl.router)"
   },
-  "middleware": {
-    "title": "Middleware (tsdl.use)"
-  },
   "output": {
     "title": "Output (tsdl.output)"
+  },
+  "TSDLError": {
+    "title": "TSDLError"
   }
 }

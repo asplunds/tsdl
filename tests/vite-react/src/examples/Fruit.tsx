@@ -22,7 +22,7 @@ export default function Fruit() {
           addOne.mutate(input, {
             onSuccess() {
               setInput("");
-              tsdl.fruit.invalidate();
+              tsdl.invalidate();
             },
             onError(e) {
               if (e instanceof TSDLError) {
@@ -47,6 +47,11 @@ export default function Fruit() {
                 removeOne.mutate(fruit.id, {
                   onSuccess() {
                     tsdl.fruit.all.invalidate();
+                  },
+                  onError(e) {
+                    if (e instanceof TSDLError) {
+                      toast.error(e.code);
+                    }
                   },
                 });
               }}

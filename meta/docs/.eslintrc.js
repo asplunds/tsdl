@@ -1,3 +1,11 @@
 module.exports = {
-  extends: ["../../.eslintrc.js", "plugin:@next/next/recommended"],
+  extends: ["next", "plugin:react/recommended"],
+  env: {
+    browser: true,
+  },
+  settings: {
+    react: {
+      version: "detect"
+    },
+  }
 };

@@ -7,7 +7,7 @@ import { types } from "@tsdl/core";
  * @param contextCreator A callback that is executed for each request
  * @returns tsdl
  */
-export function createTsdl<TBaseContext, TArg>(
+export function createTsdl<TArg, TBaseContext = TArg>(
   contextCreator: (arg: TArg) => TBaseContext
 ) {
   return {

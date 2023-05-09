@@ -3,6 +3,8 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useTheme } from "nextra-theme-docs";
+import { useMemo } from "react";
+import useMounted from "../../../hooks/useMounted";
 void jsx;
 
 const Root = styled.button`
@@ -23,18 +25,20 @@ type ButtonProps = React.ComponentProps<"button">;
 
 function Button(props: ButtonProps) {
   const theme = useTheme();
-
-  return (
-    <Root
-      css={css`
-        background-color: ${theme.resolvedTheme === "dark"
-          ? "#ffffff"
-          : "#000"};
-        color: ${theme.resolvedTheme === "dark" ? "#000" : "#fff"};
-      `}
-      {...props}
-    />
+  const isMounted = useMounted();
+  const styles = useMemo(
+    () =>
+      isMounted
+        ? css`
+            background-color: ${theme.resolvedTheme === "dark"
+              ? "#ffffff"
+              : "#000"};
+            color: ${theme.resolvedTheme === "dark" ? "#000" : "#fff"};
+          `
+        : "",
+    [isMounted, theme.resolvedTheme]
   );
+  return <Root css={styles} {...props} />;
 }
 
 export default Button;

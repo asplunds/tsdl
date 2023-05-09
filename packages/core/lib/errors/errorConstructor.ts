@@ -48,6 +48,9 @@ export class TSDLError<TValidationError = unknown> {
   get validationError() {
     return this.$validationError;
   }
+  get semanticErrorMessage() {
+    return `Error: ${this.$code}. Source: ${this.$source}`;
+  }
 
   package(): TSDLErrorPackage<TValidationError> {
     return {

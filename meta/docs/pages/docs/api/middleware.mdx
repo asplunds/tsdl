@@ -1,0 +1,252 @@
+# Middleware
+
+Like any contemporary back-end framework, TSDL offers a way for queries to be pre-handled by middleware.
+However, TSDL middleware are considerably more powerful in reu-usability, type-safety and composability.
+This is thanks to the pipeline design.
+
+## Concepts
+
+There are three key differences that make TSDL middleware awesome and powerul yet familiar to legacy middleware paradigms.
+
+### 1. Type-safe pipeline
+
+Perhaps the most striking feature of TSDL middleware is the pipeline
+architecture wherein a servert request is first given a base context (created by the TSDL instance) then piped through all (if any) of its middleware, transforming it according to the query and ultimately provided to the _query handler_ as the final context object.
+
+```ts
+import { TSDLError } from "@tsdl/core";
+
+const router = tsdl.router({
+  admin: tsdl.router({
+    updateRole: tsdl
+      .use(async (ctx) => {
+        const user = await db.fetchUser(ctx.token);
+        if (user) {
+          return {
+            ...ctx,
+            user,
+          };
+        }
+        throw new TSDLError(401);
+      })
+      .use((ctx) => {
+        return {
+          ...ctx,
+          isAdmin: ctx.user.role === "admin",
+        };
+      })
+      .query(({ ctx }) => {
+        ctx.isAdmin; // boolean
+      }),
+  }),
+});
+```
+
+In the above example you can see the pipeline in action, each middleware transforms the context (`ctx`) until it is finally provided
+to the query.
+
+### 2. Reusable routes
+
+As you may have noticed copying the logic for each "admin" query would be very tedious and hard.
+To solve this, you can move the necessary logic to a reusable variable as such:
+
+```ts filename="server.ts" {3-12,14-19,23,27,30} /loggedIn/
+import { TSDLError } from "@tsdl/core";
+
+const loggedIn = tsdl.use(async (ctx) => {
+  const user = await db.fetchUser(ctx.token);
+  if (user) {
+    return {
+      ...ctx,
+      user,
+    };
+  }
+  throw new TSDLError(401);
+});
+
+const isAdmin = loggedIn.use((ctx) => {
+  return {
+    ...ctx,
+    isAdmin: ctx.user.role === "admin",
+  };
+});
+
+const router = tsdl.router({
+  weather: tsdl.query(() => "Sunny"),
+  myProfile: loggedIn.query(({ ctx }) => {
+    return ctx.user.profile;
+  }),
+  admin: isAdmin.router({
+    updateRole: isAdmin.query(({ ctx }) => {
+      ctx.isAdmin; // boolean
+    }),
+    removeUser: isAdmin.query(({ ctx }) => {
+      ctx.isAdmin; // boolean
+    }),
+  }),
+});
+```
+
+```ts filename="client.ts"
+tsdl.admin.updateRole(); // logged in + admin only
+tsdl.admin.removeUser(); // logged in + admin only
+tsdl.myProfile(); // logged in
+tsdl.weather(); // public
+```
+
+### 3. Input access
+
+The input of a middleware is provided as the second argument for the middleware callback.
+By design the input is read-only to better co-exist with input indendpendent middleware.
+However, if you wish to effectively maniuplate the input you can still access it and then
+transform the _context_:
+
+```ts
+import { z } from "zod";
+
+const logger = <T>(ctx: T, input: string) => {
+  console.log(`Query input: ${input}`);
+  return ctx;
+};
+
+const router = tsdl.router({
+  fetchFruit: tsdl.input(z.string()).use(logger).query(),
+});
+```
+
+## What is a middleware?
+
+It's a callback that accepts two arguments:
+
+1. current context object in the pipeline
+2. a read-only input
+
+```ts
+type Middleware<TCtx, TInput, TReturn> = (
+  ctx: TCtx,
+  input: TInput
+) => TReturn | Promise<TReturn>;
+```
+
+The return type `TReturn` will be the context type `TCtx`
+in the immediately adjacent middleware in the pipeline.
+
+```ts filename="server.ts"
+const router = tsdl.router({
+  addition: tsdl
+    .use(() => 2)
+    .use((p) => p + 2)
+    .use((p) => p * 4)
+    .query(({ ctx }) => {
+      return ctx;
+    }),
+});
+```
+
+```ts filename="client.ts"
+const operation = await tsdl.addition(); // (2 + 2) * 4 = 16
+```
+
+In the above example a number is used, generally this is 100% valid however discouraged in production.
+
+### Middleware convention
+
+It's best practise to use the following type instead of the previously stated one.
+
+```ts /extends/
+type Middleware<TCtx extends object, TInput, TReturn extends TCtx> = (
+  ctx: TCtx,
+  input: TInput
+) => TReturn | Promise<TReturn>;
+```
+
+In this scenario, each middleware does not need to necessarily depend on previous.
+This is useful for creating generic middleware that do not conflict with each other
+while still allowing dependent middleware to work as well.
+
+```ts filename="server.ts"
+const router = tsdl.router({
+  addition: tsdl
+    .use((ctx) => ({ ...ctx, a: 2 }))
+    .use((ctx) => ({ ...ctx, a: ctx.p + 2, b: "Hello World!" }))
+    .query(({ ctx }) => {
+      console.log(ctx.a); // 4;
+      console.log(ctx.b); // "Hello World!";
+    }),
+});
+```
+
+## Base context
+
+The base context is created for each request.
+It's defined when creating a TSDL instance:
+
+```ts
+import http from "node:http";
+
+type BaseContext = {
+  req: http.IncomingMessage;
+  res: http.ServerResponse<http.IncomingMessage>;
+};
+
+const tsdl = createTsdl<BaseContext>((ctx) => ctx);
+```
+
+Now, the first middleware in a query pipeline will be `BaseContext`
+
+```ts
+tsdl.router({
+  captainSweatpants: tsdl.use((ctx) => {
+    return ctx; // BaseContext
+  }),
+  /* ... */
+});
+```
+
+Actually, because the base contex builder is a callback, you can modify it however you want!
+
+```ts
+import http from "node:http";
+
+type BaseContext = {
+  req: http.IncomingMessage;
+  res: http.ServerResponse<http.IncomingMessage>;
+  token?: string;
+};
+
+const tsdl = createTsdl(
+  (ctx: {
+    req: http.IncomingMessage;
+    res: http.ServerResponse<http.IncomingMessage>;
+  }) =>
+    ({
+      ...ctx,
+      token: ctx.req.headers.authorization,
+    } satisfies BaseContext)
+);
+```
+
+Even more concisely, you don't even need to explicitly type your base context unless you need to,
+TSDL infers it correctly for you.
+
+```ts
+import http from "node:http";
+
+const tsdl = createTsdl(
+  (ctx: {
+    req: http.IncomingMessage;
+    res: http.ServerResponse<http.IncomingMessage>;
+  }) => ({
+    ...ctx,
+    token: ctx.req.headers.authorization,
+  })
+);
+
+tsdl.router({
+  captainSweatpants: tsdl.use((ctx) => {
+    ctx.token; // string | undefined
+    return ctx;
+  }),
+  /* ... */
+});
+```

@@ -69,6 +69,7 @@ export default async function runnerEntrypoint<TBaseContext>(
       if (e instanceof TSDLError) {
         throw e;
       }
+
       return {
         hasInput: true,
         failure: true,
@@ -85,14 +86,17 @@ export default async function runnerEntrypoint<TBaseContext>(
       .setValidationError(validatedInput.e);
   }
 
-  const middleware = (leaf?.$mw ?? []) as ((arg: unknown) => unknown)[];
+  const middleware = (leaf?.$mw ?? []) as ((
+    arg: unknown,
+    input: unknown
+  ) => unknown)[];
 
   const ctxReduction = await (async () => {
     let ctx: unknown = baseContext;
 
     for (const [i, mw] of middleware.entries()) {
       try {
-        ctx = await mw(ctx);
+        ctx = await mw(ctx, validatedInput.input);
       } catch (e) {
         return {
           failure: true,
@@ -137,6 +141,29 @@ export default async function runnerEntrypoint<TBaseContext>(
       );
     }
   })();
+
+  const cb = (leaf.$cb ?? []) as ((arg: {
+    ctx: unknown;
+    input: unknown;
+    output: unknown;
+  }) => unknown)[];
+
+  try {
+    await Promise.all(
+      cb.map((cb) => {
+        return cb({
+          ctx: ctxReduction.ctx,
+          input: validatedInput.input,
+          output: resultOperation.result,
+        });
+      })
+    );
+  } catch (e) {
+    if (e instanceof TSDLError) {
+      throw e;
+    }
+    throw new TSDLError(500, "output").setMessage(extractErrorMessage(e));
+  }
 
   return resultOperation.result;
 }
