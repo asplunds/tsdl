@@ -3,6 +3,9 @@ module.exports = {
   env: {
     browser: true,
   },
+  rules: {
+    "react/no-unknown-property": ["error", { ignore: ["css"] }],
+  },
   settings: {
     react: {
       version: "detect",
