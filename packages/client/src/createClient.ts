@@ -1,7 +1,6 @@
 import type { types } from "@tsdl/core";
 import { fetcherUrlCallback } from "./lib/fetcherUrlCallback";
 
-/** @internal */
 export function createClient<TRouter extends types.routing.Branch>(
   fetcher: types.client.ClientFetcher
 ) {
