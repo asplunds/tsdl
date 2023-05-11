@@ -80,7 +80,7 @@ TSDL was originally created by the developers at [Enter Technologies](https://en
 - [TanStack Query](https://tanstack.com/query/latest/docs/react/overview) for the awesome query library
 - [tRPC](https://trpc.io/) for inspiration (see [migration guide](https://tsdl.asplund.dev) from tRPC to TSDL)
 - [Nx](https://nx.dev/) cloud runs
-- [Lerna](https://lerna.js.org/) amazing monorepo tool
+- [Lerna](https://lerna.js.org/) monorepo tool
 - [TypeScript](https://typescriptlang.org/) ❤️
 
 ***
