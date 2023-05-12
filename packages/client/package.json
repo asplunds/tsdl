@@ -10,12 +10,23 @@
   "dependencies": {
     "@tsdl/core": "^0.1.4"
   },
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./dist/index.js"
+    },
+    "./*": {
+      "import": "./*.ts",
+      "require": "./dist/*.js"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "index.ts",
     "src",
     "dist"
   ],
-  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/asplunds/tsdl.git",
