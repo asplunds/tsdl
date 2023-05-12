@@ -21,6 +21,10 @@
       "import": "./index.ts",
       "require": "./dist/index.js"
     },
+    "./*": {
+      "import": "./*.ts",
+      "require": "./dist/*.js"
+    },
     "./package.json": "./package.json"
   },
   "repository": {
