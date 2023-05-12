@@ -26,7 +26,9 @@ export type InferReactQueryClient<
       }
     : R extends types.routing.Leaf
     ? {
-        (input: R["$input"]): Promise<R["$return"]>;
+        (
+          ...args: R["$input"] extends undefined ? [undefined?] : [R["$input"]]
+        ): Promise<R["$return"]>;
         useQuery: R["$input"] extends undefined
           ? <TQueryFnData, TError>(
               options?: ReactQueryOptions<
