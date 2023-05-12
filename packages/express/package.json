@@ -29,7 +29,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/asplunds/tsdl.git",
-    "directory": "packages/types"
+    "directory": "packages/express"
   },
   "peerDependencies": {
     "express": "^3 || ^4 || ^5"
