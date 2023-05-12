@@ -20,7 +20,7 @@ export default function createQuery<TContext, TInput, TInputValidator>(
         $inputValidator,
         $mw,
         $cb: [],
-        $return: {} as Awaited<TReturn>,
+        $return: {} as types.common.ParsedJSON<Awaited<TReturn>>,
       };
       return {
         ...queryResult,
