@@ -71,25 +71,33 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
               input?: unknown,
               options?: ReactQueryOptions<unknown, unknown, unknown>
             ) => {
-              return useQuery(
-                path,
-                async () =>
-                  await memoCaller(
-                    input === undefined && options === undefined
-                      ? undefined
-                      : input
-                  ),
-                input !== undefined && options === undefined
-                  ? (input as ReactQueryOptions<unknown, unknown, unknown>)
-                  : options
-              );
+              try {
+                return useQuery(
+                  path,
+                  async () =>
+                    await memoCaller(
+                      input === undefined && options === undefined
+                        ? undefined
+                        : input
+                    ),
+                  input !== undefined && options === undefined
+                    ? (input as ReactQueryOptions<unknown, unknown, unknown>)
+                    : options
+                );
+              } catch {
+                return {};
+              }
             };
           }
           case "useMutation": {
             return (
               options?: Omit<UseMutationOptions<unknown>, "mutationFn">
             ) => {
-              return useMutation(memoCaller, options);
+              try {
+                return useMutation(memoCaller, options);
+              } catch {
+                return {};
+              }
             };
           }
           case "invalidate": {
