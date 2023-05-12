@@ -9,7 +9,7 @@ client.fruit
   .all()
   .then((d) => {
     console.log(d);
-    document.write(`Works!: ${d.map(v => v.name).join(", ")}`);
+    document.write(`Works!: ${d.map((v) => v.name).join(", ")}`);
   })
   .catch((e) => {
     console.error(e);
