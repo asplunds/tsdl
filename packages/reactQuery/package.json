@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/react-query",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "TSDL React Query integration",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
