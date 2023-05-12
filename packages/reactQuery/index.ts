@@ -7,8 +7,8 @@ import {
   useMutation,
   useQuery,
 } from "@tanstack/react-query";
-import { fetcherUrlCallback } from "@tsdl/client/src/lib/fetcherUrlCallback";
-import { TSDLError, types } from "@tsdl/core";
+import TSDLCaller from "@tsdl/client/src/TSDLCaller";
+import { types } from "@tsdl/core";
 
 type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
   UseQueryOptions<TQueryFnData, TError, TReturn, string[]>,
@@ -59,15 +59,7 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
   client: QueryClient
 ) {
   function emulator(path: string[]): object {
-    const caller = async (input: unknown) => {
-      const request = await fetcher(fetcherUrlCallback(path, input));
-
-      if (request.error != null) {
-        throw TSDLError.fromPackage(request.error);
-      }
-
-      return request?.payload ?? null;
-    };
+    const memoCaller = (input: unknown) => TSDLCaller(fetcher, input, path);
 
     const handler = {
       get(_target: unknown, prop: string) {
@@ -82,7 +74,7 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
               return useQuery(
                 path,
                 async () =>
-                  await caller(
+                  await memoCaller(
                     input === undefined && options === undefined
                       ? undefined
                       : input
@@ -97,7 +89,7 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
             return (
               options?: Omit<UseMutationOptions<unknown>, "mutationFn">
             ) => {
-              return useMutation(caller, options);
+              return useMutation(memoCaller, options);
             };
           }
           case "invalidate": {
@@ -112,7 +104,7 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
         return emulator([...path, prop]);
       },
     };
-    return new Proxy(caller, handler);
+    return new Proxy(memoCaller, handler);
   }
 
   return emulator([]) as InferReactQueryClient<TRouter>;

@@ -4,12 +4,15 @@
   "version": "0.0.1",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
+  "types": "./dist/cjs/tests/server/index.d.ts",
   "scripts": {
-    "dev:watch:node": "nodemon --watch \"dist/**/*.js\" --exec \"clear && TS_NODE_BASEURL=dist/tests/server node -r tsconfig-paths/register dist/tests/server\"",
-    "dev:watch:tsc": "tsc --watch>/dev/null",
-    "dev:watch": "run-p dev:watch:node dev:watch:tsc",
+    "dev:watch:node": "nodemon --watch \"dist/cjs/**/*.js\" --exec \"clear && TS_NODE_BASEURL=dist/cjs/tests/server node -r tsconfig-paths/register dist/cjs/tests/server\"",
+    "dev:watch:tsc:cjs": "tsc --module commonjs --outDir dist/cjs --watch>/dev/null",
+    "dev:watch": "run-p dev:watch:node dev:watch:tsc:cjs",
     "dev": "run-s build dev:watch",
-    "build": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:esm": "tsc --module es6 --outDir dist/esm",
+    "build": "npm run build:cjs & npm run build:esm",
     "start": "TS_NODE_BASEURL=dist/tests/server node -r tsconfig-paths/register dist/tests/server"
   },
   "dependencies": {
@@ -28,6 +31,20 @@
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0"
+  },
+  "exports": {
+    "./ts/*": {
+      "import": "./*.ts"
+    },
+    ".": {
+      "import": "./dist/esm/tests/server/index.js",
+      "require": "./dist/cjs/tests/server/index.js"
+    },
+    "./*": {
+      "import": "./dist/esm/tests/server/*.js",
+      "require": "./dist/cjs/tests/server/*.js"
+    },
+    "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",

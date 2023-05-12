@@ -5,27 +5,32 @@
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:esm": "tsc --module es6 --outDir dist/esm",
+    "build": "npm run build:cjs & npm run build:esm"
   },
   "dependencies": {
     "@tsdl/core": "^0.1.6"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/cjs/client/index.d.ts",
+  "main": "./dist/cjs/client/index.js",
   "exports": {
+    "./ts/*": {
+      "import": "./*.ts"
+    },
     ".": {
-      "import": "./index.ts",
-      "require": "./dist/index.js"
+      "import": "./dist/esm/client/index.js",
+      "require": "./dist/cjs/client/index.js"
     },
     "./*": {
-      "import": "./*.ts",
-      "require": "./dist/*.js"
+      "import": "./dist/esm/client/*.js",
+      "require": "./dist/cjs/client/*.js"
     },
     "./package.json": "./package.json"
   },
   "files": [
-    "index.ts",
-    "src",
-    "dist"
+    "dist/cjs/client",
+    "dist/esm/client"
   ],
   "repository": {
     "type": "git",

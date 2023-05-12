@@ -14,6 +14,7 @@ module.exports = {
   plugins: ["@typescript-eslint"],
   ignorePatterns: [
     ".eslintrc.*",
+    "webpack.config.*",
     "next.config.*",
     "node_modules/**/*",
     "dist/**/*",

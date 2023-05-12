@@ -1,6 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist"
-  }
+    "moduleResolution": "nodenext",
+    "paths": {
+      "@tsdl/*": ["../*"]
+    }
+  },
+  "exclude": ["dist"]
 }

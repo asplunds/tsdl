@@ -1,0 +1,25 @@
+{
+  "name": "@tsdl/test-client-webpack",
+  "version": "0.1.6",
+  "description": "TSDL server package",
+  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "dev": "webpack serve"
+  },
+  "devDependencies": {
+    "@tsdl/test-server": "file:../server",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  },
+  "dependencies": {
+    "@tsdl/client": "latest",
+    "@tsdl/core": "latest"
+  }
+}
