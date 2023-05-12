@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/server",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "TSDL server package",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@tsdl/core": "^0.1.4"
+    "@tsdl/core": "^0.1.6"
   },
   "types": "./dist/index.d.ts",
   "files": [
