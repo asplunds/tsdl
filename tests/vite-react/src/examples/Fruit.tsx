@@ -4,7 +4,7 @@ import styles from "./Fruit.module.css";
 import { Text } from "@nextui-org/react";
 import { tsdl } from "../main";
 import { toast } from "react-hot-toast";
-import { TSDLError } from "@tsdl/core";
+import { TSDLError } from "../../../../packages/core";
 
 export default function Fruit() {
   const [input, setInput] = useState("");

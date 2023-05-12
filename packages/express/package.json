@@ -10,19 +10,20 @@
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm"
   },
-  "types": "./dist/cjs/index.d.ts",
-  "main": "./dist/cjs/index.js",
+  "types": "./dist/cjs/express/index.d.ts",
+  "main": "./dist/cjs/express/index.js",
   "files": [
-    "dist"
+    "dist/cjs/express",
+    "dist/esm/express"
   ],
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/esm/express/index.js",
+      "require": "./dist/cjs/express/index.js"
     },
     "./*": {
-      "import": "./dist/esm/*.js",
-      "require": "./dist/cjs/*.js"
+      "import": "./dist/esm/express/*.js",
+      "require": "./dist/cjs/express/*.js"
     },
     "./package.json": "./package.json"
   },
