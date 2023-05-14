@@ -16,6 +16,10 @@ const Root = styled.button`
   border: 1px solid rgba(38, 38, 38, 1);
   margin: 0;
   appearance: none;
+  transition: box-shadow .2s ease-out;
+  &:hover {
+    box-shadow: 0 0 15px #7b7b7b;
+  }
   &:active {
     transform: scale(0.98);
   }

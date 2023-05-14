@@ -8,4 +8,7 @@ module.exports = withNextra({
   images: {
     unoptimized: true,
   },
+  experimental: {
+    scrollRestoration: true,
+  },
 });

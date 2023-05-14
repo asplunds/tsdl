@@ -14,34 +14,34 @@ const Root = styled.div`
 `;
 
 const Hero = styled.div`
-  margin: 80px 0;
+  margin: 180px 0;
   position: relative;
   flex-direction: column;
 `;
 
 function Home({ children }: { children: React.ReactNode }) {
   return (
-    <Wrapper width={1000}>
+    <Wrapper width={1100}>
       <Root>
         <Hero>
           <h1
             css={css`
-              font-size: 4vw;
+              font-size: 6vw;
               font-weight: 700;
               text-align: center;
             `}
           >
             TSDL
           </h1>
-          <div style={{ height: 5 }} />
           <h2
             css={css`
               font-size: 1.7vw;
+              margin-top: -0.4vw;
               font-weight: 500;
               text-align: center;
             `}
           >
-            Turn your backend into a library
+           Type-safe backend as a library
           </h2>
           <div style={{ height: 30 }} />
           <div
@@ -54,7 +54,7 @@ function Home({ children }: { children: React.ReactNode }) {
               <Button>Get Started</Button>
             </Link>
           </div>
-          <div style={{ height: 130 }} />
+          <div style={{ height: 170 }} />
           <Features />
         </Hero>
         {children}
