@@ -41,7 +41,7 @@ function Home({ children }: { children: React.ReactNode }) {
               text-align: center;
             `}
           >
-           Type-safe backend as a library
+            Type-safe backend as a library
           </h2>
           <div style={{ height: 30 }} />
           <div

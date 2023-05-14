@@ -207,10 +207,12 @@ function Features(_props: FeaturesProps) {
         >
           TSDL works standalone or alongside existing backends.
         </p>
-        <SubFeatures css={css`
-          gap: 32px;
-          margin-top: 24px;
-        `}>
+        <SubFeatures
+          css={css`
+            gap: 32px;
+            margin-top: 24px;
+          `}
+        >
           <SubFeature>
             <p>
               <FontAwesomeIcon icon={faCheck} />
