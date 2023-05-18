@@ -31,6 +31,10 @@ const Root = styled.div`
     "five five five five five five five five five";
   gap: 1.5em;
   font-size: 16px;
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 type FeaturesProps = object;
@@ -307,6 +311,7 @@ const FeatureRoot = styled.div`
   position: relative;
   overflow: hidden;
   transition: all 0.1s ease-out;
+
   h2 {
     font-weight: 600;
     font-size: 2.3em;
