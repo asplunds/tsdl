@@ -20,8 +20,8 @@
       "require": "./dist/cjs/index.js"
     },
     "./*": {
-      "import": "./dist/esm/*.js",
-      "require": "./dist/cjs/*.js"
+      "import": "./dist/esm/*",
+      "require": "./dist/cjs/*"
     },
     "./package.json": "./package.json"
   },

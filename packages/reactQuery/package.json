@@ -20,6 +20,7 @@
   "main": "./dist/cjs/reactQuery/index.js",
   "exports": {
     ".": {
+      "types": "./dist/esm/reactQuery/index.d.ts",
       "import": "./dist/esm/reactQuery/index.js",
       "require": "./dist/cjs/reactQuery/index.js"
     },
