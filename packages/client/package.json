@@ -20,7 +20,7 @@
       "import": "./*.ts"
     },
     ".": {
-      "types": "./dist/cjs/index.d.ts",
+      "types": "./dist/cjs/client/index.d.ts",
       "import": "./dist/esm/client/index.js",
       "require": "./dist/cjs/client/index.js"
     },

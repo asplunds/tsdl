@@ -17,6 +17,7 @@ import ReactLogo from "./react.svg";
 import Image from "next/image";
 import useScrollPosition from "../../hooks/useScrollPosition";
 import Link from "next/link";
+import useIsDarkTheme from "../../../hooks/useIsDarkTheme";
 
 const Root = styled.div`
   display: grid;
@@ -302,7 +303,6 @@ function Features(_props: FeaturesProps) {
 const FeatureRoot = styled.div`
   height: 300px;
   padding: 1.5em;
-  background: #000;
   border-radius: 1.5em;
   position: relative;
   overflow: hidden;
@@ -362,6 +362,7 @@ function Feature({
   i: number;
 }) {
   const pos = useScrollPosition() - i * 100;
+  const dark = useIsDarkTheme();
 
   return (
     <FeatureRoot
@@ -383,7 +384,14 @@ function Feature({
         ]}
       />
       <FeatureOverlay css={[absolute, br]}>
-        <FeatureBg css={br} />
+        <FeatureBg
+          css={[
+            br,
+            css`
+              background: ${dark ? "#000" : "#f5f5f5"};
+            `,
+          ]}
+        />
         {injection}
       </FeatureOverlay>
       <FeatureContent>{children}</FeatureContent>
