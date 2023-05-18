@@ -11,11 +11,10 @@
   },
   "types": "./dist/cjs/index.d.ts",
   "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
-    "./ts/*": {
-      "import": "./*.ts"
-    },
     ".": {
+      "types": "./dist/cjs/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },

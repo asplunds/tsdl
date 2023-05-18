@@ -19,6 +19,7 @@
     "lib"
   ],
   "main": "dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
       "types": "./dist/cjs/index.d.ts",
@@ -26,8 +27,8 @@
       "require": "./dist/cjs/index.js"
     },
     "./*": {
-      "import": "./dist/esm/*.js",
-      "require": "./dist/cjs/*.js"
+      "import": "./dist/esm/*",
+      "require": "./dist/cjs/*"
     },
     "./package.json": "./package.json"
   },

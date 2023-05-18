@@ -14,6 +14,7 @@
   },
   "types": "./dist/cjs/client/index.d.ts",
   "main": "./dist/cjs/client/index.js",
+  "module": "./dist/esm/client/index.js",
   "exports": {
     "./ts/*": {
       "import": "./*.ts"
@@ -24,8 +25,8 @@
       "require": "./dist/cjs/client/index.js"
     },
     "./*": {
-      "import": "./dist/esm/client/*.js",
-      "require": "./dist/cjs/client/*.js"
+      "import": "./dist/esm/client/*",
+      "require": "./dist/cjs/client/*"
     },
     "./package.json": "./package.json"
   },

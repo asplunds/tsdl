@@ -12,6 +12,7 @@
   },
   "types": "./dist/cjs/express/index.d.ts",
   "main": "./dist/cjs/express/index.js",
+  "module": "./dist/esm/express/index.js",
   "files": [
     "dist/cjs/express",
     "dist/esm/express"
@@ -23,8 +24,8 @@
       "require": "./dist/cjs/express/index.js"
     },
     "./*": {
-      "import": "./dist/esm/express/*.js",
-      "require": "./dist/cjs/express/*.js"
+      "import": "./dist/esm/express/*",
+      "require": "./dist/cjs/express/*"
     },
     "./package.json": "./package.json"
   },

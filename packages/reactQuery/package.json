@@ -18,6 +18,7 @@
   },
   "types": "./dist/cjs/reactQuery/index.d.ts",
   "main": "./dist/cjs/reactQuery/index.js",
+  "module": "./dist/esm/reactQuery/index.js",
   "exports": {
     ".": {
       "types": "./dist/esm/reactQuery/index.d.ts",
@@ -25,8 +26,8 @@
       "require": "./dist/cjs/reactQuery/index.js"
     },
     "./*": {
-      "import": "./dist/esm/reactQuery/*.js",
-      "require": "./dist/cjs/reactQuery/*.js"
+      "import": "./dist/esm/reactQuery/*",
+      "require": "./dist/cjs/reactQuery/*"
     },
     "./package.json": "./package.json"
   },
