@@ -189,7 +189,7 @@ type BaseContext = {
   res: http.ServerResponse<http.IncomingMessage>;
 };
 
-const tsdl = createTsdl<BaseContext>((ctx) => ctx);
+const tsdl = createTSDL<BaseContext>((ctx) => ctx);
 ```
 
 Now, the first middleware in a query pipeline will be `BaseContext`
@@ -214,7 +214,7 @@ type BaseContext = {
   token?: string;
 };
 
-const tsdl = createTsdl(
+const tsdl = createTSDL(
   (ctx: {
     req: http.IncomingMessage;
     res: http.ServerResponse<http.IncomingMessage>;
@@ -232,7 +232,7 @@ TSDL infers it correctly for you.
 ```ts
 import http from "node:http";
 
-const tsdl = createTsdl(
+const tsdl = createTSDL(
   (ctx: {
     req: http.IncomingMessage;
     res: http.ServerResponse<http.IncomingMessage>;

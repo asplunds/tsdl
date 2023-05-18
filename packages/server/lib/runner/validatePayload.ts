@@ -6,7 +6,7 @@ const allowedKeys: (keyof types.client.ClientPayload<unknown>)[] = [
 ];
 
 /** @internal */
-export default function validatePayload(payload: string): unknown {
+export function validatePayload(payload: string): unknown {
   const parsed = (() => {
     try {
       return JSON.parse(payload);

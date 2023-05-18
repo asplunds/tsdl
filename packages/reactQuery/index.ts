@@ -7,8 +7,8 @@ import {
   useMutation,
   useQuery,
 } from "@tanstack/react-query";
-import { fetcherUrlCallback } from "@tsdl/client/src/lib/fetcherUrlCallback";
-import { TSDLError, types } from "@tsdl/core";
+import TSDLCaller from "@tsdl/client/src/TSDLCaller";
+import { types } from "@tsdl/core";
 
 type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
   UseQueryOptions<TQueryFnData, TError, TReturn, string[]>,
@@ -26,7 +26,9 @@ export type InferReactQueryClient<
       }
     : R extends types.routing.Leaf
     ? {
-        (input: R["$input"]): Promise<R["$return"]>;
+        (
+          ...args: R["$input"] extends undefined ? [undefined?] : [R["$input"]]
+        ): Promise<R["$return"]>;
         useQuery: R["$input"] extends undefined
           ? <TQueryFnData, TError>(
               options?: ReactQueryOptions<
@@ -59,15 +61,7 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
   client: QueryClient
 ) {
   function emulator(path: string[]): object {
-    const caller = async (input: unknown) => {
-      const request = await fetcher(fetcherUrlCallback(path, input));
-
-      if (request.error != null) {
-        throw TSDLError.fromPackage(request.error);
-      }
-
-      return request?.payload ?? null;
-    };
+    const memoCaller = (input: unknown) => TSDLCaller(fetcher, input, path);
 
     const handler = {
       get(_target: unknown, prop: string) {
@@ -79,25 +73,33 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
               input?: unknown,
               options?: ReactQueryOptions<unknown, unknown, unknown>
             ) => {
-              return useQuery(
-                path,
-                async () =>
-                  await caller(
-                    input === undefined && options === undefined
-                      ? undefined
-                      : input
-                  ),
-                input !== undefined && options === undefined
-                  ? (input as ReactQueryOptions<unknown, unknown, unknown>)
-                  : options
-              );
+              try {
+                return useQuery(
+                  path,
+                  async () =>
+                    await memoCaller(
+                      input === undefined && options === undefined
+                        ? undefined
+                        : input
+                    ),
+                  input !== undefined && options === undefined
+                    ? (input as ReactQueryOptions<unknown, unknown, unknown>)
+                    : options
+                );
+              } catch {
+                return {};
+              }
             };
           }
           case "useMutation": {
             return (
               options?: Omit<UseMutationOptions<unknown>, "mutationFn">
             ) => {
-              return useMutation(caller, options);
+              try {
+                return useMutation(memoCaller, options);
+              } catch {
+                return {};
+              }
             };
           }
           case "invalidate": {
@@ -112,7 +114,7 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
         return emulator([...path, prop]);
       },
     };
-    return new Proxy(caller, handler);
+    return new Proxy(memoCaller, handler);
   }
 
   return emulator([]) as InferReactQueryClient<TRouter>;

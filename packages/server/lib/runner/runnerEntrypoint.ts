@@ -1,9 +1,9 @@
-import validatePayload from "./validatePayload";
+import { validatePayload } from "./validatePayload";
 import findLeaf from "./findLeaf";
 import { TSDLError, types } from "@tsdl/core";
 
 /** @internal */
-export default async function runnerEntrypoint<TBaseContext>(
+export async function runnerEntrypoint<TBaseContext>(
   router: types.routing.Branch,
   baseContext: TBaseContext,
   payload: string

@@ -1,31 +1,37 @@
 {
   "name": "@tsdl/node",
-  "version": "0.0.11",
-  "description": "TSDL node integration",
+  "version": "0.1.14",
+  "description": "TSDL native Node.js http module integration",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch"
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:esm": "tsc --module es6 --outDir dist/esm",
+    "build": "npm run build:cjs & npm run build:esm"
   },
   "dependencies": {
-    "@tsdl/server": "file:../server"
+    "@tsdl/server": "^0.1.14"
   },
-  "gitHead": "9da76f52393cfec7a8e096d8ca65ee783c5245f9",
+  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "devDependencies": {
     "@tsdl/types": "file:../types"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/cjs/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
-      "import": "./index.ts",
-      "require": "./dist/index.js"
+      "types": "./dist/cjs/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./*": {
+      "import": "./dist/esm/*",
+      "require": "./dist/cjs/*"
     },
     "./package.json": "./package.json"
   },
   "files": [
-    "index.ts",
-    "lib",
     "dist"
   ],
   "repository": {

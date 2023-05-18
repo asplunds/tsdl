@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.10.8",
+    "@fortawesome/fontawesome-free": "^6.4.0",
     "@tsdl/node": "file:../../packages/node",
     "@tsdl/server": "file:../../packages/server",
     "next": "^13.3.4",

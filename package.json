@@ -7,7 +7,8 @@
     "release": "npx lerna publish --no-private",
     "prepare": "husky install && npx lerna link",
     "build": "npx lerna run --parallel build",
-    "readme": "ts-node scripts/compileReadme.ts"
+    "readme": "ts-node scripts/compileReadme.ts",
+    "prune:dist": "find packages/**/* -name 'dist' -type d -prune -exec rm -rf '{}' +"
   },
   "private": true,
   "devDependencies": {
@@ -29,5 +30,10 @@
     "playground/*",
     "meta/*"
   ],
-  "author": "Jonathan Asplund <jonathan@asplund.net>"
+  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0"
+  }
 }

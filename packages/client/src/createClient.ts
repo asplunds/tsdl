@@ -1,25 +1,24 @@
 import type { types } from "@tsdl/core";
-import { fetcherUrlCallback } from "./lib/fetcherUrlCallback";
+import TSDLCaller from "./TSDLCaller";
 
-/** @internal */
 export function createClient<TRouter extends types.routing.Branch>(
   fetcher: types.client.ClientFetcher
 ) {
   function emulator(path: string[]): object {
-    const caller = (input: unknown) => fetcher(fetcherUrlCallback(path, input));
+    const memoCaller = (input: unknown) => TSDLCaller(fetcher, input, path);
 
     const handler = {
       get(_target: unknown, prop: string) {
         void _target;
 
         if (prop === "query") {
-          return caller;
+          return memoCaller;
         }
 
         return emulator([...path, prop]);
       },
     };
-    return new Proxy(caller, handler);
+    return new Proxy(memoCaller, handler);
   }
 
   return emulator([]) as types.client.InferClient<TRouter>;

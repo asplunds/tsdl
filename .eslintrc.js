@@ -14,6 +14,7 @@ module.exports = {
   plugins: ["@typescript-eslint"],
   ignorePatterns: [
     ".eslintrc.*",
+    "webpack.config.*",
     "next.config.*",
     "node_modules/**/*",
     "dist/**/*",
@@ -26,6 +27,14 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
     semi: ["error", "always"],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
   },
   settings: {
     next: {

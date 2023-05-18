@@ -7,6 +7,11 @@ export type Branch = {
   $type: TsDLNode.Node;
   $routes: Record<string, Branch | Leaf>;
 };
+
+export type InvokableRouter<TArg, TBaseContext> = Branch & {
+  $invoke?: (arg: TArg) => TBaseContext;
+};
+
 // Why are most types here unknown?
 // It's because this type is just a skeleton to be extended
 // and also populated with the inferred generic types.

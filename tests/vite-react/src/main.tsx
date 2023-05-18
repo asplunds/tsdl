@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createReactQueryClient } from "@tsdl/react-query";
-import type { Router } from "@tsdl/test-server";
+import { createReactQueryClient } from "../../../packages/reactQuery";
+import type { Router } from "../../server";
 import { NextUIProvider } from "@nextui-org/react";
 import "./style.css";
 import { createTheme } from "@nextui-org/react";
@@ -17,7 +17,7 @@ const darkTheme = createTheme({
 
 const queryClient = new QueryClient();
 export const tsdl = createReactQueryClient<Router>(
-  (url) => fetch(url("http://localhost:8000/tsdl")).then((d) => d.json()),
+  (url) => fetch(url("http://localhost:9000/tsdl")).then((d) => d.json()),
   queryClient
 );
 

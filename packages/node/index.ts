@@ -1,12 +1,11 @@
-import runnerEntrypoint from "@tsdl/server/lib/runner/runnerEntrypoint";
+import { runnerEntrypoint } from "@tsdl/server/lib/runner/runnerEntrypoint";
 import { createHTTPResponse } from "@tsdl/server/lib/runner/createHTTPResponse";
 import { TSDLError, types } from "@tsdl/core";
 import http from "node:http";
+import { messages } from "@tsdl/server/lib/messages";
 
-export async function tsdlNodeIntegration<TArg, TBaseContext>(
-  router: types.routing.Branch & {
-    $invoke?: (arg: TArg) => TBaseContext;
-  },
+export async function nodeTSDL<TArg, TBaseContext>(
+  router: types.routing.InvokableRouter<TArg, TBaseContext>,
   arg: TArg,
   req: http.IncomingMessage,
   res: http.ServerResponse<http.IncomingMessage>
@@ -15,7 +14,7 @@ export async function tsdlNodeIntegration<TArg, TBaseContext>(
 
   if (!router.$invoke) {
     const error = new TSDLError(500, "internal").setMessage(
-      "internal property '$invoke' not defined in provided TSDL router instance"
+      messages.INVOKE_MISSING
     );
     res.writeHead(error.numberCode);
 
@@ -32,7 +31,9 @@ export async function tsdlNodeIntegration<TArg, TBaseContext>(
   })();
 
   if (url == null) {
-    const error = new TSDLError(500, "internal").setMessage("invalid url");
+    const error = new TSDLError(500, "internal").setMessage(
+      messages.INVALID_URL
+    );
     res.writeHead(error.numberCode);
 
     return void res.end(
@@ -42,19 +43,9 @@ export async function tsdlNodeIntegration<TArg, TBaseContext>(
 
   const payload = url.get("payload");
 
-  if (payload == null) {
-    const error = new TSDLError(500, "internal").setMessage("no payload found");
-
-    res.writeHead(error.numberCode);
-
-    return void res.end(
-      JSON.stringify(JSON.stringify(createHTTPResponse(error.package(), null)))
-    );
-  }
-
-  if (!payload || typeof payload !== "string") {
+  if (!payload) {
     const error = new TSDLError(500, "internal").setMessage(
-      "payload parameter not found"
+      messages.NO_PAYLOAD
     );
 
     res.writeHead(error.numberCode);
@@ -76,12 +67,10 @@ export async function tsdlNodeIntegration<TArg, TBaseContext>(
         JSON.stringify(createHTTPResponse(e.package(), null))
       );
     } else {
-      res.writeHead(500);
+      res.writeHead(999);
       res.end("internal error");
       if (typeof console !== "undefined") {
-        console.error(
-          "TSDL never: error not of instance TSDLError. This is fatal."
-        );
+        console.error(messages.WRONG_ERROR_INSTANCE);
       }
     }
   }

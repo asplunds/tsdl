@@ -2,16 +2,12 @@
 
 TSDL vanilla client
 
-@tsdl/client, [@tsdl/core](https://npmjs.com/package/@tsdl/core), [@tsdl/node](https://npmjs.com/package/@tsdl/node), [@tsdl/react-query](https://npmjs.com/package/@tsdl/react-query), [@tsdl/server](https://npmjs.com/package/@tsdl/server)
+@tsdl/client, [@tsdl/core](https://npmjs.com/package/@tsdl/core), [@tsdl/express](https://npmjs.com/package/@tsdl/express), [@tsdl/node](https://npmjs.com/package/@tsdl/node), [@tsdl/react-query](https://npmjs.com/package/@tsdl/react-query), [@tsdl/server](https://npmjs.com/package/@tsdl/server)
 
 ***
 # [TSDL](https://tsdl.asplund.dev)
 
-Turn your backend into a library
-
-## Introduction
-
-TSDL, short for TypeScript as Data Layer, is a transport layer designed to blur the line between client and server side. TSDL is an end-to-end communication framework that makes your back-end a Type-safe library for your front-end.
+TSDL, short for TypeScript as Data Layer, is a transport layer designed to blur the line between client and server side. TSDL is an end-to-end http communication framework that makes your backend a type-safe library for your frontend.
 
 ## Links
 
@@ -75,6 +71,17 @@ If you suspect you have caused a circular dependency (easily done in monorepos),
 ### Deploying documentation
 
 Merge into branch `preview` (for preview) or branch `docs` for live. The CI/CD workflows will automatically build the nextra documentation site and deploy it to Cloudflare.
+
+## Credits
+
+TSDL was originally created by the developers at [Enter Technologies](https://entertech.se), it's used internally on projects such as [GyRank](https://gyrank.se) and [markanvisning.se](https://markanvisning.se) but was later open sourced.
+
+- [Nextra](https://nextra.site/) for documentation
+- [TanStack Query](https://tanstack.com/query/latest/docs/react/overview) for the awesome query library
+- [tRPC](https://trpc.io/) for inspiration (see [migration guide](https://tsdl.asplund.dev) from tRPC to TSDL)
+- [Nx](https://nx.dev/) cloud runs
+- [Lerna](https://lerna.js.org/) monorepo tool
+- [TypeScript](https://typescriptlang.org/) ❤️
 
 ***
 This README is auto-generated
