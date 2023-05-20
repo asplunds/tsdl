@@ -26,8 +26,8 @@
       "require": "./dist/cjs/reactQuery/index.js"
     },
     "./*": {
-      "import": "./dist/esm/reactQuery/*",
-      "require": "./dist/cjs/reactQuery/*"
+      "import": "./dist/esm/reactQuery/*.js",
+      "require": "./dist/cjs/reactQuery/*.js"
     },
     "./package.json": "./package.json"
   },

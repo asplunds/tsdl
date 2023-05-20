@@ -25,8 +25,8 @@
       "require": "./dist/cjs/client/index.js"
     },
     "./*": {
-      "import": "./dist/esm/client/*",
-      "require": "./dist/cjs/client/*"
+      "import": "./dist/esm/client/*.js",
+      "require": "./dist/cjs/client/*.js"
     },
     "./package.json": "./package.json"
   },

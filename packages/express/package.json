@@ -24,8 +24,8 @@
       "require": "./dist/cjs/express/index.js"
     },
     "./*": {
-      "import": "./dist/esm/express/*",
-      "require": "./dist/cjs/express/*"
+      "import": "./dist/esm/express/*.js",
+      "require": "./dist/cjs/express/*.js"
     },
     "./package.json": "./package.json"
   },
