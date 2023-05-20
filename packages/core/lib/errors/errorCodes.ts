@@ -1,4 +1,3 @@
-/** @internal */
 export const errorCodes = {
   "Bad Request": 400,
   Unauthorized: 401,
