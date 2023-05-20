@@ -8,7 +8,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import TSDLCaller from "@tsdl/client/src/TSDLCaller";
-import { types } from "@tsdl/core";
+import { TSDLError, types } from "@tsdl/core";
 
 type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
   UseQueryOptions<TQueryFnData, TError, TReturn, string[]>,
@@ -30,14 +30,14 @@ export type InferReactQueryClient<
           ...args: R["$input"] extends undefined ? [undefined?] : [R["$input"]]
         ): Promise<R["$return"]>;
         useQuery: R["$input"] extends undefined
-          ? <TQueryFnData, TError>(
+          ? <TQueryFnData, TError = TSDLError>(
               options?: ReactQueryOptions<
                 TQueryFnData,
                 TError,
                 Awaited<R["$return"]>
               >
             ) => UseQueryResult<R["$return"]>
-          : <TQueryFnData, TError>(
+          : <TQueryFnData, TError = TSDLError>(
               input: R["$input"],
               options?: ReactQueryOptions<
                 TQueryFnData,
@@ -45,12 +45,12 @@ export type InferReactQueryClient<
                 Awaited<R["$return"]>
               >
             ) => UseQueryResult<R["$return"]>;
-        useMutation: (
+        useMutation: <TError = TSDLError>(
           options?: Omit<
-            UseMutationOptions<R["$return"], unknown, R["$input"]>,
+            UseMutationOptions<R["$return"], TError, R["$input"]>,
             "mutationFn"
           >
-        ) => UseMutationResult<R["$return"], unknown, R["$input"]>;
+        ) => UseMutationResult<R["$return"], TError, R["$input"]>;
         invalidate: () => void;
       }
     : never
