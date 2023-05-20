@@ -76,6 +76,45 @@ export type Router = typeof router;
     ```
 
   </Tab>
+  
+  <Tab>
+
+    ```shell
+    npm i @tsdl/node
+    pnpm add @tsdl/node
+    yarn add @tsdl/node
+      ```
+
+    ```ts filename="server.ts" {2-3,6-8,21-26}
+    import { createTSDL } from "@tsdl/server";
+    import { expressTSDL } from "@tsdl/express";
+    import express from "express";
+
+    // A base context is created for each query
+    const tsdl = createTSDL(
+      (ctx: { req: express.Request; res: express.Response }) => ctx
+    );
+
+    const fruit = ["banana", "apple", "orange"];
+    const router = tsdl.router({
+      food: tsdl.router({
+        fetchFruit: tsdl.query(() => fruit),
+      }),
+    });
+
+    export type Router = typeof router;
+
+    const server = http.createServer(requestListener);
+
+    const app = express()
+      .use(
+        "/tsdl",
+        expressTSDL(router, (req, res) => ({ req, res }))
+      )
+      .listen(8000);
+    ```
+
+  </Tab>
 
 </Tabs>
 
