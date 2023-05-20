@@ -12,10 +12,7 @@ const tsdl = createTSDL(
   (ctx: {
     req: http.IncomingMessage;
     res: http.ServerResponse<http.IncomingMessage>;
-  }) => ({
-    ...ctx,
-    token: ctx.req.headers.authorization,
-  })
+  }) => ctx
 );
 
 const db = ["apple", "banana", "orange", "apple", "banana"];
