@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/express",
   "description": "TSDL express.js integration",
-  "version": "0.1.16",
+  "version": "0.1.18",
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
@@ -39,6 +39,6 @@
   },
   "dependencies": {
     "@tsdl/core": "^0.1.16",
-    "@tsdl/server": "^0.1.16"
+    "@tsdl/server": "^0.1.18"
   }
 }
