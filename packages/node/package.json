@@ -12,7 +12,7 @@
   "dependencies": {
     "@tsdl/server": "^0.1.18"
   },
-  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
+  "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
   "devDependencies": {
     "@tsdl/types": "file:../types"
   },
