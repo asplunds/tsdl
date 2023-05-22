@@ -70,7 +70,7 @@ const router = tsdl.router({
     test: tsdl
       .use((p) => p)
       .input(z.string())
-      .use(p => p)
+      .use((p) => p)
       .query(({ ctx, input }) => {
         void ctx;
         //   ^?
