@@ -67,6 +67,17 @@ const router = tsdl.router({
       .query(({ input }) => {
         db.push(input.name);
       }),
+    test: tsdl
+      .use((p) => p)
+      .input(z.string())
+      .use(p => p)
+      .query(({ ctx, input }) => {
+        void ctx;
+        //   ^?
+        void input;
+        //   ^?
+        return "ok";
+      }),
     scrapeOne: tsdl
       .input(z.string())
       .use(logger)
