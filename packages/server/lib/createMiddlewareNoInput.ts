@@ -20,7 +20,7 @@ export default function createMiddlewareNoInput<
 
   return {
     use,
-    ...createInput<TContext>(),
+    ...createInput<TContext>($mw),
     ...createQuery<TContext, TInput, TInputValidator>($inputValidator, $mw),
   };
 }

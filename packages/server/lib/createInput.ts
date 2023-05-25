@@ -3,7 +3,7 @@ import createMiddleware from "./createMiddleware";
 import createQuery from "./createQuery";
 
 /** @internal */
-export default function createInput<TContext>() {
+export default function createInput<TContext>($mw: unknown[] = []) {
   return {
     input<TInputRaw>(inputValidator: types.validation.Validator<TInputRaw>) {
       type Input = Awaited<TInputRaw>;
@@ -16,7 +16,7 @@ export default function createInput<TContext>() {
           TContext,
           Input,
           types.validation.Validator<TInputRaw>
-        >(inputValidator),
+        >(inputValidator, $mw),
       };
     },
   };

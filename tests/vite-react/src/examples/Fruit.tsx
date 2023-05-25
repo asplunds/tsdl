@@ -13,6 +13,8 @@ export default function Fruit() {
   const removeOne = tsdl.fruit.removeOne.useMutation();
   const fruit = tsdl.fruit.all.useQuery();
 
+  tsdl.vegetables.test("shalom");
+
   return (
     <div className={styles.cont}>
       <form

@@ -68,14 +68,14 @@ const router = tsdl.router({
         db.push(input.name);
       }),
     test: tsdl
-      .use((p) => p)
+      .use(async () => "sup" as const)
       .input(z.string())
-      .use((p) => p)
       .query(({ ctx, input }) => {
         void ctx;
         //   ^?
         void input;
         //   ^?
+        console.log(ctx);
         return "ok";
       }),
     scrapeOne: tsdl
