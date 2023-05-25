@@ -21,6 +21,7 @@ export type InferClient<T extends Branch | Leaf> = T extends infer R
         query: (
           ...args: R["$input"] extends undefined ? [undefined?] : [R["$input"]]
         ) => Promise<Awaited<R["$return"]>>;
+        infer: Awaited<R["$return"]>;
       }
     : never
   : never;

@@ -52,6 +52,7 @@ export type InferReactQueryClient<
           >
         ) => UseMutationResult<R["$return"], TError, R["$input"]>;
         invalidate: () => void;
+        infer: Awaited<R["$return"]>;
       }
     : never
   : never;
