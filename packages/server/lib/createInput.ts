@@ -10,7 +10,7 @@ export default function createInput<TContext>($mw: unknown[] = []) {
       return {
         ...createQuery<TContext, Input, types.validation.Validator<TInputRaw>>(
           inputValidator,
-          []
+          $mw
         ),
         ...createMiddleware<
           TContext,
