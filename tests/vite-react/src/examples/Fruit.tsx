@@ -12,7 +12,7 @@ export default function Fruit() {
   const addOne = tsdl.fruit.addOne.useMutation();
   const removeOne = tsdl.fruit.removeOne.useMutation();
   const fruit = tsdl.fruit.all.useQuery();
-  
+
   return (
     <div className={styles.cont}>
       <form
