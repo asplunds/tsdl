@@ -75,7 +75,7 @@ const router = tsdl.router({
         //   ^?
         void input;
         //   ^?
-        console.log(ctx);
+
         return "ok";
       }),
     scrapeOne: tsdl
