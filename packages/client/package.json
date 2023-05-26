@@ -12,27 +12,27 @@
   "dependencies": {
     "@tsdl/core": "^0.1.22"
   },
-  "types": "./dist/cjs/client/index.d.ts",
-  "main": "./dist/cjs/client/index.js",
-  "module": "./dist/esm/client/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
     "./ts/*": {
       "import": "./*.ts"
     },
     ".": {
-      "types": "./dist/cjs/client/index.d.ts",
-      "import": "./dist/esm/client/index.js",
-      "require": "./dist/cjs/client/index.js"
+      "types": "./dist/cjs/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
     },
     "./*": {
-      "import": "./dist/esm/client/*.js",
-      "require": "./dist/cjs/client/*.js"
+      "import": "./dist/esm/*.js",
+      "require": "./dist/cjs/*.js"
     },
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/cjs/client",
-    "dist/esm/client"
+    "dist/cjs",
+    "dist/esm"
   ],
   "repository": {
     "type": "git",

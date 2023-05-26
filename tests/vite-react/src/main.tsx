@@ -16,9 +16,10 @@ const darkTheme = createTheme({
 });
 
 const queryClient = new QueryClient();
-export const tsdl = createReactQueryClient<Router>((arg) => {
-  console.log(arg);
-  return fetch(arg.url("http://localhost:9000/tsdl")).then((d) => d.json());
+export const tsdl = createReactQueryClient<Router>(({ url, options }) => {
+  return fetch(url("http://localhost:9000/tsdl"), options).then((d) =>
+    d.json()
+  );
 }, queryClient);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

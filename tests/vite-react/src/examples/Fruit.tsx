@@ -15,6 +15,7 @@ export default function Fruit() {
   const fruit2 = tsdl.fruit.all(undefined, {
     next: 10,
   });
+  void fruit2;
 
   return (
     <div className={styles.cont}>
