@@ -1,13 +1,14 @@
 {
   "name": "@tsdl/server",
-  "version": "0.1.14",
+  "version": "0.1.23",
   "description": "TSDL server package",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
-    "build": "npm run build:cjs & npm run build:esm"
+    "build": "npm run build:cjs & npm run build:esm",
+    "watch": "tsc --watch --module es6 --outDir dist/esm"
   },
   "types": "./dist/cjs/index.d.ts",
   "main": "./dist/cjs/index.js",
@@ -19,13 +20,13 @@
       "require": "./dist/cjs/index.js"
     },
     "./*": {
-      "import": "./dist/esm/*",
-      "require": "./dist/cjs/*"
+      "import": "./dist/esm/*.js",
+      "require": "./dist/cjs/*.js"
     },
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@tsdl/core": "^0.1.14"
+    "@tsdl/core": "^0.1.23"
   },
   "files": [
     "dist"
@@ -35,5 +36,5 @@
     "url": "https://github.com/asplunds/tsdl.git",
     "directory": "packages/server"
   },
-  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b"
+  "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e"
 }

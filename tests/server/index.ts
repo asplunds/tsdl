@@ -67,6 +67,17 @@ const router = tsdl.router({
       .query(({ input }) => {
         db.push(input.name);
       }),
+    test: tsdl
+      .use(async () => "sup" as const)
+      .input(z.string())
+      .query(({ ctx, input }) => {
+        void ctx;
+        //   ^?
+        void input;
+        //   ^?
+
+        return "ok";
+      }),
     scrapeOne: tsdl
       .input(z.string())
       .use(logger)
@@ -101,7 +112,7 @@ const requestListener = (
 
 const server = http.createServer(requestListener);
 
-server.listen(8000, () => {
+server.listen(8001, () => {
   console.log("Node backend started");
 });
 

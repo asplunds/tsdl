@@ -4,9 +4,10 @@ import { TSDLError, types } from "@tsdl/core";
 export default async function TSDLCaller(
   fetcher: types.client.ClientFetcher,
   input: unknown,
-  path: string[]
+  path: string[],
+  options?: unknown
 ) {
-  const request = await fetcher(fetcherUrlCallback(path, input));
+  const request = await fetcher(fetcherUrlCallback(path, input, options));
 
   if (request.error != null) {
     throw TSDLError.fromPackage(request.error);

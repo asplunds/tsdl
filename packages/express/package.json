@@ -1,8 +1,8 @@
 {
   "name": "@tsdl/express",
   "description": "TSDL express.js integration",
-  "version": "0.1.14",
-  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
+  "version": "0.1.23",
+  "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
   "scripts": {
@@ -24,8 +24,8 @@
       "require": "./dist/cjs/express/index.js"
     },
     "./*": {
-      "import": "./dist/esm/express/*",
-      "require": "./dist/cjs/express/*"
+      "import": "./dist/esm/express/*.js",
+      "require": "./dist/cjs/express/*.js"
     },
     "./package.json": "./package.json"
   },
@@ -38,7 +38,7 @@
     "express": "^3 || ^4 || ^5"
   },
   "dependencies": {
-    "@tsdl/core": "^0.1.14",
-    "@tsdl/server": "^0.1.14"
+    "@tsdl/core": "^0.1.23",
+    "@tsdl/server": "^0.1.23"
   }
 }

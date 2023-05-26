@@ -51,7 +51,7 @@ import { Steps, Tabs, Tab, Callout } from "nextra-theme-docs";
     ```ts filename="main.tsx" {3-5}
     import type { Router } from "my-server";
 
-    export const tsdl = createClient<Router>((url) =>
+    export const tsdl = createClient<Router>(({ url }) =>
       fetch(url("http://localhost:8000/tsdl")).then((d) => d.json())
     );
     ```
@@ -75,7 +75,7 @@ import { Steps, Tabs, Tab, Callout } from "nextra-theme-docs";
 
     const queryClient = new QueryClient();
     export const tsdl = createReactQueryClient<Router>(
-      (url) => fetch(url("http://localhost:8000/tsdl")).then((d) => d.json()),
+      ({ url }) => fetch(url("http://localhost:8000/tsdl")).then((d) => d.json()),
       queryClient
     );
 
