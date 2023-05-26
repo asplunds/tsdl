@@ -27,7 +27,9 @@ export type InferReactQueryClient<
     : R extends types.routing.Leaf
     ? {
         (
-          ...args: R["$input"] extends undefined ? [undefined?] : [R["$input"]]
+          ...args: R["$input"] extends undefined
+            ? [undefined?, unknown?]
+            : [R["$input"], unknown?]
         ): Promise<R["$return"]>;
         useQuery: R["$input"] extends undefined
           ? <TQueryFnData, TError = TSDLError>(
@@ -62,7 +64,8 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
   client: QueryClient
 ) {
   function emulator(path: string[]): object {
-    const memoCaller = (input: unknown) => TSDLCaller(fetcher, input, path);
+    const memoCaller = (input: unknown, options?: unknown) =>
+      TSDLCaller(fetcher, input, path, options);
 
     const handler = {
       get(_target: unknown, prop: string) {

@@ -6,9 +6,11 @@ export type ClientPayload<TInput> = {
   input: TInput;
 };
 
-export type ClientFetcher = <T>(
-  url: (path: string) => string
-) => Promise<HTTPResponse<T>> | HTTPResponse<T>;
+export type ClientFetcher = <T>(args: {
+  url: (path: string) => string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options: any;
+}) => Promise<HTTPResponse<T>> | HTTPResponse<T>;
 
 export type InferClient<T extends Branch | Leaf> = T extends infer R
   ? R extends Branch
@@ -16,10 +18,14 @@ export type InferClient<T extends Branch | Leaf> = T extends infer R
     : R extends Leaf
     ? {
         (
-          ...args: R["$input"] extends undefined ? [undefined?] : [R["$input"]]
+          ...args: R["$input"] extends undefined
+            ? [undefined?, unknown?]
+            : [R["$input"], unknown?]
         ): Promise<Awaited<R["$return"]>>;
         query: (
-          ...args: R["$input"] extends undefined ? [undefined?] : [R["$input"]]
+          ...args: R["$input"] extends undefined
+            ? [undefined?, unknown?]
+            : [R["$input"], unknown?]
         ) => Promise<Awaited<R["$return"]>>;
         infer: Awaited<R["$return"]>;
       }

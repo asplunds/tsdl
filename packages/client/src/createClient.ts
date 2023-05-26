@@ -5,7 +5,8 @@ export function createClient<TRouter extends types.routing.Branch>(
   fetcher: types.client.ClientFetcher
 ) {
   function emulator(path: string[]): object {
-    const memoCaller = (input: unknown) => TSDLCaller(fetcher, input, path);
+    const memoCaller = (input: unknown, options?: unknown) =>
+      TSDLCaller(fetcher, input, path, options);
 
     const handler = {
       get(_target: unknown, prop: string) {
