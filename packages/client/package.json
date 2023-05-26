@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/client",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "description": "TSDL vanilla client",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "build": "npm run build:cjs & npm run build:esm"
   },
   "dependencies": {
-    "@tsdl/core": "^0.1.22"
+    "@tsdl/core": "^0.1.23"
   },
   "types": "./dist/cjs/index.d.ts",
   "main": "./dist/cjs/index.js",
