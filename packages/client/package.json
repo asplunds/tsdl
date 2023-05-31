@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/client",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "description": "TSDL vanilla client",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
