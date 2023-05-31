@@ -93,6 +93,7 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
                     : options
                 );
               } catch {
+                // catches Next.js/ssr hydration issues... annoyng
                 return {};
               }
             };
