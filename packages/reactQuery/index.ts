@@ -13,7 +13,7 @@ import { TSDLError, types } from "@tsdl/core";
 type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
   UseQueryOptions<TQueryFnData, TError, TReturn, string[]>,
   "queryKey" | "queryFn" | "initialData"
-> & { initialData?: () => undefined };
+> & { initialData?: (() => TReturn) | TReturn };
 
 export type InferReactQueryClient<
   T extends types.routing.Branch | types.routing.Leaf
