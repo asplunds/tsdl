@@ -13,8 +13,8 @@ export async function nodeTSDL<TArg, TBaseContext>(
   res.setHeader("Content-Type", "application/json");
 
   if (!router.$invoke) {
-    const error = new TSDLError(500, "internal").setMessage(
-      messages.INVOKE_MISSING
+    const error = new TSDLError(500, messages.INVOKE_MISSING).setSource(
+      "internal"
     );
     res.writeHead(error.numberCode);
 
@@ -31,9 +31,10 @@ export async function nodeTSDL<TArg, TBaseContext>(
   })();
 
   if (url == null) {
-    const error = new TSDLError(500, "internal").setMessage(
-      messages.INVALID_URL
+    const error = new TSDLError(500, messages.INVALID_URL).setSource(
+      "internal"
     );
+
     res.writeHead(error.numberCode);
 
     return void res.end(

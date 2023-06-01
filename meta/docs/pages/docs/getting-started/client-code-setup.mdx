@@ -44,7 +44,7 @@ import { Steps, Tabs, Tab, Callout } from "nextra-theme-docs";
 
 ### Create client
 
-<Tabs items={["Default", "React query", "SWR"]}>
+<Tabs items={["Default", "React Query", "SWR"]}>
 
   <Tab>
 
@@ -106,13 +106,15 @@ import { Steps, Tabs, Tab, Callout } from "nextra-theme-docs";
     }
     ```
 
-    The TSDL+ReactQuery integration exposes the following properties to the client:
+    The TSDL + React Query integration exposes the following properties to the client:
 
     - `.useQuery(input? | options?, options?)`
     - `.useMutation(options?)`
     - `.invalidate()`
 
     In addition, you can still call each query normally by invoking the function.
+
+    For more info and usage examples go to [React Query integration](../integrations/react-query) page
 
   </Tab>
 

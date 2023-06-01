@@ -1,50 +1,41 @@
-import { TSDLErrorPackage } from "../../types/common";
-import { Source } from "../../types/error";
-import { errorCodes, errorCodesReversed } from "./errorCodes";
-
-export class TSDLError<TValidationError = unknown> {
-  private $code: keyof typeof errorCodes;
-  private $message?: string;
-  private $validationError?: TValidationError;
-  private $source: Source = "application";
-  constructor(
-    code:
-      | keyof typeof errorCodes
-      | (typeof errorCodes)[keyof typeof errorCodes],
-    message?: string
-  ) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TSDLError = void 0;
+const errorCodes_1 = require("./errorCodes");
+class TSDLError {
+  constructor(code, message) {
+    this.$source = "application";
     this.$message = message;
     if (typeof code === "number") {
-      const match = errorCodesReversed[code];
-      if (match == null || !(match in errorCodes)) {
+      const match = errorCodes_1.errorCodesReversed[code];
+      if (match == null || !(match in errorCodes_1.errorCodes)) {
         throw InvalidCodeError();
       }
       this.$code = match;
     } else {
-      if (!(code in errorCodes)) {
+      if (!(code in errorCodes_1.errorCodes)) {
         throw InvalidCodeError();
       }
       this.$code = code;
     }
   }
-  setSource(source: Source) {
+  setSource(source) {
     this.$source = source;
     return this;
   }
-  setMessage(message?: string) {
+  setMessage(message) {
     this.$message = message;
     return this;
   }
-  setValidationError(error?: TValidationError) {
+  setValidationError(error) {
     this.$validationError = error;
     return this;
   }
-
   get code() {
     return this.$code;
   }
   get numberCode() {
-    return errorCodes[this.$code];
+    return errorCodes_1.errorCodes[this.$code];
   }
   get message() {
     return this.$message;
@@ -55,31 +46,27 @@ export class TSDLError<TValidationError = unknown> {
   get semanticErrorMessage() {
     return `Error: ${this.$code}. Source: ${this.$source}`;
   }
-
-  package(): TSDLErrorPackage<TValidationError> {
+  package() {
     return {
       $schema: "TSDLError",
       code: this.$code,
       message: this.$message,
       validationError: this.$validationError,
       source: this.$source,
-    } satisfies TSDLErrorPackage<TValidationError>;
+    };
   }
-
-  toString(): string {
+  toString() {
     return JSON.stringify(this.package());
   }
-
-  static fromPackage<TValidationError>(
-    pkg: TSDLErrorPackage<TValidationError>
-  ) {
+  static fromPackage(pkg) {
     return new TSDLError(pkg.code)
       .setMessage(pkg.message)
       .setValidationError(pkg.validationError);
   }
 }
-
+exports.TSDLError = TSDLError;
 /** @internal */
 function InvalidCodeError() {
   return new Error("Invalid code");
 }
+//# sourceMappingURL=errorConstructor.js.map

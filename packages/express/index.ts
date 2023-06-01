@@ -10,8 +10,8 @@ export function expressTSDL<TArg, TBaseContext>(
 ) {
   const runner = async (req: Request, res: Response, next: NextFunction) => {
     if (!router.$invoke) {
-      const error = new TSDLError(500, "internal").setMessage(
-        messages.INVOKE_MISSING
+      const error = new TSDLError(500, messages.INVOKE_MISSING).setSource(
+        "internal"
       );
 
       return void res
@@ -50,8 +50,8 @@ export function expressTSDL<TArg, TBaseContext>(
     })();
 
     if (!payload) {
-      const error = new TSDLError(500, "internal").setMessage(
-        messages.NO_PAYLOAD
+      const error = new TSDLError(500, messages.NO_PAYLOAD).setSource(
+        "internal"
       );
 
       return void res

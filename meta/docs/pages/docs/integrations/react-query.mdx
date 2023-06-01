@@ -1,0 +1,201 @@
+# TanStack Query (FKA React Query) integration
+
+TSDL natively integrates with React Query.
+
+import { Steps } from "nextra-theme-docs";
+
+## Installation
+
+<Steps>
+
+### Ensure you have a server
+
+If you have a server, great!
+You're ready to use TSDL + React Query.
+If not, head over to [server-side setup](../getting-started/server-code-setup) and come back here.
+
+### Install dependencies (front-end)
+
+import { Tab, Tabs } from "nextra-theme-docs";
+
+<Tabs items={["pnpm", "npm", "yarn"]}>
+  <Tab>
+    ```shell filename="client" copy
+    pnpm add @tsdl/react-query @tanstack/react-query
+    ```
+  </Tab>
+  <Tab>
+    ```shell filename="client" copy
+    npm i @tsdl/react-query @tanstack/react-query
+    ```
+  </Tab>
+  <Tab>
+    ```shell filename="client" copy
+    yarn add @tsdl/react-query @tanstack/react-query
+    ```
+  </Tab>
+</Tabs>
+
+### Create a client
+
+Follow the steps in [client-side setup](/docs/getting-started/client-code-setup) and under "Create client" select "React Query".
+
+</Steps>
+
+## Usage
+
+### Basic usage
+
+```ts filename="App.tsx"
+import { tsdl } from "./tsdl";
+
+export default function App() {
+  const applesQuery = tsdl.fruits.fetchApples.useQuery();
+}
+```
+
+### useQuery options (_without_ TSDL input)
+
+If the query has no inputs, the first argument will be `useQuery` options
+
+```ts filename="App.tsx"
+import { tsdl } from "./tsdl";
+
+export default function App() {
+  const applesQuery = tsdl.fruits.fetchApples.useQuery({
+    enabled: false,
+    intialData: ["Golden Delicious", "Cortland"],
+  });
+}
+```
+
+### useQuery options (_with_ TSDL input)
+
+If the TSDL query has an input, the first argument is input and the second argument is `useQuery` options.
+
+```ts filename="App.tsx"
+import { tsdl } from "./tsdl";
+
+export default function App() {
+  const applesQuery = tsdl.fruits.fetchFruit.useQuery("apples", {
+    enabled: false,
+    intialData: ["Golden Delicious", "Cortland"],
+  });
+}
+```
+
+### Pass arguments to `useQuery`
+
+```ts filename="App.tsx"
+export default function App() {
+  const cars = tsdl.cars.fetchCars.useQuery({
+    brand: "volvo",
+  });
+}
+```
+
+```ts filename="server.ts"
+const router = tsdl.router({
+  cars: tsdl.router({
+    fetchCars: tsdl
+      .input(
+        z.object({
+          brand: z.string(),
+        })
+      )
+      .query(async ({ input }) => {
+        return await db.cars.findMany({ where: input });
+      }),
+  }),
+});
+```
+
+### Mutations
+
+React Query's `useMutation` is fully supported.
+For more information about `useMutation`, refer to the
+[official documentation](https://tanstack.com/query/v5/docs/react/reference/useMutation).
+
+```tsx filename="App.tsx"
+export default function App() {
+  const addCar = tsdl.cars.addCar.useMutation({
+    /* options? */
+  });
+  const [name, setName] = useState("");
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        addCar.mutate(name, {
+          onSuccess() {
+            tsdl.cars.invalidate();
+          },
+        });
+      }}
+    >
+      <input
+        name="name"
+        value={name}
+        onChange={(e) => setName(e.currentTarget.value)}
+      />
+      <button disabled={addCar.isLoading} type="submit">
+        Add!
+      </button>
+    </form>
+  );
+}
+```
+
+### Invalidation
+
+This is a shorthand for [`queryClient.invalidateQueries`](https://tanstack.com/query/v4/docs/react/guides/query-invalidation).
+
+`.invalidate()` is exposed for all nodes of the router, **not just the leaf nodes**.
+
+```tsx
+tsdl.cars.brands.invalidate();
+tsdl.cars.invalidate();
+```
+
+is equivelant to
+
+```tsx
+query.invalidateQueries({
+  queryKey: ["cars", "brands"],
+});
+query.invalidateQueries({
+  queryKey: ["cars"],
+});
+```
+
+Both the optional `filter` and `options` arguments are supported. Note that `queryKey` is omitted in `filters`.
+
+### Inferernce
+
+It's often useful to access the return type of a query however using `Awaited<ReturnType<typeof tsdl.cars.brands>>` is a bit cumbersome.
+Therefore, TSDL exposes `.infer` for all leaf nodes (queries).
+
+Server component example:
+
+```tsx filename="Sidebar.tsx"
+async function Sidebar() {
+  const user = await tsdl.user.me();
+
+  return <UserItems initialData={user} />;
+}
+```
+
+```tsx filename="UserItems.tsx" /infer/
+function UserItems({
+  initialData,
+}: {
+  initialData: typeof tsdl.user.me.infer;
+}) {
+  const userQuery = tsdl.user.useQuery({
+    initialData,
+  }); // no "logged out" state while loading! But also no reload required when user logs out :)
+
+  return <>...</>;
+}
+```

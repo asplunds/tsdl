@@ -3,3 +3,4 @@ dist/
 .next/
 out/
 README.md
+meta/docs/pages/docs/integrations/react-query.mdx

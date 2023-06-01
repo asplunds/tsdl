@@ -1,4 +1,6 @@
 import {
+  InvalidateOptions,
+  InvalidateQueryFilters,
   QueryClient,
   UseMutationOptions,
   UseMutationResult,
@@ -13,7 +15,9 @@ import { TSDLError, types } from "@tsdl/core";
 type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
   UseQueryOptions<TQueryFnData, TError, TReturn, string[]>,
   "queryKey" | "queryFn" | "initialData"
-> & { initialData?: () => undefined };
+> & {
+  initialData?: (() => TReturn | null | undefined) | TReturn | null | undefined;
+};
 
 export type InferReactQueryClient<
   T extends types.routing.Branch | types.routing.Leaf
@@ -53,7 +57,13 @@ export type InferReactQueryClient<
             "mutationFn"
           >
         ) => UseMutationResult<R["$return"], TError, R["$input"]>;
-        invalidate: () => void;
+        invalidate: (
+          filters?: Omit<
+            InvalidateQueryFilters<unknown> | undefined,
+            "queryKey"
+          >,
+          options?: InvalidateOptions | undefined
+        ) => Promise<void>;
         infer: Awaited<R["$return"]>;
       }
     : never
@@ -91,6 +101,7 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
                     : options
                 );
               } catch {
+                // catches Next.js/ssr hydration issues... annoyng
                 return {};
               }
             };
@@ -107,10 +118,20 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
             };
           }
           case "invalidate": {
-            return () => {
-              client.invalidateQueries({
-                queryKey: path,
-              });
+            return (
+              filters?: Omit<
+                InvalidateQueryFilters<unknown> | undefined,
+                "queryKey"
+              >,
+              options?: InvalidateOptions | undefined
+            ) => {
+              return client.invalidateQueries(
+                {
+                  ...filters,
+                  queryKey: path,
+                },
+                options
+              );
             };
           }
         }
