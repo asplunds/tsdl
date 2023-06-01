@@ -38,7 +38,7 @@
     "express": "^3 || ^4 || ^5"
   },
   "dependencies": {
-    "@tsdl/core": "^0.1.23",
+    "@tsdl/core": "file:../core",
     "@tsdl/server": "^0.1.23"
   }
 }

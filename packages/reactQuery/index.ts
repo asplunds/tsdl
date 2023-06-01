@@ -1,4 +1,6 @@
 import {
+  InvalidateOptions,
+  InvalidateQueryFilters,
   QueryClient,
   UseMutationOptions,
   UseMutationResult,
@@ -55,7 +57,13 @@ export type InferReactQueryClient<
             "mutationFn"
           >
         ) => UseMutationResult<R["$return"], TError, R["$input"]>;
-        invalidate: () => void;
+        invalidate: (
+          filters?: Omit<
+            InvalidateQueryFilters<unknown> | undefined,
+            "queryKey"
+          >,
+          options?: InvalidateOptions | undefined
+        ) => Promise<void>;
         infer: Awaited<R["$return"]>;
       }
     : never
@@ -110,10 +118,20 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
             };
           }
           case "invalidate": {
-            return () => {
-              client.invalidateQueries({
-                queryKey: path,
-              });
+            return (
+              filters?: Omit<
+                InvalidateQueryFilters<unknown> | undefined,
+                "queryKey"
+              >,
+              options?: InvalidateOptions | undefined
+            ) => {
+              return client.invalidateQueries(
+                {
+                  ...filters,
+                  queryKey: path,
+                },
+                options
+              );
             };
           }
         }

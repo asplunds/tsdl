@@ -13,6 +13,12 @@ throw new TSDLError(400);
 throw new TSDLError("Unauthorized");
 ```
 
+### With message
+
+```ts
+throw new TSDLError(403, "Insuffient permissions");
+```
+
 import { Callout } from "nextra-theme-docs";
 
 <Callout type="info">
@@ -69,7 +75,7 @@ error.code; // "Bad Request"
 ### `numberCode`
 
 ```ts filename="client.ts"
-error.code; // 400
+error.numberCode; // 400
 ```
 
 ### `validationError`

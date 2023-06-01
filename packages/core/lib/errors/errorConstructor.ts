@@ -6,14 +6,14 @@ export class TSDLError<TValidationError = unknown> {
   private $code: keyof typeof errorCodes;
   private $message?: string;
   private $validationError?: TValidationError;
-  private $source: Source;
+  private $source: Source = "application";
   constructor(
     code:
       | keyof typeof errorCodes
       | (typeof errorCodes)[keyof typeof errorCodes],
-    source: Source = "application"
+    message?: string
   ) {
-    this.$source = source;
+    this.$message = message;
     if (typeof code === "number") {
       const match = errorCodesReversed[code];
       if (match == null || !(match in errorCodes)) {
@@ -26,6 +26,10 @@ export class TSDLError<TValidationError = unknown> {
       }
       this.$code = code;
     }
+  }
+  setSource(source: Source) {
+    this.$source = source;
+    return this;
   }
   setMessage(message?: string) {
     this.$message = message;

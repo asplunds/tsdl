@@ -15,9 +15,10 @@ export async function runnerEntrypoint<TBaseContext>(
   const leaf = findLeaf(parsed.path, router);
 
   if (!leaf) {
-    throw new TSDLError(500, "internal").setMessage(
+    throw new TSDLError(
+      500,
       `no leaf found for path ${parsed.path.join("/")}`
-    );
+    ).setSource("internal");
   }
 
   const validatedInput = await (async () => {
@@ -81,8 +82,8 @@ export async function runnerEntrypoint<TBaseContext>(
   })();
 
   if (validatedInput.failure) {
-    throw new TSDLError(400, "input")
-      .setMessage(validatedInput.message)
+    throw new TSDLError(400, validatedInput.message)
+      .setSource("input")
       .setValidationError(validatedInput.e);
   }
 
@@ -115,7 +116,7 @@ export async function runnerEntrypoint<TBaseContext>(
   })();
 
   if (ctxReduction.failure) {
-    throw new TSDLError(500, "middleware").setMessage(ctxReduction.message);
+    throw new TSDLError(500, ctxReduction.message).setSource("middleware");
   }
 
   const query = leaf.$query as (arg: {
@@ -136,9 +137,11 @@ export async function runnerEntrypoint<TBaseContext>(
       if (e instanceof TSDLError) {
         throw e;
       }
-      throw new TSDLError(500, "application").setMessage(
+      throw new TSDLError(
+        500,
+
         extractErrorMessage(e)
-      );
+      ).setSource("application");
     }
   })();
 
@@ -162,7 +165,7 @@ export async function runnerEntrypoint<TBaseContext>(
     if (e instanceof TSDLError) {
       throw e;
     }
-    throw new TSDLError(500, "output").setMessage(extractErrorMessage(e));
+    throw new TSDLError(500, extractErrorMessage(e)).setSource("output");
   }
 
   return resultOperation.result;

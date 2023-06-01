@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "./components/misc/Logo";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   logo: <Logo />,
   project: {
@@ -14,4 +15,5 @@ export default {
       titleTemplate: "%s – TSDL",
     };
   },
+  docsRepositoryBase: "https://github.com/asplunds/tsdl",
 };

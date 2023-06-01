@@ -17,21 +17,27 @@ export function validatePayload(payload: string): unknown {
 
   // Commence budget zod, lol.
   if (!parsed) {
-    throw new TSDLError(500).setMessage("unable to parse payload");
+    throw new TSDLError(500, "unable to parse payload").setSource("internal");
   }
 
   if (typeof parsed !== "object") {
-    throw new TSDLError(500).setMessage("parsed payload incorrect type");
+    throw new TSDLError(500, "parsed payload incorrect type").setSource(
+      "internal"
+    );
   }
 
   const keys = Object.keys(parsed);
 
   if (keys.length !== allowedKeys.length) {
-    throw new TSDLError(500).setMessage("parsed payload invalid key count");
+    throw new TSDLError(500, "parsed payload invalid key count").setSource(
+      "internal"
+    );
   }
 
   if (!allowedKeys.every((v) => keys.includes(v))) {
-    throw new TSDLError(500).setMessage("parsed payload invalid key literals");
+    throw new TSDLError(500, "parsed payload invalid key literals").setSource(
+      "internal"
+    );
   }
 
   return parsed;
