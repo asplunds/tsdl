@@ -20,19 +20,16 @@ import { Tab, Tabs } from "nextra-theme-docs";
 
 <Tabs items={["pnpm", "npm", "yarn"]}>
   <Tab>
-    ```shell filename="client" copy
-    pnpm add @tsdl/react-query @tanstack/react-query
-    ```
+    ```shell filename="client" copy pnpm add @tsdl/react-query
+    @tanstack/react-query ```
   </Tab>
   <Tab>
-    ```shell filename="client" copy
-    npm i @tsdl/react-query @tanstack/react-query
-    ```
+    ```shell filename="client" copy npm i @tsdl/react-query
+    @tanstack/react-query ```
   </Tab>
   <Tab>
-    ```shell filename="client" copy
-    yarn add @tsdl/react-query @tanstack/react-query
-    ```
+    ```shell filename="client" copy yarn add @tsdl/react-query
+    @tanstack/react-query ```
   </Tab>
 </Tabs>
 
@@ -177,6 +174,7 @@ It's often useful to access the return type of a query however using `Awaited<Re
 Therefore, TSDL exposes `.infer` for all leaf nodes (queries).
 
 Server component example:
+
 ```tsx filename="Sidebar.tsx"
 async function Sidebar() {
   const user = await tsdl.user.me();
@@ -184,9 +182,12 @@ async function Sidebar() {
   return <UserItems initialData={user} />;
 }
 ```
+
 ```tsx filename="UserItems.tsx" /infer/
-function UserItems({ initialData }: {
-  initialData: typeof tsdl.user.me.infer,
+function UserItems({
+  initialData,
+}: {
+  initialData: typeof tsdl.user.me.infer;
 }) {
   const userQuery = tsdl.user.useQuery({
     initialData,
