@@ -17,7 +17,6 @@ const Root = styled.div`
 `;
 
 function Logo() {
-
   return (
     <Root>
       <Image height={30} src={src} alt="TSDL Logo" />
