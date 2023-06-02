@@ -99,6 +99,9 @@ export async function runnerEntrypoint<TBaseContext>(
       try {
         ctx = await mw(ctx, validatedInput.input);
       } catch (e) {
+        if (e instanceof TSDLError) {
+          throw e;
+        }
         return {
           failure: true,
           message: `failed to invoke middleware [${i}] of query ${parsed.path.join(
