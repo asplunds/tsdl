@@ -81,7 +81,8 @@ TSDL was originally created by the developers at [Enter Technologies](https://en
 - [tRPC](https://trpc.io/) for inspiration (see [migration guide](https://tsdl.asplund.dev) from tRPC to TSDL)
 - [Nx](https://nx.dev/) cloud runs
 - [Lerna](https://lerna.js.org/) monorepo tool
-- [TypeScript](https://typescriptlang.org/) ❤️
+- [TypeScript](https://typescriptlang.org/)
+- [Vitest](https://vitest.dev/)
 
 ***
 This README is auto-generated

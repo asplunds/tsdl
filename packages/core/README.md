@@ -1,6 +1,6 @@
 [//]: <> (AUTO GENERATED - DO NOT EDIT ME. EDIT README IN PROJECT ROOT)
 
-TSDL core
+TSDL core utils and types
 
 [@tsdl/client](https://npmjs.com/package/@tsdl/client), @tsdl/core, [@tsdl/express](https://npmjs.com/package/@tsdl/express), [@tsdl/node](https://npmjs.com/package/@tsdl/node), [@tsdl/react-query](https://npmjs.com/package/@tsdl/react-query), [@tsdl/server](https://npmjs.com/package/@tsdl/server)
 
@@ -81,7 +81,8 @@ TSDL was originally created by the developers at [Enter Technologies](https://en
 - [tRPC](https://trpc.io/) for inspiration (see [migration guide](https://tsdl.asplund.dev) from tRPC to TSDL)
 - [Nx](https://nx.dev/) cloud runs
 - [Lerna](https://lerna.js.org/) monorepo tool
-- [TypeScript](https://typescriptlang.org/) ❤️
+- [TypeScript](https://typescriptlang.org/)
+- [Vitest](https://vitest.dev/)
 
 ***
 This README is auto-generated
