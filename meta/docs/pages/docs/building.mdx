@@ -1,0 +1,64 @@
+# Building guide
+
+When building the front-end you might run into issues with incompatable tsconfigs
+betweem the client and server(s).
+
+It's normal for your back-end and front-end to have different configurations.
+Since TSDL **never** imports any _runtime_ code from your server,
+the issue of the TypeScript compiler type checking server side code can be mitigated.
+
+## How to skip tsc checking server files
+
+import { Steps } from "nextra-theme-docs";
+
+<Steps>
+
+### Client side
+
+Make sure your client's `tsconfig.json` has `"compilerOptions.skipLibCheck": true`
+and add the _path_ or _package name_ (if you use a monorepo) to the `types` directive in your tsconfig.json.
+
+```jsonc filename="client/tsconfig.json" {4, 7}
+{
+  "compilerOptions": {
+    /* ... */
+    "skipLibCheck": true
+    /* ... */
+  },
+  "types": ["backend"] // the path or module name to your backend package
+}
+```
+
+### Server side
+
+Add the following to your back-end's `package.json`.
+
+This will point the `tsc` compiler to the types location instead
+of the actual code thereby skipping type checking.
+
+```json filename="backend/package.json" {4,6}
+{
+  "name": "backend",
+  ...
+  "types": "dist",
+  "scripts": {
+    "build:types": "tsc --outDir dist --declaration --emitDeclarationOnly",
+    ...
+  }
+  ...
+}
+```
+
+You can build however you want, the important thing is that declaration
+files are built somehwere. Therefore, you don't necessarily
+need `--emitDeclarationOnly` if you want `.js` files in your output directory.
+
+### Building front-end
+
+1. `npm run build:types` in your back-end
+2. `npm run build` in your front-end
+
+This should make the TypeScript compiler skip type
+checking your backend since `skipLibCheck` ignores `.d.ts` files.
+
+</Steps>

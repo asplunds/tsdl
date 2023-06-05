@@ -45,9 +45,7 @@ export async function nodeTSDL<TArg, TBaseContext>(
   const payload = url.get("payload");
 
   if (!payload) {
-    const error = new TSDLError(500, "internal").setMessage(
-      messages.NO_PAYLOAD
-    );
+    const error = new TSDLError(500, messages.NO_PAYLOAD).setSource("internal");
 
     res.writeHead(error.numberCode);
 

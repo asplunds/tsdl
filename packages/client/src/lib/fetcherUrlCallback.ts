@@ -5,9 +5,10 @@ export function fetcherUrlCallback<TInput>(
   input: TInput,
   options?: unknown
 ) {
+  const payload = JSON.stringify(createPayload(path, input ?? null));
   return {
+    payload,
     url: (urlPath: string) => {
-      const payload = createPayload(path, input ?? null);
       const [location, queryString] = urlPath.split("?") as [
         string,
         string | undefined
@@ -19,7 +20,7 @@ export function fetcherUrlCallback<TInput>(
           return new URLSearchParams();
         }
       })();
-      searchParams.set("payload", JSON.stringify(payload));
+      searchParams.set("payload", payload);
       const resolvedPath = (location.endsWith("/") ? "" : "/") + path.join("/");
       return `${location}${resolvedPath}?${searchParams}`;
     },

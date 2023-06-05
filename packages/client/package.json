@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/client",
-  "version": "0.1.27",
+  "version": "0.1.29",
   "description": "TSDL vanilla client",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "license": "MIT",
@@ -8,9 +8,6 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm"
-  },
-  "dependencies": {
-    "@tsdl/core": "^0.1.27"
   },
   "types": "./dist/cjs/index.d.ts",
   "main": "./dist/cjs/index.js",
@@ -36,5 +33,8 @@
     "url": "https://github.com/asplunds/tsdl.git",
     "directory": "packages/client"
   },
-  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b"
+  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
+  "devDependencies": {
+    "@tsdl/core": "file:../core"
+  }
 }

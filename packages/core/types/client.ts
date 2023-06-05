@@ -10,6 +10,7 @@ export type ClientFetcher = <T>(args: {
   url: (path: string) => string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options: any;
+  payload: string;
 }) => Promise<HTTPResponse<T>> | HTTPResponse<T>;
 
 export type InferClient<T extends Branch | Leaf> = T extends infer R

@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/core",
   "description": "TSDL core utils and types",
-  "version": "0.1.27",
+  "version": "0.1.29",
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "author": "Jonathan Asplund <jonathan@asplund.net>",
   "types": "./dist/cjs/index.d.ts",
