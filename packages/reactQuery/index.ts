@@ -69,10 +69,12 @@ export type InferReactQueryClient<
     : never
   : never;
 
-export function createReactQueryClient<TRouter extends types.routing.Branch>(
-  fetcher: types.client.ClientFetcher,
-  client: QueryClient
-) {
+export function createReactQueryClient<
+  TRouter extends types.routing.Branch,
+  TQueryClient extends {
+    invalidateQueries: QueryClient["invalidateQueries"];
+  } = QueryClient
+>(fetcher: types.client.ClientFetcher, client: TQueryClient) {
   function emulator(path: string[]): object {
     const memoCaller = (input: unknown, options?: unknown) =>
       TSDLCaller(fetcher, input, path, options);
@@ -125,7 +127,8 @@ export function createReactQueryClient<TRouter extends types.routing.Branch>(
               >,
               options?: InvalidateOptions | undefined
             ) => {
-              return client.invalidateQueries(
+              // prevent react query version issues...
+              return client?.invalidateQueries(
                 {
                   ...filters,
                   queryKey: path,

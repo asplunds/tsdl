@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createReactQueryClient } from "../../../packages/reactQuery/dist/cjs/reactQuery/index.js";
-import type { Router } from "../../server.js";
+import type { Router } from "../../server";
 import { NextUIProvider } from "@nextui-org/react";
 import "./style.css";
 import { createTheme } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
+import { createReactQueryClient } from "@tsdl/react-query";
 
 const darkTheme = createTheme({
   type: "dark",
