@@ -39,12 +39,17 @@ const logger = <T>(ctx: T, input: string) => {
 
 const router = tsdl.router({
   fruit: tsdl.router({
-    addOne: tsdl.input(z.string().regex(/^[\w\s]+$/)).query(({ input }) =>
-      fruit.unshift({
-        id: Date.now(),
-        name: input,
+    addOne: tsdl
+      .input(z.string().regex(/^[\w\s]+$/))
+      .use(() => {
+        throw new TSDLError("Bad Gateway", "oopsie.123");
       })
-    ),
+      .query(({ input }) =>
+        fruit.unshift({
+          id: Date.now(),
+          name: input,
+        })
+      ),
     removeOne: tsdl.input(z.number()).query(({ input }) => {
       fruit = fruit.filter((v) => v.id !== input);
     }),
@@ -59,6 +64,7 @@ const router = tsdl.router({
       )
       .query(({ input }) => db.find((v) => v === input.name)),
     addOne: tsdl
+
       .input(
         z.object({
           name: z.string().regex(/^[\s\d\w]$/),
