@@ -1,11 +1,10 @@
 import { expect, test, vi } from "vitest";
-import { createTSDL } from "../packages/server";
 import { createClient } from "../packages/client";
-import { runnerEntrypoint } from "../packages/server/lib/runner/runnerEntrypoint";
-import { createHTTPResponse } from "../packages/server/lib/runner/createHTTPResponse";
+import { createReactQueryClient } from "../packages/reactQuery";
 import { TSDLError } from "../packages/core";
-
-const tsdl = createTSDL(() => undefined);
+import { createFetcher } from "./mocks/fetcher";
+import { QueryClient } from "@tanstack/react-query";
+import { tsdl } from "./mocks/tsdl";
 
 const callbacks = {
   output({ output }: { output: number }) {
@@ -17,7 +16,7 @@ const router = tsdl.router({
   test: tsdl.query(() => 123),
   add: tsdl
     .input({
-      validate: (a: unknown) => {
+      validate: (a) => {
         if (typeof a === "number") {
           return a;
         }
@@ -41,24 +40,13 @@ const router = tsdl.router({
 
 type Router = typeof router;
 
-const client = createClient<Router>(({ payload }) => {
-  const fetcher = async () => {
-    try {
-      const result = await runnerEntrypoint(router, {}, payload);
+const client = createClient<Router>(createFetcher(router));
+const reactClient = createReactQueryClient<Router>(
+  createFetcher(router),
+  new QueryClient()
+);
 
-      return JSON.parse(JSON.stringify(createHTTPResponse(null, result)));
-    } catch (e) {
-      if (e instanceof TSDLError) {
-        return createHTTPResponse(e.package(), null);
-      }
-    }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return fetcher() as any;
-});
-
-test("request works", async () => {
+test.each([client, reactClient])("request works", async (client) => {
   expect(await client.test()).toBe(123);
   expect(await client.deep.nested()).toBe("ok");
 });
@@ -80,18 +68,24 @@ test.each(["a", true, undefined, {}, [], null])(
   }
 );
 
-test("dates are serialized", async () => {
+test.each([client, reactClient])("dates are serialized", async () => {
   expect(await client.date()).toBe(new Date(0).toJSON());
 });
 
-test("ctx pipeline works", async () => {
+test.each([client, reactClient])("ctx pipeline works", async () => {
   expect(await client.ctx()).toBe(4);
 });
 
-test("output is called", async () => {
+test.each([client, reactClient])("output is called", async () => {
   const outputSpy = vi.spyOn(callbacks, "output");
 
   await client.output();
 
   expect(outputSpy).toBeCalledTimes(1);
+});
+
+test("react query integration works", () => {
+  expect(reactClient.add.useMutation).toBeDefined();
+  expect(reactClient.add.useQuery).toBeDefined();
+  expect(reactClient.add.invalidate).toBeDefined();
 });
