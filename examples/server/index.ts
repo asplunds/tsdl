@@ -41,9 +41,9 @@ const router = tsdl.router({
   fruit: tsdl.router({
     addOne: tsdl
       .input(z.string().regex(/^[\w\s]+$/))
-      .use(() => {
+      /* .use(() => {
         throw new TSDLError("Bad Gateway", "oopsie.123");
-      })
+      }) */
       .query(({ input }) =>
         fruit.unshift({
           id: Date.now(),

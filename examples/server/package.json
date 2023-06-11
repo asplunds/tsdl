@@ -6,13 +6,15 @@
   "license": "MIT",
   "types": "./dist/cjs/tests/server/index.d.ts",
   "scripts": {
-    "dev:watch:node": "nodemon --watch \"dist/cjs/**/*.js\" --exec \"clear && TS_NODE_BASEURL=dist/cjs/tests/server node -r tsconfig-paths/register dist/cjs/tests/server\"",
+    "dev:watch:node": "nodemon --watch \"dist/cjs/**/*.js\" --exec \"clear && TS_NODE_BASEURL=dist/cjs/examples/server node -r tsconfig-paths/register dist/cjs/examples/server\"",
     "dev:watch:tsc:cjs": "tsc --module commonjs --outDir dist/cjs --watch>/dev/null",
-    "dev:watch": "run-p dev:watch:node dev:watch:tsc:cjs",
+    "dev:watch": "npm run build:cjs && run-p dev:watch:node dev:watch:tsc:cjs",
     "dev": "run-s build dev:watch",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm",
+    "dev:sucrase": "node -r sucrase/register index.ts",
+    "watch": "nodemon -e ts,tsx --watch \"**/*.ts\" --exec \"clear && node -r sucrase/register index.ts\"",
     "start": "TS_NODE_BASEURL=dist/tests/server node -r tsconfig-paths/register dist/tests/server"
   },
   "dependencies": {
@@ -28,6 +30,7 @@
   "devDependencies": {
     "nodemon": "^2.0.22",
     "npm-run-all": "^4.1.5",
+    "sucrase": "^3.32.0",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0"

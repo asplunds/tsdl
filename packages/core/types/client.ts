@@ -8,6 +8,7 @@ export type ClientPayload<TInput> = {
 
 export type ClientFetcher = <T>(args: {
   url: (path: string) => string;
+  signal: AbortSignal;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options: any;
   payload: string;
@@ -29,6 +30,10 @@ export type InferClient<T extends Branch | Leaf> = T extends infer R
             : [R["$input"], unknown?]
         ) => Promise<Awaited<R["$return"]>>;
         infer: Awaited<R["$return"]>;
-      }
+      } & CommonClientMethods
     : never
   : never;
+
+export type CommonClientMethods = {
+  abort(): void;
+};

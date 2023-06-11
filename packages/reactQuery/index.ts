@@ -65,6 +65,7 @@ export type InferReactQueryClient<
           options?: InvalidateOptions | undefined
         ) => Promise<void>;
         infer: Awaited<R["$return"]>;
+        abort(): void;
       }
     : never
   : never;
@@ -75,9 +76,10 @@ export function createReactQueryClient<
     invalidateQueries: QueryClient["invalidateQueries"];
   } = QueryClient
 >(fetcher: types.client.ClientFetcher, client: TQueryClient) {
+  const controller = new AbortController();
   function emulator(path: string[]): object {
     const memoCaller = (input: unknown, options?: unknown) =>
-      TSDLCaller(fetcher, input, path, options);
+      TSDLCaller(fetcher, input, path, controller.signal, options);
 
     const handler = {
       get(_target: unknown, prop: string) {
@@ -107,6 +109,9 @@ export function createReactQueryClient<
                 return {};
               }
             };
+          }
+          case "abort": {
+            return () => void controller.abort();
           }
           case "useMutation": {
             return (
