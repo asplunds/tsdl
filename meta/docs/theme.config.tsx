@@ -16,4 +16,7 @@ export default {
     };
   },
   docsRepositoryBase: "https://github.com/asplunds/tsdl",
+  sidebar: {
+    defaultMenuCollapseLevel: 3,
+  },
 };

@@ -8,7 +8,6 @@ import { TSDLError } from "@tsdl/core";
 
 export default function Fruit() {
   const [input, setInput] = useState("");
-
   const addOne = tsdl.fruit.addOne.useMutation();
   const removeOne = tsdl.fruit.removeOne.useMutation();
   const fruit = tsdl.fruit.all.useQuery();

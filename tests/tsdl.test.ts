@@ -88,4 +88,5 @@ test("react query integration works", () => {
   expect(reactClient.add.useMutation).toBeDefined();
   expect(reactClient.add.useQuery).toBeDefined();
   expect(reactClient.add.invalidate).toBeDefined();
+  expect(reactClient.add.abort).toBeDefined();
 });

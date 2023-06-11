@@ -1,0 +1,60 @@
+# Abort request
+
+`query.abort` is a method for aborting a [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) request with the [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/AbortController) API.
+
+## Usage
+
+import { Steps } from "nextra-theme-docs";
+
+<Steps>
+### Setup signal in client
+In your `createClient` invocation, add the property to your fetch call `signal`:
+```tsx filename="client/tsdl.ts"
+export const tsdl = createClient<Router>(({ url, signal }) =>
+  fetch(url("http://localhost:8000/tsdl"), { signal }).then((d) => d.json())
+);
+```
+
+Together with options you would use this instead:
+
+```tsx filename="client/tsdl.ts"
+export const tsdl = createClient<Router>(({ url, options, signal }) =>
+  fetch(url("http://localhost:8000/tsdl"), { ...options, signal }).then((d) =>
+    d.json()
+  )
+);
+```
+
+### Perform request abortion
+
+Simply invoke `.abort` on any route
+
+```tsx {9} filename="App.tsx" /abort/
+import { tsdl } from "@/tsdl";
+import { useState, useEffect } from "react";
+
+export function Search() {
+  const [value, setValue] = useState("");
+  const search = tsdl.animals.search.useMutation();
+  useEffect(() => {
+    search.mutate(value);
+    return () => tsdl.animals.search.abort();
+  }, [value]);
+
+  return (
+    <>
+      <input value={value} setValue={setValue} />
+      <p>Search Results:</p>
+      <ul>
+        {search.data?.map(animal =>
+          <li key={animal.id}>{animal.name}</li>
+        )}
+      </ul>
+    </ul>
+  )
+}
+```
+
+</Steps>
+
+Calling `.abort()` on a route without its client providing a signal is a no-op
