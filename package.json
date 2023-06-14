@@ -35,7 +35,11 @@
     "playground/*",
     "meta/*"
   ],
-  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",

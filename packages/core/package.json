@@ -3,7 +3,18 @@
   "description": "TSDL core utils and types",
   "version": "0.1.30",
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
-  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework"
+  ],
   "types": "./dist/cjs/index.d.ts",
   "license": "MIT",
   "scripts": {

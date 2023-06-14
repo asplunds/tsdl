@@ -2,7 +2,18 @@
   "private": true,
   "name": "@tsdl/test-server",
   "version": "0.0.1",
-  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework"
+  ],
   "license": "MIT",
   "types": "./dist/cjs/tests/server/index.d.ts",
   "scripts": {

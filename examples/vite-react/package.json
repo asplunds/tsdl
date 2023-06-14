@@ -3,6 +3,18 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

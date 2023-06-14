@@ -3,7 +3,18 @@
   "description": "TSDL express.js integration",
   "version": "0.1.30",
   "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
-  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework"
+  ],
   "license": "MIT",
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
