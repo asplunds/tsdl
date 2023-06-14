@@ -45,7 +45,8 @@
   },
   "files": [
     "dist/cjs/reactQuery",
-    "dist/esm/reactQuery"
+    "dist/esm/reactQuery",
+    "LICENSE.md"
   ],
   "repository": {
     "type": "git",

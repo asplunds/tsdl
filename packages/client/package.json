@@ -37,7 +37,8 @@
   },
   "files": [
     "dist/cjs",
-    "dist/esm"
+    "dist/esm",
+    "LICENSE.md"
   ],
   "repository": {
     "type": "git",

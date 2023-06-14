@@ -26,7 +26,8 @@
   "module": "./dist/esm/express/index.js",
   "files": [
     "dist/cjs/express",
-    "dist/esm/express"
+    "dist/esm/express",
+    "LICENSE.md"
   ],
   "exports": {
     ".": {

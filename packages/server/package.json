@@ -40,7 +40,8 @@
     "@tsdl/core": "^0.1.31"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE.md"
   ],
   "repository": {
     "type": "git",
