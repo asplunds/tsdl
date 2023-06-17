@@ -6,6 +6,7 @@ import { TSDLError } from "@tsdl/core";
 import express from "express";
 import { expressTSDL } from "@tsdl/express";
 import cors from "cors";
+import { createTree, visualizeTree } from "@tsdl/tree";
 /* import * as yup from "yup"; */
 
 const tsdl = createTSDL(
@@ -95,6 +96,8 @@ const router = tsdl.router({
     fetchAll: tsdl.query(async () => db),
   }),
 });
+
+console.log(visualizeTree(createTree(router)));
 
 export type Router = typeof router;
 

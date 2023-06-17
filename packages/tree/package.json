@@ -1,6 +1,6 @@
 {
-  "name": "@tsdl/core",
-  "description": "TSDL core utils and types",
+  "name": "@tsdl/tree",
+  "description": "TSDL router tree visualizer",
   "version": "0.1.32",
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "author": {
@@ -47,7 +47,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/asplunds/tsdl.git",
-    "directory": "packages/core"
+    "directory": "packages/tree"
   },
   "devDependencies": {
     "typescript": "^5.0.4"
