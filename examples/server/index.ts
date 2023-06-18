@@ -64,9 +64,8 @@ const router = tsdl.router({
         })
       )
       .query(({ input }) => db.find((v) => v === input.name)),
-    addOne: tsdl
-
-      .input(
+    addOne: tsdl.input
+      .doc("aight")(
         z.object({
           name: z.string().regex(/^[\s\d\w]$/),
         })
@@ -74,9 +73,10 @@ const router = tsdl.router({
       .query(({ input }) => {
         db.push(input.name);
       }),
-    test: tsdl
-      .use(async () => "sup" as const)
+    test: tsdl.use
+      .doc("hi")(async () => "sup" as const)
       .input(z.string())
+      .use((ctx) => ctx)
       .query(({ ctx, input }) => {
         void ctx;
         //   ^?
@@ -87,7 +87,8 @@ const router = tsdl.router({
       }),
     scrapeOne: tsdl
       .input(z.string())
-      .use(logger)
+      .use.doc("mw1")(logger)
+      .use.doc("mw2")(logger)
       .query(() => "potato")
       .output((ctx) => {
         ctx.input;

@@ -21,7 +21,8 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm",
-    "watch": "tsc --watch --module commonjs --outDir dist/cjs"
+    "watch": "tsc --watch --module commonjs --outDir dist/cjs",
+    "watch:esm": "tsc --watch --module es6 --outDir dist/esm"
   },
   "files": [
     "dist",

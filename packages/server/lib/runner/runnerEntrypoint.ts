@@ -87,17 +87,14 @@ export async function runnerEntrypoint<TBaseContext>(
       .setValidationError(validatedInput.e);
   }
 
-  const middleware = (leaf?.$mw ?? []) as ((
-    arg: unknown,
-    input: unknown
-  ) => unknown)[];
+  const middleware = (leaf?.$mw ?? []) as types.routing.MiddlewareCollection[];
 
   const ctxReduction = await (async () => {
     let ctx: unknown = baseContext;
 
     for (const [i, mw] of middleware.entries()) {
       try {
-        ctx = await mw(ctx, validatedInput.input);
+        ctx = await mw.cb(ctx, validatedInput.input);
       } catch (e) {
         if (e instanceof TSDLError) {
           throw e;
