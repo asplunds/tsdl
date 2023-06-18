@@ -7,7 +7,7 @@
     "lint": "eslint && prettier . -w",
     "release": "npx lerna publish --no-private",
     "prepare": "husky install && npx lerna link",
-    "build": "npx lerna run --parallel build",
+    "build": "npm run prune:dist && npm run build --prefix packages/core && npx lerna run --parallel build",
     "readme": "ts-node scripts/compileReadme.ts",
     "prune:dist": "find packages/**/* -name 'dist' -type d -prune -exec rm -rf '{}' +"
   },
