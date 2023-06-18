@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/react-query",
   "description": "TSDL React Query integration",
-  "version": "0.1.33",
+  "version": "0.2.0",
   "author": {
     "email": "jonathan@asplund.net",
     "name": "Jonathan Asplund",
@@ -22,8 +22,8 @@
     "watch": "tsc --module es6 --outDir dist/esm --watch"
   },
   "dependencies": {
-    "@tsdl/client": "^0.1.33",
-    "@tsdl/core": "^0.1.33"
+    "@tsdl/client": "^0.2.0",
+    "@tsdl/core": "^0.2.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^4 || ^5"
