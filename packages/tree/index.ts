@@ -11,7 +11,7 @@ type Tree = {
 };
 
 export function createTree(router: types.routing.Branch): Tree {
-  return generateTree(["root"], router);
+  return generateTree(["TSDL"], router);
 }
 
 /** @internal */
@@ -39,7 +39,6 @@ const colors = [
   chalk.hex("#f7cd04"),
   chalk.green,
   chalk.cyan,
-  chalk.blue,
   chalk.hex("#b21ae8"),
   chalk.hex("#fc85fb"),
   chalk.red,
@@ -49,20 +48,25 @@ export function visualizeTree(tree: Tree): string {
   const sections: string[] = [];
   function generateTreeVisualization(tree: Tree, depth: number): void {
     const indent = " ".repeat(depth * 2) + (depth ? "∟" : "");
-    const using = tree.mwDoc.map((v) => v.name).filter((v) => v != null);
     const node = tree.path[tree.path.length - 1];
-    const coloredNode =
-      (tree.leaf ? chalk.black(" λ ") : "") +
-      colors[depth % colors.length](node);
-    sections.push(
-      `${indent}${coloredNode}${
-        tree.inputDoc?.name ? chalk.gray(` input "${tree.inputDoc.name}"`) : ""
-      }${
-        using.length
-          ? chalk.gray(` using ${using.map((v) => `"${v}"`).join(", ")}`)
-          : ""
-      }`
-    );
+
+    const parts = [
+      `${indent}${
+        (tree.leaf ? chalk.black(" λ ") : "") +
+        colors[depth % colors.length](node)
+      }${tree.queryDoc?.name ? chalk.blue(` "${tree.queryDoc?.name}"`) : ""}`,
+      tree.inputDoc?.name ? chalk.black(`input "${tree.inputDoc.name}"`) : null,
+      tree.mwDoc.length
+        ? chalk.black(
+            `using ${tree.mwDoc
+              .map((v) => v.name)
+              .filter((v) => v != null)
+              .map((v) => `"${v}"`)
+              .join(", ")}`
+          )
+        : null,
+    ].filter((v) => v != null);
+    sections.push(parts.join(chalk.black(" • ")));
     for (const node of tree.nodes) {
       generateTreeVisualization(node, depth + 1);
     }

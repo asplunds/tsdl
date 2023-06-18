@@ -89,7 +89,7 @@ const router = tsdl.router({
       .input(z.string())
       .use.doc("mw1")(logger)
       .use.doc("mw2")(logger)
-      .query(() => "potato")
+      .query.doc("Potato")(() => "potato")
       .output((ctx) => {
         ctx.input;
         throw new TSDLError(500);
