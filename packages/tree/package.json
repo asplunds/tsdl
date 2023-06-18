@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/tree",
   "description": "TSDL router tree visualizer",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "author": {
     "email": "jonathan@asplund.net",
