@@ -4,39 +4,8 @@ import { createReactQueryClient } from "../packages/reactQuery";
 import { TSDLError } from "../packages/core";
 import { createFetcher } from "./mocks/fetcher";
 import { QueryClient } from "@tanstack/react-query";
-import { tsdl } from "./mocks/tsdl";
-
-const callbacks = {
-  output({ output }: { output: number }) {
-    return void output;
-  },
-};
-
-const router = tsdl.router({
-  test: tsdl.query(() => 123),
-  add: tsdl
-    .input({
-      validate: (a) => {
-        if (typeof a === "number") {
-          return a;
-        }
-        throw "invalid";
-      },
-    })
-    .query(({ input }) => input),
-  deep: tsdl.router({
-    nested: tsdl.query(() => "ok"),
-  }),
-  thrown: tsdl.query(() => {
-    throw new TSDLError(404);
-  }),
-  date: tsdl.query(() => new Date(0)),
-  ctx: tsdl
-    .use(async () => 2)
-    .use((p) => p + 2)
-    .query(({ ctx }) => ctx),
-  output: tsdl.query(() => 123).output((arg) => callbacks.output(arg)),
-});
+import { router } from "./mocks/router";
+import { callbacks } from "./mocks/callbacks";
 
 type Router = typeof router;
 

@@ -7,7 +7,7 @@
     "lint": "eslint && prettier . -w",
     "release": "npx lerna publish --no-private",
     "prepare": "husky install && npx lerna link",
-    "build": "npx lerna run --parallel build",
+    "build": "npm run prune:dist && npm run build --prefix packages/core && npx lerna run --parallel build",
     "readme": "ts-node scripts/compileReadme.ts",
     "prune:dist": "find packages/**/* -name 'dist' -type d -prune -exec rm -rf '{}' +"
   },
@@ -35,7 +35,11 @@
     "playground/*",
     "meta/*"
   ],
-  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",

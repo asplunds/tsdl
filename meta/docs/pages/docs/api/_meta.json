@@ -17,6 +17,9 @@
   "client": {
     "title": "Client"
   },
+  "documented": {
+    "title": "Documented"
+  },
   "TSDLError": {
     "title": "TSDLError"
   }

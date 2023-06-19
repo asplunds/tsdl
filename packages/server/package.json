@@ -1,8 +1,19 @@
 {
   "name": "@tsdl/server",
-  "version": "0.1.30",
+  "version": "0.2.0",
   "description": "TSDL server package",
-  "author": "Jonathan Asplund <jonathan@asplund.net>",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework"
+  ],
   "license": "MIT",
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
@@ -26,10 +37,11 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@tsdl/core": "^0.1.30"
+    "@tsdl/core": "^0.2.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE.md"
   ],
   "repository": {
     "type": "git",

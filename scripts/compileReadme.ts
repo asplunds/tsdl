@@ -9,6 +9,7 @@ type Package = {
 (async () => {
   const packages = await fs.readdir("./packages");
   const readme = await fs.readFile("./README.md", "utf-8");
+  const license = await fs.readFile("./LICENSE", "utf-8");
 
   const packageData: Package[] = [];
 
@@ -59,6 +60,8 @@ type Package = {
         "This README is auto-generated",
       ].join("\n")
     );
+
+    await fs.writeFile(`./packages/${data.folder}/LICENSE.md`, license);
 
     console.log(`Generated README.md for "${data.name}"`);
   }

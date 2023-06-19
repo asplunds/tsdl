@@ -1,7 +1,8 @@
 {
-  "name": "@tsdl/client",
-  "version": "0.2.0",
-  "description": "TSDL vanilla client",
+  "name": "@tsdl/tree",
+  "description": "TSDL router tree visualizer",
+  "version": "0.2.4",
+  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "author": {
     "email": "jonathan@asplund.net",
     "name": "Jonathan Asplund",
@@ -14,15 +15,23 @@
     "api",
     "framework"
   ],
+  "types": "./dist/cjs/index.d.ts",
   "license": "MIT",
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm",
-    "watch": "tsc --watch --module es6 --outDir dist/esm"
+    "watch": "tsc --watch --module commonjs --outDir dist/cjs",
+    "watch:esm": "tsc --watch --module es6 --outDir dist/esm"
   },
-  "types": "./dist/cjs/index.d.ts",
-  "main": "./dist/cjs/index.js",
+  "files": [
+    "dist",
+    "index.ts",
+    "src",
+    "lib",
+    "LICENSE.md"
+  ],
+  "main": "dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "exports": {
     ".": {
@@ -36,18 +45,15 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist/cjs",
-    "dist/esm",
-    "LICENSE.md"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/asplunds/tsdl.git",
-    "directory": "packages/client"
+    "directory": "packages/tree"
   },
-  "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "devDependencies": {
-    "@tsdl/core": "file:../core"
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2"
   }
 }
