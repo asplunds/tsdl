@@ -1,3 +1,3 @@
-import {createTSDL} from "@tsdl/server";
+import { createTSDL } from "@tsdl/server";
 
 export const tsdl = createTSDL(() => undefined);

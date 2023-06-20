@@ -10,21 +10,3 @@ const router = tsdl.router({
 });
 
 export type Router = typeof router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
