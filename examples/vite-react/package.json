@@ -25,6 +25,7 @@
     "@nextui-org/react": "^1.0.0-beta.12",
     "@radix-ui/react-popover": "1.0.5",
     "@tanstack/react-query": "^4.29.5",
+    "@tsdl/client": "file:../../packages/client",
     "@tsdl/react-query": "file:../../packages/reactQuery",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

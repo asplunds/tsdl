@@ -1,0 +1,21 @@
+{
+  "name": "@tsdl/example-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tsdl/client": "^0.2.0",
+    "@tsdl/core": "^0.2.0",
+    "@tsdl/server": "^0.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3",
+    "zod": "^3.21.4"
+  }
+}
