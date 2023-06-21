@@ -122,7 +122,7 @@ If you suspect you have caused a circular dependency (easily done in monorepos),
 
 ### Deploying documentation
 
-Merge into branch `preview` (for preview) or branch `docs` for live. The CI/CD workflows will automatically build the nextra documentation site and deploy it to Cloudflare.
+Merge into branch `preview` (for preview) or branch `docs` for live. The CI/CD workflows will automatically build the Nextra documentation site and deploy it to Cloudflare.
 
 ## Credits
 
