@@ -19,7 +19,8 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm",
-    "watch": "tsc --module es6 --outDir dist/esm --watch"
+    "watch": "tsc --module es6 --outDir dist/esm --watch",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@tsdl/client": "^0.2.0",
