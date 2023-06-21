@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/server",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "description": "TSDL server package",
   "author": {
     "email": "jonathan@asplund.net",
@@ -38,7 +38,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@tsdl/core": "^0.2.0"
+    "@tsdl/core": "^0.2.5"
   },
   "files": [
     "dist",
