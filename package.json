@@ -7,9 +7,9 @@
     "lint": "eslint && prettier . -w",
     "release": "npx lerna publish --no-private",
     "prepare": "husky install && npx lerna link",
-    "types": "npx lerna run --parallel build",
+    "types": "npx lerna run --parallel build && npm run types --prefix tests",
     "build": "npm run types && npm run prune:dist && npm run build --prefix packages/core && npx lerna run --parallel build",
-    "readme": "ts-node scripts/compileReadme.ts",
+    "readme": "node -r sucrase/register scripts/compileReadme.ts",
     "prune:dist": "find packages/**/* -name 'dist' -type d -prune -exec rm -rf '{}' +"
   },
   "private": true,
@@ -26,6 +26,7 @@
     "nx": "16.0.1",
     "nx-cloud": "latest",
     "prettier": "^2.5.1",
+    "sucrase": "^3.32.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
     "vitest": "^0.31.4"
