@@ -1,0 +1,7 @@
+{
+  "name": "@tsdl/tests",
+  "private": true,
+  "scripts": {
+    "types": "tsc --noEmit"
+  }
+}
