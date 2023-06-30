@@ -12,9 +12,9 @@
     "readme": "node -r sucrase/register scripts/compileReadme.ts",
     "prune:dist": "find packages/**/* -name 'dist' -type d -prune -exec rm -rf '{}' +",
     "workflow:types": "npm run types",
-    "workflow:lint": "eslint && prettier",
+    "workflow:lint": "eslint && prettier .",
     "workflow:build": "npm run build",
-    "workflow:test": "npm run test"
+    "workflow:test": "npm run build && npm run test"
   },
   "private": true,
   "devDependencies": {
