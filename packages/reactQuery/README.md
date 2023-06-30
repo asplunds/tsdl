@@ -5,11 +5,9 @@ TSDL React Query integration
 [@tsdl/bun](https://npmjs.com/package/@tsdl/bun), [@tsdl/client](https://npmjs.com/package/@tsdl/client), [@tsdl/core](https://npmjs.com/package/@tsdl/core), [@tsdl/express](https://npmjs.com/package/@tsdl/express), [@tsdl/node](https://npmjs.com/package/@tsdl/node), @tsdl/react-query, [@tsdl/server](https://npmjs.com/package/@tsdl/server), [@tsdl/tree](https://npmjs.com/package/@tsdl/tree)
 
 ***
-<center>
+<div align="center">
 <img src="https://raw.githubusercontent.com/asplunds/tsdl/main/meta/docs/components/misc/Logo/logo.svg" alt="drawing" width="80"/> <h1>Type-Safe Data Layer</h1> <p></p>
-</center>
-
-***
+</div>
 
 TSDL, short for Type-Safe Data Layer, is a transport layer designed to blur the line between client and server side. TSDL is an end-to-end http communication framework that makes your backend a type-safe library for your frontend.
 

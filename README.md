@@ -1,8 +1,6 @@
-<center>
+<div align="center">
 <img src="https://raw.githubusercontent.com/asplunds/tsdl/main/meta/docs/components/misc/Logo/logo.svg" alt="drawing" width="80"/> <h1>Type-Safe Data Layer</h1> <p></p>
-</center>
-
-***
+</div>
 
 TSDL, short for Type-Safe Data Layer, is a transport layer designed to blur the line between client and server side. TSDL is an end-to-end http communication framework that makes your backend a type-safe library for your frontend.
 
