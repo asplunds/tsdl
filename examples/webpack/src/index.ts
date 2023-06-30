@@ -1,7 +1,7 @@
 import { createClient } from "@tsdl/client";
 import type { Router } from "@tsdl/test-node";
 
-const client = createClient<Router>(({url}) =>
+const client = createClient<Router>(({ url }) =>
   fetch(url("http://localhost:9000/tsdl")).then((d) => d.json())
 );
 

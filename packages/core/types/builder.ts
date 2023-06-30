@@ -61,7 +61,9 @@ export type Input<TContext> = InputCb<TContext> & {
   doc(...args: unknown[]): InputCb<TContext>;
 };
 
-export type Router<TBaseContext> = <T extends { [key in keyof T]: TSDLTree<TBaseContext> }>(
+export type Router<TBaseContext> = <
+  T extends { [key in keyof T]: TSDLTree<TBaseContext> }
+>(
   routes: T
 ) => {
   $bc: TBaseContext;
@@ -118,7 +120,7 @@ export type Middleware<TContext, TInput, TInputValidator> = MiddlewareCb<
 };
 
 export type TSDLRoot<TBaseContext> = {
-  $bc: TBaseContext,
+  $bc: TBaseContext;
   router: Router<TBaseContext>;
   input: Input<TBaseContext>;
   query: Query<TBaseContext, undefined, undefined>;

@@ -44,14 +44,16 @@ Bun.serve({
 ```
 
 ## Providing base context
+
 The base context is the basis for subsequent (if any)
 contexts and the type is provided as a generic argument
 when [creating a TSDL instance](../getting-started/server-code-setup)
+
 ```ts
 bunTSDL(
   router,
   req,
   responseCb,
   ctx // <--- this is where you provide your base context.
-)
+);
 ```

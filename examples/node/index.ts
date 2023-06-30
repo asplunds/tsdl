@@ -34,8 +34,5 @@ const app = express();
 
 app
   .use(cors())
-  .use(
-    "/tsdl",
-    expressTSDL(router)
-  )
+  .use("/tsdl", expressTSDL(router))
   .listen(9000, () => console.log("Express backend started"));

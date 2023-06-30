@@ -21,7 +21,10 @@ export function createTree(router: types.routing.Branch): Tree {
 }
 
 /** @internal */
-function generateTree(path: string[], router: types.routing.TSDLTree<unknown>): Tree {
+function generateTree(
+  path: string[],
+  router: types.routing.TSDLTree<unknown>
+): Tree {
   const leaf = router.$type === types.routing.TSDLNode.Leaf;
 
   return {
