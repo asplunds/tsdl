@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/example-common",
   "version": "0.3.0",
-  "private": false,
+  "private": true,
   "author": {
     "email": "jonathan@asplund.net",
     "name": "Jonathan Asplund",
