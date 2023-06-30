@@ -13,7 +13,7 @@ test.each(routers.map((v) => v.router))("invoking router should work", (a) => {
     const router = a(routes);
     expect(router).toHaveProperty("$routes");
     expect(router).toHaveProperty("$type");
-    expect(router).toHaveProperty("$invoke");
+    expect(router).toHaveProperty("$bc");
     expect(router.$type).toBe(types.routing.TSDLNode.Node);
     expect(router.$routes).toBe(routes);
   }
