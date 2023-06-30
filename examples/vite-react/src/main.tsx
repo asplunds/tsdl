@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { Router } from "../../server";
 import "./style.css";
 import { Toaster } from "react-hot-toast";
 import { createReactQueryClient } from "@tsdl/react-query";
+import type { Router } from "@tsdl/test-node";
 
 const queryClient = new QueryClient();
 export const tsdl = createReactQueryClient<Router>(

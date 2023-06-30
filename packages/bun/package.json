@@ -1,0 +1,60 @@
+{
+  "name": "@tsdl/bun",
+  "description": "TSDL Bun integration",
+  "version": "0.0.0",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework",
+    "bun"
+  ],
+  "scripts": {
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:esm": "tsc --module es6 --outDir dist/esm",
+    "build": "npm run build:cjs & npm run build:esm",
+    "watch:esm": "tsc --watch --module es6 --outDir dist/esm",
+    "watch:cjs": "tsc --watch --module commonjs --outDir dist/cjs",
+    "watch": "run-p watch:esm watch:cjs",
+    "types": "tsc --noEmit"
+  },
+  "types": "./dist/cjs/bun/index.d.ts",
+  "main": "./dist/cjs/bun/index.js",
+  "module": "./dist/esm/bun/index.js",
+  "files": [
+    "dist/cjs/bun",
+    "dist/esm/bun",
+    "LICENSE.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/cjs/bun/index.d.ts",
+      "import": "./dist/esm/bun/index.js",
+      "require": "./dist/cjs/bun/index.js"
+    },
+    "./*": {
+      "import": "./dist/esm/bun/*.js",
+      "require": "./dist/cjs/bun/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asplunds/tsdl.git",
+    "directory": "packages/bun"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "bun-types": "latest",
+    "npm-run-all": "^4.1.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

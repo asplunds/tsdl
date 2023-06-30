@@ -33,7 +33,7 @@
   },
   "workspaces": [
     "packages/*",
-    "tests/*",
+    "examples/*",
     "playground/*",
     "meta/*"
   ],

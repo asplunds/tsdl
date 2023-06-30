@@ -13,7 +13,7 @@ import { Steps, Tabs, Tab } from "nextra-theme-docs";
 ```ts filename="server.ts" copy
 import { createTSDL } from "@tsdl/server";
 
-export const tsdl = createTSDL(() => undefined);
+export const tsdl = createTSDL();
 
 const fruit = ["banana", "apple", "orange"];
 const router = tsdl.router({
@@ -31,21 +31,23 @@ export type Router = typeof router;
 
   <Tab>
     ```shell
-    npm i @tsdl/node
-    pnpm add @tsdl/node
-    yarn add @tsdl/node
+    npm i @tsdl/node @tsdl/server
+    ```
+    ```shell
+    npm i -D @types/node
     ```
 
-    ```ts {2-3,6-9,20-36} filename="server.ts" copy
+    ```ts {2-3,6-10,21-37} filename="server.ts" copy
     import { createTSDL } from "@tsdl/server";
     import http from "node:http";
     import { nodeTSDL } from "@tsdl/node";
 
     // A base context is created for each query
-    const tsdl = createTSDL((ctx: {
+    const tsdl = createTSDL<{
       req: http.IncomingMessage;
       res: http.ServerResponse<http.IncomingMessage>;
-    }) => ctx);
+      color: string,
+    }>();
 
     const fruit = ["banana", "apple", "orange"];
     const router = tsdl.router({
@@ -61,12 +63,7 @@ export type Router = typeof router;
       res: http.ServerResponse<http.IncomingMessage>
     ) => {
       if (req.url?.startsWith("/tsdl")) {
-        return nodeTSDL(
-          router,
-          { req, res }, // the arg needed to create a context
-          req,
-          res
-        );
+        return nodeTSDL(router, req, res, { req, res, color: "yellow" });
       }
     };
 
@@ -80,20 +77,18 @@ export type Router = typeof router;
   <Tab>
 
     ```shell
-    npm i @tsdl/express
-    pnpm add @tsdl/express
-    yarn add @tsdl/express
+    npm i @tsdl/express @tsdl/server express
       ```
+    ```shell
+    npm i -D @types/express @types/node
+    ```
 
-    ```ts filename="server.ts" {2-3,6-8,21-26}
+    ```ts filename="server.ts" {2-3,5,16-21}
     import { createTSDL } from "@tsdl/server";
     import { expressTSDL } from "@tsdl/express";
     import express from "express";
 
-    // A base context is created for each query
-    const tsdl = createTSDL(
-      (ctx: { req: express.Request; res: express.Response }) => ctx
-    );
+    const tsdl = createTSDL<{ req: express.Request; res: express.Response }>();
 
     const fruit = ["banana", "apple", "orange"];
     const router = tsdl.router({

@@ -3,7 +3,7 @@ import { TSDLError } from "../../packages/core";
 import { callbacks } from "./callbacks";
 import { createTSDL } from "../../packages/server";
 
-export const tsdl = createTSDL(() => undefined);
+export const tsdl = createTSDL();
 
 export const router = tsdl.router({
   test: tsdl.query(() => 123),

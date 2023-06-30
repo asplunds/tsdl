@@ -4,22 +4,13 @@ import { messages } from "@tsdl/server/lib/messages";
 import { createHTTPResponse } from "@tsdl/server/lib/runner/createHTTPResponse";
 import { runnerEntrypoint } from "@tsdl/server/lib/runner/runnerEntrypoint";
 
-export function expressTSDL<TArg, TBaseContext>(
-  router: types.routing.InvokableRouter<TArg, TBaseContext>,
-  arg: (req: Request, res: Response, _next: NextFunction) => TArg
+export function expressTSDL<TBaseContext>(
+  router: types.routing.TSDLTree<TBaseContext>,
+  ...args: TBaseContext extends undefined
+    ? [undefined?]
+    : [(req: Request, res: Response, next: NextFunction) => TBaseContext]
 ) {
   const runner = async (req: Request, res: Response, next: NextFunction) => {
-    if (!router.$invoke) {
-      const error = new TSDLError(500, messages.INVOKE_MISSING).setSource(
-        "internal"
-      );
-
-      return void res
-        .status(error.numberCode)
-        .send(createHTTPResponse(error.package(), null))
-        .end();
-    }
-
     const payload = (() => {
       const payloadBody = req.body?.payload;
       if (typeof payloadBody === "object" && payloadBody != null) {
@@ -60,7 +51,8 @@ export function expressTSDL<TArg, TBaseContext>(
         .end();
     }
 
-    const ctx: TBaseContext = router.$invoke(arg(req, res, next));
+    const ctx = args[0]?.(req, res, next);
+
     try {
       const response = await runnerEntrypoint(router, ctx, payload);
       return void res.status(200).send(createHTTPResponse(null, response));

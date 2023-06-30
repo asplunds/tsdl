@@ -1,8 +1,8 @@
 [//]: <> (AUTO GENERATED - DO NOT EDIT ME. EDIT README IN PROJECT ROOT)
 
-TSDL express.js integration
+TSDL Bun integration
 
-[@tsdl/bun](https://npmjs.com/package/@tsdl/bun), [@tsdl/client](https://npmjs.com/package/@tsdl/client), [@tsdl/core](https://npmjs.com/package/@tsdl/core), @tsdl/express, [@tsdl/node](https://npmjs.com/package/@tsdl/node), [@tsdl/react-query](https://npmjs.com/package/@tsdl/react-query), [@tsdl/server](https://npmjs.com/package/@tsdl/server), [@tsdl/tree](https://npmjs.com/package/@tsdl/tree)
+@tsdl/bun, [@tsdl/client](https://npmjs.com/package/@tsdl/client), [@tsdl/core](https://npmjs.com/package/@tsdl/core), [@tsdl/express](https://npmjs.com/package/@tsdl/express), [@tsdl/node](https://npmjs.com/package/@tsdl/node), [@tsdl/react-query](https://npmjs.com/package/@tsdl/react-query), [@tsdl/server](https://npmjs.com/package/@tsdl/server), [@tsdl/tree](https://npmjs.com/package/@tsdl/tree)
 
 ***
 <center>

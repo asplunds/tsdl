@@ -1,11 +1,11 @@
 import { types } from "@tsdl/core";
 
 /** @internal */
-export default function findLeaf(
+export default function findLeaf<TBaseContext>(
   path: string[],
-  node: types.routing.TsDLTree
+  node: types.routing.TSDLTree<TBaseContext>
 ): types.routing.Leaf | null {
-  if (node.$type === types.routing.TsDLNode.Node) {
+  if (node.$type === types.routing.TSDLNode.Node) {
     const nextNode = node.$routes[path[0]];
     if (!nextNode) {
       console.log("no-next");

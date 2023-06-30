@@ -4,7 +4,7 @@ import { TSDLError, types } from "@tsdl/core";
 
 /** @internal */
 export async function runnerEntrypoint<TBaseContext>(
-  router: types.routing.Branch,
+  router: types.routing.TSDLTree<TBaseContext>,
   baseContext: TBaseContext,
   payload: string
 ): Promise<unknown> {

@@ -12,7 +12,12 @@
     "rpc",
     "data layer",
     "api",
-    "framework"
+    "framework",
+    "deno",
+    "bun",
+    "node",
+    "server",
+    "http"
   ],
   "license": "MIT",
   "scripts": {

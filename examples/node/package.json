@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "@tsdl/test-server",
-  "version": "0.0.1",
+  "name": "@tsdl/test-node",
+  "version": "0.0.0",
   "author": {
     "email": "jonathan@asplund.net",
     "name": "Jonathan Asplund",
@@ -15,9 +15,9 @@
     "framework"
   ],
   "license": "MIT",
-  "types": "./dist/cjs/tests/server/index.d.ts",
+  "types": "./dist/cjs/examples/node/index.d.ts",
   "scripts": {
-    "dev:watch:node": "nodemon --watch \"dist/cjs/**/*.js\" --exec \"clear && TS_NODE_BASEURL=dist/cjs/examples/server node -r tsconfig-paths/register dist/cjs/examples/server\"",
+    "dev:watch:node": "nodemon --watch \"dist/cjs/**/*.js\" --exec \"clear && TS_NODE_BASEURL=dist/cjs/examples node -r tsconfig-paths/register dist/cjs/examples/server\"",
     "dev:watch:tsc:cjs": "tsc --module commonjs --outDir dist/cjs --watch>/dev/null",
     "dev:watch": "npm run build:cjs && run-p dev:watch:node dev:watch:tsc:cjs",
     "dev": "run-s build dev:watch",
@@ -26,9 +26,10 @@
     "build": "npm run build:cjs & npm run build:esm",
     "dev:sucrase": "node -r sucrase/register index.ts",
     "watch": "nodemon -e ts,tsx --watch \"**/*.ts\" --exec \"clear && node -r sucrase/register index.ts\"",
-    "start": "TS_NODE_BASEURL=dist/tests/server node -r tsconfig-paths/register dist/tests/server"
+    "start": "TS_NODE_BASEURL=dist/examples/node node -r tsconfig-paths/register dist/examples/node"
   },
   "dependencies": {
+    "@tsdl/example-common": "file:../common",
     "@tsdl/node": "file:../../packages/node",
     "@tsdl/server": "file:../../packages/server",
     "@tsdl/tree": "file:../../packages/tree",
@@ -52,18 +53,18 @@
       "import": "./*.ts"
     },
     ".": {
-      "import": "./dist/esm/tests/server/index.js",
-      "require": "./dist/cjs/tests/server/index.js"
+      "import": "./dist/esm/examples/node/index.js",
+      "require": "./dist/cjs/examples/node/index.js"
     },
     "./*": {
-      "import": "./dist/esm/tests/server/*.js",
-      "require": "./dist/cjs/tests/server/*.js"
+      "import": "./dist/esm/examples/node/*.js",
+      "require": "./dist/cjs/examples/node/*.js"
     },
     "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/asplunds/tsdl.git",
-    "directory": "tests/server"
+    "directory": "examples/node"
   }
 }

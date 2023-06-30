@@ -12,7 +12,9 @@
     "rpc",
     "data layer",
     "api",
-    "framework"
+    "framework",
+    "react",
+    "react-query"
   ],
   "license": "MIT",
   "scripts": {

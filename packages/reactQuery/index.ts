@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-query";
 import TSDLCaller from "@tsdl/client/src/TSDLCaller";
 import { TSDLError, types } from "@tsdl/core";
+import { emptyReactQuery } from "./lib/emptyReactQuery";
 
 type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
   UseQueryOptions<TQueryFnData, TError, TReturn, string[]>,
@@ -20,9 +21,9 @@ type ReactQueryOptions<TQueryFnData, TError, TReturn> = Omit<
 };
 
 export type InferReactQueryClient<
-  T extends types.routing.Branch | types.routing.Leaf
+  T extends types.routing.Branch<unknown> | types.routing.Leaf
 > = T extends infer R
-  ? R extends types.routing.Branch
+  ? R extends types.routing.Branch<unknown>
     ? {
         [Key in keyof R["$routes"]]: InferReactQueryClient<R["$routes"][Key]>;
       } & {
@@ -71,7 +72,7 @@ export type InferReactQueryClient<
   : never;
 
 export function createReactQueryClient<
-  TRouter extends types.routing.Branch,
+  TRouter extends types.routing.Branch<unknown>,
   TQueryClient extends {
     invalidateQueries: QueryClient["invalidateQueries"];
   } = QueryClient
@@ -94,19 +95,14 @@ export function createReactQueryClient<
               try {
                 return useQuery(
                   path,
-                  async () =>
-                    await memoCaller(
-                      input === undefined && options === undefined
-                        ? undefined
-                        : input
-                    ),
+                  async () => await memoCaller(input, options),
                   input !== undefined && options === undefined
                     ? (input as ReactQueryOptions<unknown, unknown, unknown>)
                     : options
                 );
               } catch {
-                // catches Next.js/ssr hydration issues... annoyng
-                return {};
+                // catches Next.js/ssr hydration issues... annoying
+                return emptyReactQuery;
               }
             };
           }

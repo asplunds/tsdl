@@ -15,7 +15,7 @@ export function validatePayload(payload: string): unknown {
     }
   })();
 
-  // Commence budget zod, lol.
+  // Commence budget zod, lol. Should probably refactor this and unit test it...
   if (!parsed) {
     throw new TSDLError(500, "unable to parse payload").setSource("internal");
   }

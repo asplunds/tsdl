@@ -12,7 +12,8 @@
     "rpc",
     "data layer",
     "api",
-    "framework"
+    "framework",
+    "node"
   ],
   "license": "MIT",
   "scripts": {

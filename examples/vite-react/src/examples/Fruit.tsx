@@ -11,10 +11,6 @@ export default function Fruit() {
   const addOne = tsdl.fruit.addOne.useMutation();
   const removeOne = tsdl.fruit.removeOne.useMutation();
   const fruit = tsdl.fruit.all.useQuery();
-  const fruit2 = tsdl.fruit.all(undefined, {
-    next: 10,
-  });
-  void fruit2;
 
   return (
     <div className={styles.cont}>

@@ -1,0 +1,24 @@
+{
+  "name": "@tsdl/example-common",
+  "version": "0.0.0",
+  "private": false,
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "@tsdl/core": "file:../../packages/core",
+    "@tsdl/server": "file:../../packages/server",
+    "zod": "^3.21.4"
+  }
+}

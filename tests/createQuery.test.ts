@@ -25,5 +25,5 @@ test.each(queries)("queries should be correct", (validator, mw) => {
   expect(query.$arg).toBeDefined();
   expect(query.$cb).toStrictEqual([]);
   expect(query.$query).toBe(arg);
-  expect(query.$type).toBe(types.routing.TsDLNode.Leaf);
+  expect(query.$type).toBe(types.routing.TSDLNode.Leaf);
 });

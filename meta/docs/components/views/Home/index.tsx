@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import Wrapper from "../../layout/Wrapper";
 import Button from "../../ui/Button";
 import Link from "next/link";
-import Features from "../../misc/Features";
+
 void jsx;
 
 const Root = styled.div`
@@ -29,6 +29,9 @@ function Home({ children }: { children: React.ReactNode }) {
               font-size: 6vw;
               font-weight: 700;
               text-align: center;
+              @media screen and (max-width: 800px) {
+                font-size: max(15vw, 60px);
+              }
             `}
           >
             TSDL
@@ -39,6 +42,9 @@ function Home({ children }: { children: React.ReactNode }) {
               margin-top: -0.4vw;
               font-weight: 500;
               text-align: center;
+              @media screen and (max-width: 800px) {
+                font-size: max(1.7vw, 24px);
+              }
             `}
           >
             Type-safe backend as a library
@@ -54,8 +60,20 @@ function Home({ children }: { children: React.ReactNode }) {
               <Button>Get Started</Button>
             </Link>
           </div>
-          <div style={{ height: 170 }} />
-          <Features />
+          <div style={{ height: 60 }} />
+          <video
+            muted
+            loop
+            autoPlay
+            playsInline
+            css={css`
+              border-radius: 15px;
+              box-shadow: 0 13px 45px -3px #000;
+              margin: 0 auto;
+              width: min(1000px, calc(100% - 8px));
+            `}
+            src="/tsdl.mp4"
+          />
         </Hero>
         {children}
       </Root>
