@@ -4,7 +4,6 @@ import { router } from "./mocks/router";
 
 test("Tree to be generated", () => {
   const tree = createTree(router);
-  console.log(JSON.stringify(tree, null, 2));
   expect(tree).toBeDefined();
 
   const input = tree.nodes.find((v) => v.path[1] === "documented")?.inputDoc;
