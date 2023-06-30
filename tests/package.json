@@ -1,0 +1,17 @@
+{
+  "name": "@tsdl/tests",
+  "private": true,
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "types": "tsc --noEmit",
+    "test": "vitest run",
+    "dev": "vitest",
+    "start": "npm run test"
+  },
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  }
+}

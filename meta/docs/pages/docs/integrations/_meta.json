@@ -1,1 +1,8 @@
-{}
+{
+  "react-query": {
+    "title": "React Query"
+  },
+  "bun": {
+    "title": "Bun"
+  }
+}

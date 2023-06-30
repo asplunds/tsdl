@@ -1,0 +1,59 @@
+# Bun integration
+
+TSDL works natively with [Bun](https://bun.sh).
+
+## Installation
+
+Make sure you have a [server](../getting-started/server-code-setup) ready. Then run:
+
+```shell
+bun install @tsdl/bun
+```
+
+If you don't have a `router`, read the [getting started guide](../getting-started/introduction)
+
+Add this to your bun server:
+
+```ts filename="server.ts"
+import { bunTSDL } from "@tsdl/bun";
+
+Bun.serve({
+  port: 9000,
+  fetch(req) {
+    const url = new URL(req.url);
+
+    if (url.pathname.startsWith("/tsdl")) {
+      return bunTSDL(
+        router,
+        req,
+        (content, status) =>
+          new Response(content, {
+            status,
+            headers: {
+              "Access-Control-Allow-Origin": "*", // TODO: change this
+            },
+          })
+      );
+    }
+
+    /* ... */
+
+    return new Response("404!");
+  },
+});
+```
+
+## Providing base context
+
+The base context is the basis for subsequent (if any)
+contexts and the type is provided as a generic argument
+when [creating a TSDL instance](../getting-started/server-code-setup)
+
+```ts
+bunTSDL(
+  router,
+  req,
+  responseCb,
+  ctx // <--- this is where you provide your base context.
+);
+```

@@ -14,8 +14,8 @@ export type ClientFetcher = <T>(args: {
   payload: string;
 }) => Promise<HTTPResponse<T>> | HTTPResponse<T>;
 
-export type InferClient<T extends Branch | Leaf> = T extends infer R
-  ? R extends Branch
+export type InferClient<T extends Branch<unknown> | Leaf> = T extends infer R
+  ? R extends Branch<unknown>
     ? { [Key in keyof R["$routes"]]: InferClient<R["$routes"][Key]> }
     : R extends Leaf
     ? {

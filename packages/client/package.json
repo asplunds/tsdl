@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/client",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "TSDL vanilla client",
   "author": {
     "email": "jonathan@asplund.net",
@@ -19,7 +19,8 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm",
-    "watch": "tsc --watch --module es6 --outDir dist/esm"
+    "watch": "tsc --watch --module es6 --outDir dist/esm",
+    "types": "tsc --noEmit"
   },
   "types": "./dist/cjs/index.d.ts",
   "main": "./dist/cjs/index.js",

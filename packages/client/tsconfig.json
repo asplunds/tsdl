@@ -6,5 +6,6 @@
       "@tsdl/*": ["../*"]
     }
   },
+  "include": ["."],
   "exclude": ["dist"]
 }

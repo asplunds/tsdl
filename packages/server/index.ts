@@ -6,18 +6,18 @@ import createQuery from "./lib/createQuery";
 
 /**
  * Create a TSDL instance
- * @param contextCreator A callback that is executed for each request
  * @returns tsdl
  */
-export function createTSDL<TArg, TBaseContext = TArg>(
-  contextCreator: (arg: TArg) => TBaseContext
-): types.builder.TSDLRoot<TArg, TBaseContext> {
+export function createTSDL<
+  TBaseContext = undefined
+>(): types.builder.TSDLRoot<TBaseContext> {
   return {
-    ...createRouter(contextCreator),
+    $bc: {} as TBaseContext,
+    ...createRouter(),
     ...createInput<TBaseContext>(),
     ...createMiddlewareNoInput<TBaseContext, undefined, undefined>(undefined),
     ...createQuery(undefined, [], { name: null, description: null }),
-  } satisfies types.builder.TSDLRoot<TArg, TBaseContext>;
+  } satisfies types.builder.TSDLRoot<TBaseContext>;
 }
 
 export type TSDL = types.routing.TSDL;

@@ -1,15 +1,12 @@
-export enum TsDLNode {
+export enum TSDLNode {
   Leaf,
   Node,
 }
 
-export type Branch = {
-  $type: TsDLNode.Node;
-  $routes: Record<string, Branch | Leaf>;
-};
-
-export type InvokableRouter<TArg, TBaseContext> = Branch & {
-  $invoke?: (arg: TArg) => TBaseContext;
+export type Branch<TBaseContext = unknown> = {
+  $bc: TBaseContext;
+  $type: TSDLNode.Node;
+  $routes: Record<string, Branch<TBaseContext> | Leaf>;
 };
 
 export type MiddlewareCollection = CommonDoc & {
@@ -30,7 +27,7 @@ export type Leaf<
   TInputValidator = unknown
 > = {
   $arg: unknown;
-  $type: TsDLNode.Leaf;
+  $type: TSDLNode.Leaf;
   $return: TReturn;
   $input: TInput;
   $inputValidator: TInputValidator;
@@ -41,7 +38,7 @@ export type Leaf<
   $queryDoc: CommonDoc;
 };
 
-export type TsDLTree = Branch | Leaf;
+export type TSDLTree<TBaseContext> = Branch<TBaseContext> | Leaf;
 
 export type TSDL = {
   query: unknown;

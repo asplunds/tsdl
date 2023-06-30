@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/tree",
   "description": "TSDL router tree visualizer",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "author": {
     "email": "jonathan@asplund.net",
@@ -22,7 +22,8 @@
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm",
     "watch": "tsc --watch --module commonjs --outDir dist/cjs",
-    "watch:esm": "tsc --watch --module es6 --outDir dist/esm"
+    "watch:esm": "tsc --watch --module es6 --outDir dist/esm",
+    "types": "tsc --noEmit"
   },
   "files": [
     "dist",

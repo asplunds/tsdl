@@ -1,0 +1,38 @@
+{
+  "name": "@tsdl/bun-example",
+  "version": "0.0.0",
+  "private": true,
+  "module": "index.ts",
+  "type": "module",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "bun index.ts",
+    "dev": "nodemon --ext ts,tsx --exec \"clear && bun start\"",
+    "watch": "bun --watch index.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "bun-types": "^0.5.0",
+    "nodemon": "^2.0.22"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@tsdl/example-common": "file:../common",
+    "@tsdl/test-server": "file:../server",
+    "@tsdl/tree": "file:../../packages/tree"
+  }
+}

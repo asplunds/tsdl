@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/react-query",
   "description": "TSDL React Query integration",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": {
     "email": "jonathan@asplund.net",
     "name": "Jonathan Asplund",
@@ -12,18 +12,21 @@
     "rpc",
     "data layer",
     "api",
-    "framework"
+    "framework",
+    "react",
+    "react-query"
   ],
   "license": "MIT",
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm",
-    "watch": "tsc --module es6 --outDir dist/esm --watch"
+    "watch": "tsc --module es6 --outDir dist/esm --watch",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@tsdl/client": "^0.2.0",
-    "@tsdl/core": "^0.2.0"
+    "@tsdl/client": "^0.3.0",
+    "@tsdl/core": "^0.3.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^4 || ^5"

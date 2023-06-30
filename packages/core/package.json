@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/core",
   "description": "TSDL core utils and types",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "author": {
     "email": "jonathan@asplund.net",
@@ -21,7 +21,8 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
     "build": "npm run build:cjs & npm run build:esm",
-    "watch": "tsc --watch --module commonjs --outDir dist/cjs"
+    "watch": "tsc --watch --module commonjs --outDir dist/cjs",
+    "types": "tsc --noEmit"
   },
   "files": [
     "dist",

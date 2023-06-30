@@ -1,20 +1,8 @@
 import { createTSDL } from "@tsdl/server";
-import http from "node:http";
-import { nodeTSDL } from "@tsdl/node";
-import { z } from "zod";
 import { TSDLError } from "@tsdl/core";
-import express from "express";
-import { expressTSDL } from "@tsdl/express";
-import cors from "cors";
-import { createTree, visualizeTree } from "@tsdl/tree";
-/* import * as yup from "yup"; */
+import { z } from "zod";
 
-const tsdl = createTSDL(
-  (ctx: {
-    req: http.IncomingMessage;
-    res: http.ServerResponse<http.IncomingMessage>;
-  }) => ctx
-);
+const tsdl = createTSDL();
 
 const db = ["apple", "banana", "orange", "apple", "banana"];
 
@@ -38,7 +26,7 @@ const logger = <T>(ctx: T, input: string) => {
   return ctx;
 };
 
-const router = tsdl.router({
+export const router = tsdl.router({
   fruit: tsdl.router({
     addOne: tsdl
       .input(z.string().regex(/^[\w\s]+$/))
@@ -97,41 +85,3 @@ const router = tsdl.router({
     fetchAll: tsdl.query(async () => db),
   }),
 });
-
-console.log(visualizeTree(createTree(router)));
-
-export type Router = typeof router;
-
-const requestListener = (
-  req: http.IncomingMessage,
-  res: http.ServerResponse<http.IncomingMessage>
-) => {
-  res.setHeader("Access-Control-Allow-Origin", "localhost");
-  if (req.url?.startsWith("/tsdl")) {
-    return nodeTSDL(
-      router,
-      {
-        req,
-        res,
-      },
-      req,
-      res
-    );
-  }
-};
-
-const server = http.createServer(requestListener);
-
-server.listen(8001, () => {
-  console.log("Node backend started");
-});
-
-const app = express();
-
-app
-  .use(cors())
-  .use(
-    "/tsdl",
-    expressTSDL(router, (req, res) => ({ req, res }))
-  )
-  .listen(9000, () => console.log("Express backend started"));

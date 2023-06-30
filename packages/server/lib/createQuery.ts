@@ -21,7 +21,7 @@ export default function createQuery<TContext, TInput, TInputValidator>(
           $arg,
           $input: {} as TInput,
           $query: query,
-          $type: types.routing.TsDLNode.Leaf as const,
+          $type: types.routing.TSDLNode.Leaf as const,
           $inputValidator,
           $inputDoc,
           $queryDoc: { name, description },

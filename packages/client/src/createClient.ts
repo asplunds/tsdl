@@ -1,7 +1,7 @@
 import type { types } from "@tsdl/core";
 import TSDLCaller from "./TSDLCaller";
 
-export function createClient<TRouter extends types.routing.Branch>(
+export function createClient<TRouter extends types.routing.Branch<unknown>>(
   fetcher: types.client.ClientFetcher
 ) {
   function emulator(path: string[]): object {

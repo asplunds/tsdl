@@ -1,4 +1,4 @@
-import { Leaf, TsDLNode, TsDLTree } from "./routing";
+import { Leaf, TSDLNode, TSDLTree } from "./routing";
 import { Validator } from "./validation";
 
 export type Output<
@@ -61,14 +61,14 @@ export type Input<TContext> = InputCb<TContext> & {
   doc(...args: unknown[]): InputCb<TContext>;
 };
 
-export type Router<TArg, TBaseContext> = <
-  T extends { [key in keyof T]: TsDLTree }
+export type Router<TBaseContext> = <
+  T extends { [key in keyof T]: TSDLTree<TBaseContext> }
 >(
   routes: T
 ) => {
+  $bc: TBaseContext;
   $routes: T;
-  $type: TsDLNode.Node;
-  $invoke: ((arg: TArg) => TBaseContext) | undefined;
+  $type: TSDLNode.Node;
 };
 
 type MiddlewareCbNoInput<TContext, TInput, TInputValidator> = {
@@ -119,8 +119,9 @@ export type Middleware<TContext, TInput, TInputValidator> = MiddlewareCb<
   doc(...args: unknown[]): MiddlewareCb<TContext, TInput, TInputValidator>;
 };
 
-export type TSDLRoot<TArg, TBaseContext> = {
-  router: Router<TArg, TBaseContext>;
+export type TSDLRoot<TBaseContext> = {
+  $bc: TBaseContext;
+  router: Router<TBaseContext>;
   input: Input<TBaseContext>;
   query: Query<TBaseContext, undefined, undefined>;
   use: MiddlewareNoInput<TBaseContext, undefined, undefined>;

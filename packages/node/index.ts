@@ -4,24 +4,14 @@ import { TSDLError, types } from "@tsdl/core";
 import http from "node:http";
 import { messages } from "@tsdl/server/lib/messages";
 
-export async function nodeTSDL<TArg, TBaseContext>(
-  router: types.routing.InvokableRouter<TArg, TBaseContext>,
-  arg: TArg,
+export async function nodeTSDL<TBaseContext>(
+  router: types.routing.TSDLTree<TBaseContext>,
   req: http.IncomingMessage,
-  res: http.ServerResponse<http.IncomingMessage>
+  res: http.ServerResponse<http.IncomingMessage>,
+  ...args: TBaseContext extends undefined ? [undefined?] : [TBaseContext]
 ) {
   res.setHeader("Content-Type", "application/json");
 
-  if (!router.$invoke) {
-    const error = new TSDLError(500, messages.INVOKE_MISSING).setSource(
-      "internal"
-    );
-    res.writeHead(error.numberCode);
-
-    return void res.end(
-      JSON.stringify(createHTTPResponse(error.package(), null))
-    );
-  }
   const url = (() => {
     try {
       return new URLSearchParams(req.url?.split("?")[1]);
@@ -53,8 +43,7 @@ export async function nodeTSDL<TArg, TBaseContext>(
       JSON.stringify(JSON.stringify(createHTTPResponse(error.package(), null)))
     );
   }
-
-  const ctx: TBaseContext = router.$invoke(arg);
+  const ctx = args[0];
   try {
     const response = await runnerEntrypoint(router, ctx, payload);
     res.writeHead(200);

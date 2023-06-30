@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/node",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "TSDL native Node.js http module integration",
   "author": {
     "email": "jonathan@asplund.net",
@@ -12,16 +12,18 @@
     "rpc",
     "data layer",
     "api",
-    "framework"
+    "framework",
+    "node"
   ],
   "license": "MIT",
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
-    "build": "npm run build:cjs & npm run build:esm"
+    "build": "npm run build:cjs & npm run build:esm",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@tsdl/server": "^0.2.0"
+    "@tsdl/server": "^0.3.0"
   },
   "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
   "devDependencies": {
