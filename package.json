@@ -10,7 +10,11 @@
     "types": "npx lerna run --parallel build && npm run types --prefix tests",
     "build": "npm run types && npm run prune:dist && npm run build --prefix packages/core && npx lerna run --parallel build",
     "readme": "node -r sucrase/register scripts/compileReadme.ts",
-    "prune:dist": "find packages/**/* -name 'dist' -type d -prune -exec rm -rf '{}' +"
+    "prune:dist": "find packages/**/* -name 'dist' -type d -prune -exec rm -rf '{}' +",
+    "workflow:types": "npm run types",
+    "workflow:lint": "eslint && prettier",
+    "workflow:build": "npm run build",
+    "workflow:test": "npm run test"
   },
   "private": true,
   "devDependencies": {
