@@ -49,6 +49,7 @@
   },
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "devDependencies": {
-    "@tsdl/core": "file:../core"
+    "@tsdl/core": "file:../core",
+    "typescript": "^5.1.6"
   }
 }

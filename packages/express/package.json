@@ -55,5 +55,8 @@
   "dependencies": {
     "@tsdl/core": "file:../core",
     "@tsdl/server": "^0.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6"
   }
 }

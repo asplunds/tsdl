@@ -54,5 +54,8 @@
     "url": "https://github.com/asplunds/tsdl.git",
     "directory": "packages/server"
   },
-  "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e"
+  "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
 }

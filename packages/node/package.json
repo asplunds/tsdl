@@ -27,7 +27,8 @@
   },
   "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
   "devDependencies": {
-    "@tsdl/types": "file:../types"
+    "@tsdl/types": "file:../types",
+    "typescript": "^5.1.6"
   },
   "types": "./dist/cjs/index.d.ts",
   "main": "./dist/cjs/index.js",

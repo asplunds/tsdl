@@ -12,7 +12,7 @@
     "@tsdl/server": "^0.2.0"
   },
   "devDependencies": {
-    "typescript": "^5.1.3",
+    "typescript": "^5.1.6",
     "zod": "^3.21.4"
   }
 }
