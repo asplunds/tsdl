@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@tsdl/nextra-docs",
+  "name": "@tsdl/meta-docs",
   "version": "0.0.0",
   "author": {
     "email": "jonathan@asplund.net",
