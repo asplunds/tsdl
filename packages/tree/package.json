@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/tree",
   "description": "TSDL router tree visualizer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "gitHead": "be0c5a1189afab2d9fc2889ffd81c95552cb195b",
   "author": {
     "email": "jonathan@asplund.net",
@@ -52,7 +52,7 @@
     "directory": "packages/tree"
   },
   "devDependencies": {
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "chalk": "^4.1.2"

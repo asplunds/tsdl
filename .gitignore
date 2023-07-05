@@ -40,3 +40,4 @@ Thumbs.db
 
 # Lerna
 lerna-debug.log
+nx-cloud.env

@@ -18,11 +18,12 @@
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@tsdl/node": "file:../../packages/node",
     "@tsdl/server": "file:../../packages/server",
-    "next": "^13.3.4",
-    "nextra": "^2.4.2",
-    "nextra-theme-docs": "^2.4.2",
+    "next": "^13.4.8",
+    "nextra": "^2.8.0",
+    "nextra-theme-docs": "^2.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sharp": "^0.32.1",
     "yup": "^1.1.1",
     "zod": "^3.21.4"
   },
@@ -32,6 +33,6 @@
     "eslint": "^8.40.0",
     "eslint-config-next": "^13.4.1",
     "eslint-plugin-react": "^7.32.2",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.6"
   }
 }
