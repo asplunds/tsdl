@@ -15,9 +15,9 @@ function deps(_props: depsProps) {
   return (
     <Wrapper>
       <Root>
-        <Text h1 as="h2" style={{
-
-        }}>End to end Type Safety</Text>
+        <Text h1 as="h2" style={{}}>
+          End to end Type Safety
+        </Text>
       </Root>
     </Wrapper>
   );
