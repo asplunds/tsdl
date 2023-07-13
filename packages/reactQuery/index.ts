@@ -102,7 +102,7 @@ export function createReactQueryClient<
                 );
               } catch {
                 // catches Next.js/ssr hydration issues... annoying
-                return emptyReactQuery;
+                return emptyReactQuery(options?.initialData);
               }
             };
           }
