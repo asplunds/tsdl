@@ -16,19 +16,22 @@ export default function createQuery<TContext, TInput, TInputValidator>(
   const createQuery =
     (name: string | null, description: string | null) =>
     <TReturn>(query: (arg: { ctx: TContext; input: TInput }) => TReturn) => {
-      const queryResult: types.routing.Leaf<TReturn, TInput, TInputValidator> =
-        {
-          $arg,
-          $input: {} as TInput,
-          $query: query,
-          $type: types.routing.TSDLNode.Leaf as const,
-          $inputValidator,
-          $inputDoc,
-          $queryDoc: { name, description },
-          $mw,
-          $cb: [],
-          $return: {} as types.common.ParsedJSON<Awaited<TReturn>>,
-        };
+      const queryResult: types.routing.Leaf<
+        Awaited<TReturn>,
+        TInput,
+        TInputValidator
+      > = {
+        $arg,
+        $input: {} as TInput,
+        $query: query,
+        $type: types.routing.TSDLNode.Leaf as const,
+        $inputValidator,
+        $inputDoc,
+        $queryDoc: { name, description },
+        $mw,
+        $cb: [],
+        $return: {} as types.common.ParsedJSON<Awaited<TReturn>>,
+      };
       return {
         ...queryResult,
         ...createOutput<
