@@ -42,7 +42,7 @@ export const router = tsdl.router({
     removeOne: tsdl.input(z.number()).query(({ input }) => {
       fruit = fruit.filter((v) => v.id !== input);
     }),
-    all: tsdl.query(() => fruit),
+    all: tsdl.query(async () => fruit),
   }),
   vegetables: tsdl.router({
     fetchOne: tsdl

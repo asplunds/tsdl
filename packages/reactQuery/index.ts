@@ -43,7 +43,7 @@ export type InferReactQueryClient<
                 TError,
                 Awaited<R["$return"]>
               >
-            ) => UseQueryResult<R["$return"]>
+            ) => UseQueryResult<Awaited<R["$return"]>>
           : <TQueryFnData, TError = TSDLError>(
               input: R["$input"],
               options?: ReactQueryOptions<
@@ -51,7 +51,7 @@ export type InferReactQueryClient<
                 TError,
                 Awaited<R["$return"]>
               >
-            ) => UseQueryResult<R["$return"]>;
+            ) => UseQueryResult<Awaited<R["$return"]>>;
         useMutation: <TError = TSDLError>(
           options?: Omit<
             UseMutationOptions<R["$return"], TError, R["$input"]>,
