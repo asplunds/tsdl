@@ -92,17 +92,19 @@ export function createReactQueryClient<
               input?: unknown,
               options?: ReactQueryOptions<unknown, unknown, unknown>
             ) => {
+              const arg =
+                input !== undefined && options === undefined
+                  ? (input as ReactQueryOptions<unknown, unknown, unknown>)
+                  : options;
               try {
                 return useQuery(
                   path,
                   async () => await memoCaller(input, options),
-                  input !== undefined && options === undefined
-                    ? (input as ReactQueryOptions<unknown, unknown, unknown>)
-                    : options
+                  arg
                 );
               } catch {
                 // catches Next.js/ssr hydration issues... annoying
-                return emptyReactQuery(options?.initialData);
+                return emptyReactQuery(arg?.initialData);
               }
             };
           }
