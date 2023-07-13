@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/node",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "TSDL native Node.js http module integration",
   "author": {
     "email": "jonathan@asplund.net",
@@ -23,7 +23,7 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "@tsdl/server": "^0.3.1"
+    "@tsdl/server": "^0.3.2"
   },
   "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
   "devDependencies": {
