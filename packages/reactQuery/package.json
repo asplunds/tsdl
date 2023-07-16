@@ -1,7 +1,7 @@
 {
   "name": "@tsdl/react-query",
   "description": "TSDL React Query integration",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "author": {
     "email": "jonathan@asplund.net",
     "name": "Jonathan Asplund",
