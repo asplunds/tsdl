@@ -54,10 +54,10 @@ export type InferReactQueryClient<
             ) => UseQueryResult<Awaited<R["$return"]>>;
         useMutation: <TError = TSDLError>(
           options?: Omit<
-            UseMutationOptions<R["$return"], TError, Awaited<R["$input"]>>,
+            UseMutationOptions<Awaited<R["$return"]>, TError, R["$input"]>,
             "mutationFn"
           >
-        ) => UseMutationResult<R["$return"], TError, Awaited<R["$input"]>>;
+        ) => UseMutationResult<Awaited<R["$return"]>, TError, R["$input"]>;
         invalidate: (
           filters?: Omit<
             InvalidateQueryFilters<unknown> | undefined,
