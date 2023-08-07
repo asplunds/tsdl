@@ -54,7 +54,7 @@ function Query({ tree }: QueryProps) {
   }, [path, tree]);
 
   const [baseUrl, setBaseUrl] = useLocalStorageState("baseUrl", {
-    defaultValue: "http://localhost:8000",
+    defaultValue: "http://localhost:8000/tsdl",
   });
   const [input, setInput] = useLocalStorageState(["input", path].join("-"), {
     defaultValue: "",

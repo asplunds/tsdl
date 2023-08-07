@@ -18,7 +18,9 @@ const html = (tree: string) => `<!DOCTYPE html>
     }
   </style>
   <iframe
-      src="http://localhost:5174/initialize?tree=${encodeURIComponent(tree)}"
+      src="https://tsdl-dashboard.asplund.dev/initialize?tree=${encodeURIComponent(
+        tree
+      )}"
       style="width: 100%; height: 100%; border: none"
     />
   </body>
