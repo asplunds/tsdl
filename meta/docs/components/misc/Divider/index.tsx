@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useConfig } from "nextra-theme-docs";
 void jsx;
 
 const Root = styled.div`
@@ -13,8 +14,6 @@ const Root = styled.div`
 type DividerProps = React.ComponentProps<"div">;
 
 function Divider(props: DividerProps) {
-  const config = useConfig();
-  console.log(config.nextThemes.defaultTheme);
   return (
     <Root
       css={css`

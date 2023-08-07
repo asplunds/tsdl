@@ -18,6 +18,8 @@
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@tsdl/node": "file:../../packages/node",
     "@tsdl/server": "file:../../packages/server",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
     "next": "^13.3.4",
     "nextra": "^2.4.2",
     "nextra-theme-docs": "^2.4.2",

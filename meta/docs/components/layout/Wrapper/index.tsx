@@ -1,26 +1,20 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
-void jsx;
+import React from "react";
 
-const Root = styled.div`
-  padding: 0 max(env(safe-area-inset-right), 1.5rem);
-  margin: 0 auto;
-  box-sizing: border-box;
-`;
+type WrapperProps = {
+  children: React.ReactNode;
+  width: number;
+};
 
-type WrapperProps = { width?: string | number } & React.ComponentProps<"div">;
-
-function Wrapper({ width, ...props }: WrapperProps) {
+function Wrapper({ children, width }: WrapperProps) {
   return (
-    <Root
-      css={css`
-        max-width: ${(typeof width === "number" ? `${width}px` : width) ??
-        "90rem"};
-      `}
-      {...props}
-    />
+    <div
+      style={{
+        marginInline: "auto",
+        width: `min(${width}px, calc(100% - 24px))`,
+      }}
+    >
+      {children}
+    </div>
   );
 }
 

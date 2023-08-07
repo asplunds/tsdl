@@ -21,7 +21,7 @@
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
-    "build": "npm run build:cjs & npm run build:esm",
+    "build-prevent": "npm run build:cjs & npm run build:esm",
     "types": "tsc --noEmit"
   },
   "dependencies": {

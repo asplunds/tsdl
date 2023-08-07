@@ -1,26 +1,13 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx } from "@emotion/react";
-import styled from "@emotion/styled";
+import React from "react";
 import src from "./logo.svg";
 import Image from "next/image";
-
-void jsx;
-
-const Root = styled.div`
-  display: inline-block;
-  svg {
-    height: 40px;
-    width: 40px;
-    display: flex;
-  }
-`;
+import classes from "./Logo.module.css";
 
 function Logo() {
   return (
-    <Root>
+    <div className={classes.root}>
       <Image height={30} src={src} alt="TSDL Logo" />
-    </Root>
+    </div>
   );
 }
 
