@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/gui",
-  "version": "0.3.2",
+  "version": "0.3.8",
   "description": "GUI Interface for your TSDL app",
   "author": {
     "email": "jonathan@asplund.net",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@tsdl/core": "file:../core",
-    "@tsdl/server": "^0.3.2"
+    "@tsdl/server": "^0.3.8"
   },
   "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
   "devDependencies": {

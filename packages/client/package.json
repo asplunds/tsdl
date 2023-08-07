@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/client",
-  "version": "0.3.2",
+  "version": "0.3.8",
   "description": "TSDL vanilla client",
   "author": {
     "email": "jonathan@asplund.net",
