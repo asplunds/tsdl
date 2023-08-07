@@ -1,0 +1,59 @@
+{
+  "name": "@tsdl/gui",
+  "version": "0.3.2",
+  "description": "GUI Interface for your TSDL app",
+  "author": {
+    "email": "jonathan@asplund.net",
+    "name": "Jonathan Asplund",
+    "url": "https://asplund.dev"
+  },
+  "keywords": [
+    "tsdl",
+    "rpc",
+    "data layer",
+    "api",
+    "framework",
+    "node",
+    "gui",
+    "frontend"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:esm": "tsc --module es6 --outDir dist/esm",
+    "build": "npm run build:cjs & npm run build:esm",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tsdl/server": "^0.3.2"
+  },
+  "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
+  "devDependencies": {
+    "@tsdl/types": "file:../types",
+    "typescript": "^5.1.6"
+  },
+  "types": "./dist/cjs/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/cjs/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./*": {
+      "import": "./dist/esm/*.js",
+      "require": "./dist/cjs/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "LICENSE.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asplunds/tsdl.git",
+    "directory": "packages/node"
+  }
+}

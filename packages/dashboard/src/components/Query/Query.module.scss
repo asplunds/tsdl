@@ -1,0 +1,44 @@
+.sticky {
+  position: sticky;
+  top: 12px;
+}
+
+.texts {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.top {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #6e6e6e;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #6e6e6e;
+  margin-bottom: 24px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+
+.input {
+  width: 100%;
+}

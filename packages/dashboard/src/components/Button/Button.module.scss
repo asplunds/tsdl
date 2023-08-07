@@ -1,0 +1,19 @@
+.button {
+  padding: 12px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  background: #2c2a2a;
+  appearance: none;
+  border: 1px solid #7b7b7b;
+  color: #ccc;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  &:hover {
+    background: #403d3d;
+  }
+  transform-origin: center;
+  &:active {
+    transform: scale(0.98);
+  }
+}

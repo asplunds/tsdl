@@ -1,22 +1,7 @@
 import { types } from "@tsdl/core";
 import chalk from "chalk";
 
-type Tree = {
-  /** the complete path to the leaf */
-  path: string[];
-  /** child nodes, will be empty if leaf */
-  nodes: Tree[];
-  /** if true, this is a query (leaf node) */
-  leaf: boolean;
-  /** documentation of the input */
-  inputDoc?: types.routing.CommonDoc;
-  /** documentation of the query */
-  queryDoc?: types.routing.CommonDoc;
-  /** documentation of the middlewares in order */
-  mwDoc: types.routing.CommonDoc[];
-};
-
-export function createTree(router: types.routing.Branch): Tree {
+export function createTree(router: types.routing.Branch): types.tree.Tree {
   return generateTree(["TSDL"], router);
 }
 
@@ -24,7 +9,7 @@ export function createTree(router: types.routing.Branch): Tree {
 function generateTree(
   path: string[],
   router: types.routing.TSDLTree<unknown>
-): Tree {
+): types.tree.Tree {
   const leaf = router.$type === types.routing.TSDLNode.Leaf;
 
   return {
@@ -53,9 +38,12 @@ const colors = [
   chalk.red,
 ];
 
-export function visualizeTree(tree: Tree): string {
+export function visualizeTree(tree: types.tree.Tree): string {
   const sections: string[] = [];
-  function generateTreeVisualization(tree: Tree, depth: number): void {
+  function generateTreeVisualization(
+    tree: types.tree.Tree,
+    depth: number
+  ): void {
     const indent = " ".repeat(depth * 2) + (depth ? "∟" : "");
     const node = tree.path[tree.path.length - 1];
 

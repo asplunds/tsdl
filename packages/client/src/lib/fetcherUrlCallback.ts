@@ -1,4 +1,5 @@
 import { createPayload } from "./createPayload";
+import { createUrl } from "./createUrl";
 
 export function fetcherUrlCallback<TInput>(
   path: string[],
@@ -10,22 +11,7 @@ export function fetcherUrlCallback<TInput>(
   return {
     payload,
     signal,
-    url: (urlPath: string) => {
-      const [location, queryString] = urlPath.split("?") as [
-        string,
-        string | undefined
-      ];
-      const searchParams = (() => {
-        try {
-          return new URLSearchParams(queryString);
-        } catch {
-          return new URLSearchParams();
-        }
-      })();
-      searchParams.set("payload", payload);
-      const resolvedPath = (location.endsWith("/") ? "" : "/") + path.join("/");
-      return `${location}${resolvedPath}?${searchParams}`;
-    },
+    url: createUrl(path, payload),
     options,
   };
 }

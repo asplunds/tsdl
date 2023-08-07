@@ -1,0 +1,17 @@
+.tree {
+  a {
+    text-decoration: none;
+  }
+  .title {
+    position: sticky;
+    top: calc((var(--depth)) * 24px);
+    background: #111;
+    z-index: calc(100 - var(--depth));
+    border-radius: 4px;
+    padding: 6px calc((var(--depth) + 1) * 24px);
+    color: var(--color);
+    &:hover {
+      background: #514848;
+    }
+  }
+}
