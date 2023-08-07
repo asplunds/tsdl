@@ -1,5 +1,5 @@
 {
-  "name": "dashboard",
+  "name": "@tsdl/dashboard",
   "description": "TSDL dashboard - visualize your TSDL app",
   "author": {
     "email": "jonathan@asplund.net",

@@ -7,6 +7,6 @@
       "@tsdl/*": ["../../packages/*"]
     }
   },
-  "exclude": ["dist"],
+  "exclude": ["dist", "../../packages/dashboard"],
   "include": ["../../packages", "."]
 }
