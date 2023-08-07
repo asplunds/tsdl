@@ -1,6 +1,6 @@
 {
   "name": "@tsdl/gui",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "GUI Interface for your TSDL app",
   "author": {
     "email": "jonathan@asplund.net",
