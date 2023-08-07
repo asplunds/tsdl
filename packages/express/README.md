@@ -2,7 +2,7 @@
 
 TSDL express.js integration
 
-[@tsdl/bun](https://npmjs.com/package/@tsdl/bun), [@tsdl/client](https://npmjs.com/package/@tsdl/client), [@tsdl/core](https://npmjs.com/package/@tsdl/core), @tsdl/express, [@tsdl/node](https://npmjs.com/package/@tsdl/node), [@tsdl/react-query](https://npmjs.com/package/@tsdl/react-query), [@tsdl/server](https://npmjs.com/package/@tsdl/server), [@tsdl/tree](https://npmjs.com/package/@tsdl/tree)
+[@tsdl/bun](https://npmjs.com/package/@tsdl/bun), [@tsdl/client](https://npmjs.com/package/@tsdl/client), [@tsdl/core](https://npmjs.com/package/@tsdl/core), [@tsdl/dashboard](https://npmjs.com/package/@tsdl/dashboard), @tsdl/express, [@tsdl/gui](https://npmjs.com/package/@tsdl/gui), [@tsdl/node](https://npmjs.com/package/@tsdl/node), [@tsdl/react-query](https://npmjs.com/package/@tsdl/react-query), [@tsdl/server](https://npmjs.com/package/@tsdl/server), [@tsdl/tree](https://npmjs.com/package/@tsdl/tree)
 
 ***
 <div align="center">
