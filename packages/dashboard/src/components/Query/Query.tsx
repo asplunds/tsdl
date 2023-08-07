@@ -64,7 +64,14 @@ function Query({ tree }: QueryProps) {
     if (!resolvedPath) {
       return "";
     }
-    const payload = JSON.stringify(createPayload(resolvedPath, input ?? null));
+    const parsed = (() => {
+      try {
+        return JSON.parse(input);
+      } catch {
+        return null;
+      }
+    })();
+    const payload = JSON.stringify(createPayload(resolvedPath, parsed));
 
     return createUrl(resolvedPath, payload)(baseUrl);
   }, [baseUrl, input, resolvedPath]);

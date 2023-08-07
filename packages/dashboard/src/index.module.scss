@@ -1,12 +1,14 @@
 .main {
   display: flex;
   > section {
-    flex: none;
-    width: 50%;
+    flex: 1;
     box-sizing: border-box;
     padding: 12px;
     &:last-child {
       border-left: 1px solid #6e6e6e;
+    }
+    &:first-child {
+      border-left: none;
     }
   }
 }

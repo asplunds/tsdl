@@ -15,7 +15,6 @@
     "framework"
   ],
   "license": "MIT",
-  "main": "index.js",
   "dependencies": {
     "@tsdl/core": "file:../../packages/core",
     "@tsdl/server": "file:../../packages/server",

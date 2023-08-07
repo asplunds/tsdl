@@ -21,10 +21,12 @@
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:esm": "tsc --module es6 --outDir dist/esm",
-    "build-prevent": "npm run build:cjs & npm run build:esm",
-    "types": "tsc --noEmit"
+    "build": "npm run build:cjs & npm run build:esm",
+    "types": "tsc --noEmit",
+    "watch": "tsc --watch --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
+    "@tsdl/core": "file:../core",
     "@tsdl/server": "^0.3.2"
   },
   "gitHead": "2d13f580fd7de2a0ef291926ec7f0b94a987db2e",
